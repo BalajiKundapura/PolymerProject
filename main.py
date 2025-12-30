@@ -2,6 +2,9 @@ import sys
 import os
 import json
 
+# Command for Grobid Server Start: 
+# docker run -t --rm -p 8070:8070 lfoppiano/grobid:0.7.1
+
 PROJECT_DIR = r"C:\Users\Balaji-Personal\Desktop\polymerProject"
 if PROJECT_DIR not in sys.path:
     sys.path.insert(0, PROJECT_DIR)
