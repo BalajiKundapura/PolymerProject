@@ -1,0 +1,7 @@
+,,chemical composition,,expt microstructure,,,calcd microstructure,,
+,,of blends (mol %),,(separated via total curves),,"(calculated via 1,2 curves)",,,
+blend samples,M p (kg/mol),,,,,,,,
+"1,4/3,4","of 3,4-PI a",expt,calcd,"1,2-PI (mol %) 1,4-PI (mol %) 3,4-PI (mol %) 1,2-PI (mol %) 1,4-PI (mol %) 3,4-PI (mol %)",,,,,
+4/7,10.3,58.4/41.6,56.0/44.0,0/22.6,80.4/24.5,19.6/52.9,0/24.6,100/17.6,0/57.8
+4/8,39.0,55.5/44.5,49.9/50.1,0/27.3,90.4/20.4,9.6/52.3,0/28.0,97.9/17.4,2.1/54.6
+4/10,78.2,51.4/48.6,51.7/48.3,0/32.8,92.3/20.9,7.7/46.3,0/32.9,96.8/18.8,3.2/48.3

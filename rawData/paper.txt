@@ -1,0 +1,193 @@
+' INTRODUCTION
+A comprehensive analysis of polymers includes not only structure elucidation of the bulk sample; it also requires analysis of the different parameters of molecular heterogeneity, which is typically conducted by liquid chromatography. Depending on the separation method,
+1
+it is possible to obtain the molar mass distribution (MMD), chemical composition distribution (CCD), and functionality type distribution (FTD). In particular, liquid chromatography at critical conditions (LCCC) is an elegant method to separate polymers regarding chemical heterogeneity.
+[2]
+[3]
+[4]
+[5]
+In this case polymers of the same composition and microstructure elute independently of their molar mass at the same retention volume. This status was also called "chromatographic invisibility" by Gorbunov and Skvortsov
+6
+and is characterized by compensating enthalpic and entropic interactions between the macromolecules and the chromatographic system. Meanwhile, many applications of LCCC to block copolymers
+[7]
+[8]
+[9]
+[10]
+[11]
+[12]
+and blends of homopolymers
+[13]
+[14]
+[15]
+have been reported. Most of the references report critical conditions achieved by using solvent mixtures as the mobile phase. However, critical conditions can also be obtained by varying the temperature.
+8
+In this case even single solvents can establish critical conditions as shown by Chang,
+16
+Macko,
+17
+and the present authors.
+18
+However, not all molecular details can be determined by liquid chromatography and concentration detection. The hyphenation of LCCC with NMR is of great interest for the polymer characterization. It can provide true molar masses and true chemical compositions of block copolymers
+[18]
+[19]
+[20]
+and can analyze end groups of polymers.
+21
+In the present work we focus on liquid chromatographic separations according to microstructure and the analysis of the microstructures by
+1
+H NMR spectroscopy. The first separation and analysis of polymer microstructures by HPLC-NMR was reported by Pasch, Hiller, and Haner
+22
+describing the analysis of low molar mass polystyrenes. However, LCCC is also capable of separating higher molar mass polymers regarding microstructure. Berek et al.
+23
+separated poly(methyl methacrylate) regarding tacticity, while Kitayama et al.
+24
+analyzed poly(ethyl methacrylate) according to the tactic triads by LCCC-NMR. The separation according to microstructure is always a challenge. Now, we want to demonstrate that LCCC-NMR is a powerful tool for the separation and analysis of polyisoprene (PI) regarding its different isomeric microstructures.
+' EXPERIMENTAL SECTION Samples. Two series of polyisoprenes of different molar masses were used (Table
+1
+). One series consists of samples containing predominantly 1,4-isoprene units with a small content of 3,4-isoprene units (samples 1-5), and the other series is samples containing predominantly 3,4-isoprene units and additionally 1,2-and 1,4-isoprene units (samples 6-10). The corresponding structures are drawn in Scheme 1.
+LCCC.
+The LCCC experiments were performed with an Agilent 1100 HPLC system (Agilent Technologies GmbH, B€ oblingen, Germany) Received: December 2, 2010 Revised:
+January 24, 2011
+ABSTRACT: It is shown that online coupling of liquid chromatography at critical conditions (LCCC) and
+1
+H NMR spectroscopy can be used to separate and analyze polyisoprenes with respect to their isomeric microstructures. It was possible to separate blends of copolymers consisting predominantly of 3,4-and 1,4-isoprene units by using critical conditions of 1,4-PI. Critical conditions of 1,4-PI were established such that polymers containing predominantly 3,4-PI elute in the size exclusion mode. Furthermore, on-flow NMR detection allows for the complete eluate analysis and the detection of all three isomeric species, such as 1,2-, 1,4-, and 3,4-isoprene, in the eluting fractions. These three individual moieties were correctly quantified in the individual blend components. It was also found that the 3,4-PI samples were random terpolymers of 1,2-, 1,4-, and 3,4-isoprene, whereas the 1,4-PI samples were copolymers of 1,4-and 3,4-isoprene. In addition, SEC-NMR allowed for a fast and precise molar mass calibration and the calculation of the relevant molar mass parameters M w and M n .
+consisting of a pump with degasser, UV detector, column oven, and autosampler. The column system consisted of three reversed phase Nucleosil C 18 columns (100-5, 300-5, and 1000-7) with sizes of 250 Â 4.6 mm i.d. from Macherey-Nagel (D€ uren, Germany). The mobile phase was a mixture of butanone and cyclohexane. All LCCC experiments were performed with 1 H NMR as the detector.
+LCCC-NMR. The LCCC-NMR experiments were performed with a DRX-500 NMR spectrometer (Bruker BioSpin GmbH, Germany) attached to the Agilent 1100 HPLC system. Hystar software was controlling the HPLC. The NMR experiments were carried out with a z-gradient inverse triple resonance flow probe ( 1 H 90°pulse of 7.7 μs).
+The flow cell had an active volume of 60 μL. The LCCC-NMR experiments were performed with a concentration of 5 mg mL -1 for each PI sample. 100 μL was injected. The flow rate was 0.5 mL min -1 . On-flow HPLC-NMR experiments were carried out by using protonated HPLC solvents. WET solvent suppression
+25
+was applied to the HPLC solvents. Eight scans per FID with 8 kB data, 6 kHz spectral width, and 0.79 s recycle delay (0.68 s acquisition time) were acquired. The series of FIDs were Fourier transformed via one time domain (zero filling to 16 kb) and plotted as 2D contour plots of retention times vs 1 H chemical shifts.
+SEC-NMR.
+On-flow SEC-NMR experiments were performed with the same system and same acquisition parameters as described above. Three columns (PSS SDV 5 μm precolumn, 10 3 Å, and 10 5 Å with 300 Â 8 mm i.d.) were used. The data were processed as 2D contour plots. The accuracy of the NMR retention time was (2 s.
+The sample concentration was 2.7 mg mL -1 . 100 μL was injected. HPLC grade THF was used as mobile phase with a flow rate of 0.8 mL min -1 . WET solvent suppression was applied to THF.
+' RESULTS AND DISCUSSION LCCC-NMR of Blends of Polyisoprene. For the separation of polyisoprene according to the microstructure by LCCC critical conditions of one species of polyisoprene, i.e., 1,2-, 1,4-, or 3,4-PI, have to be established. As is known, critical conditions depend on the different polarities of the sample, the stationary phase, and the mobile phase. In the case of different microstructures the polarities of the different microstructural units are very similar. Therefore, to find a suitable separation procedure is more challenging.
+It was the goal of the present study to find critical conditions of 1,4-PI. Unfortunately, the available samples are not pure 1,4-PI but contain small amounts of the other isomeric moieties. As is shown in Table
+1
+, the samples under investigation contain at least 93 mol % of 1,4-isoprene units. Strictly speaking, there cannot be one single critical point for all these samples. It can be assumed, however, that the elution behavior of the samples is mainly driven by the 1,4-isoprene units.
+For establishing near-LCCC conditions a nonpolar stationary phase RP-18 was selected. Figure
+1
+shows the elution behavior of the 1,4-PI samples as a function of eluent composition. It can be seen that indeed near-critical conditions can be achieved by using butanone/cyclohexane mixtures as the mobile phase. If the composition of the two solvents is 92/8 vol %, these conditions are obtained for a temperature of 29 °C. In this case all 1,4-PI samples elute at the same retention volume irrespective of their molar masses. If the mobile phase contains more cyclohexane (>8 vol %), the molar mass dependence corresponds to show size exclusion chromatography (SEC) behavior. If the mobile phase contains less cyclohexane (<8 vol %), the 1,4-PI samples are eluted in the liquid adsorption chromatography (LAC) mode. It is important to note that the near-critical conditions of the 1,4-PI
+28
+for the separation of blends of PI and polystyrene as well as polybutadiene.
+To evaluate the separation capabilities of the present LCCC mode, samples of different molar masses containing predominantly 3,4-isoprene units (see Table
+1
+) are investigated under the same conditions. Critical conditions are only useful if one molecular moiety (the one at LCCC conditions) shows a molar mass independence, and other species are experiencing a molar mass dependence such as SEC (or LAC). SEC is preferred since it allows for a molar mass calibration of the component which is not under critical conditions.
+The behavior of 3,4-PI samples can be tested by preparing blends of samples with predominantly 1,4-and 3,4-isoprene units. Three blends were prepared containing three different 3,4-PI polymers. In order to evaluate the accuracy of the critical conditions, we also conducted measurements at both LCCC conditions of 1,4-PI and SEC conditions of 3,4-PI at different injected sample concentrations. The concentrations were varied between 1 and 14 mg mL -1 . No differences were found for the elution times and for the calculated molar mass distributions at low and high concentrations. Therefore, a concentration of 5 mg mL -1 was used for the blends.
+The main problem for the characterization of these blends is the fact that common chromatographic detectors (RI, ELSD, UV) are unable to differentiate between 1,4-and 3,4-PI. Therefore, the online coupling of LCCC and NMR is preferred. Figure
+2
+shows the on-flow experiments performed on the three blends.
+Figure
+2
+2
+was used to determine the chemical composition distribution of 1,2-, 1,4-, and 3,4-isoprene units for the three blends. In order to ensure quantitative data, we have also used the method of relaxation corrected intensities as was proposed by Hiller et al.
+29
+For this purpose, 20 mg of polyisoprene dissolved in 100 mL of butanone/cyclohexane (92/8 vol %) was pumped through a closed system consisting of pump and flow probe. This setup allowed for the precise measurement of the NMR intensities of all olefinic species in dependence of flow rate and NMR recycle delay. Figure
+3
+shows the NMR intensities of the olefinic moieties as a function of the recycle delays at flow rates of 0 and 0.5 mL min -1 (by using 90°p ulses). Figure
+3
+clearly shows that the olefinic protons have very different relaxation times. The 3,4-protons are the fastest relaxing protons, and the 1,4-protons are the slowest. As a consequence, the raw data of NMR intensities for a recycle delay of 0.79 s deviate significantly from the correct quantification. Accordingly, this figure is used to calculate correction factors for the NMR intensities by comparing the flow data to a stop-flow relaxation. The factors are determined to be 1.6 for 1,2-PI, 2.2 for 1,4-PI, and 1.3 for 3,4-PI. Using these correction factors, the correct chemical compositions can be calculated for these microstructures. Figure
+4
+shows the microstructure distributions for the three blends at critical conditions of 1,4-PI. In comparison to the blends, Figure
+5
+5a
+it is obvious that also the 1,4-PI sample has a constant distribution of the isomers which indicates a random copolymer. (v) Since the chemical composition of the three isomeric moieties in the 3,4-PI samples is constant, the entire elution curve for each single isomeric species for both blend components can be calculated (see dashed lines of Figure
+4
+). This is possible because the 1,2-isoprene unit curve is eluting without any overlapping and allows for a simulation of the complete elution of the other two isomeric species due to their constant ratios to each other.
+The simulation provides even the complete detection of the lower intensity species, i.e., the low-intensity 3,4isoprene component in the 1,4-PI sample as well as the low intensity 1,4-isoprene component in the 3,4-PI samples. (vi) The simulated elution of the individual microstructures allows for a correct determination of the molar composition of the blends since the total elution of the predominantly 1,4-PI and predominantly 3,4-PI samples can be perfectly separated. Adding the individual elution traces, the true individual contents of each isomer and finally the true molar composition of the blends can be calculated (see Table
+2
+). These data differ significantly if the molar composition is only determined by a graphical separation, where the two samples are separated by the experimental minimum of the total elution. Molar Mass Distributions by LCCC-NMR and SEC-NMR. As discussed before, the 3,4-PI samples elute in SEC mode. This behavior provokes the question if a molar mass calibration regarding 3,4-PI can be obtained. In order to obtain this calibration, on-flow experiments were carried out for all 3,4-PI (samples 6-10) of Table
+1
+under critical conditions of 1,4-PI. Figure
+6
+shows the on-flow runs. By taking the maximum traces of the eluting species of Figure
+6
+, the calibration curve of Figure
+7
+could be constructed.
+Macromolecules
+ARTICLE
+This calibration curve shall now be used for the calculation of the MMD of the 3,4-PI samples.
+Unfortunately, the number of available 3,4-PI samples was limited. However, the data points could be used for calculating a SEC calibration curve. Even with this limited selection of samples, we tried to derive the molar mass distribution and calculated the number-average M n and weight-average M w molar mass parameters for the NMR detector (as the mass sensitive detector). According to Striegel, 30 they are given by
+M n ¼ ∑ n i ¼ 1 I i ∑ n i ¼ 1 I i M i
+ð1Þ
+M w ¼ ∑ n i ¼ 1 ðI i M i Þ ∑ n i ¼ 1 I i
+ð2Þ
+where I i = N i M i is the NMR intensity, N i is the number of macromolecules, and M i is the molar mass of the ith volume element of the SEC curve of each monomer species. Using eqs 1 and 2 and the calibration of Figure
+7
+, M n , M w , and the polydispersity were determined. It was found that the calculated molar masses of LCCC-NMR agreed well with the supplier values only in a few cases of M w (see Table
+3
+). The main problem, however, is the tailing of the chromatograms of the 3,4-PI samples as seen in Figure
+5b
+, which causes lower M n values.
+To evaluate the tailing, classical SEC-NMR and SEC-RI measurements of the polyisoprenes were carried out. All 1,4-PI and 3,4-PI samples were measured in THF. Again, all olefinic species can be easily detected with NMR. Figure
+8
+shows the individual NMR chromatograms of an on-flow SEC-NMR run of a 3,4-PI sample (sample 8).
+It is seen from Figure
+8
+that all three isomers show a homogeneous distribution along the elution peak. The chemical composition of these species is constant. In this case the sum of them can be used for constructing the entire elution which should correspond to the refractive index measurements. In order to obtain a molar mass calibation, all PI samples were measured with SEC-NMR and SEC-RI. Figure
+9
+shows the molar mass calibration obtained with SEC-NMR for both 1,4-PI and 3,4-PI.
+The calibration curves in Figures
+7 and 9
+were used for the determination of the molar mass distributions of the 3,4-PI samples. Figure
+10
+shows the comparison of the MMD of sample 8 from SEC-NMR, SEC-RI, and LCCC-NMR data. It shows a similar distribution for SEC-NMR and SEC-RI. The distribution of the SEC-NMR is slightly broader than that from SEC-RI. However, the tailing of the LCCC-NMR curve is significantly more pronounced than for SEC-NMR. Therefore, it was not caused by the larger volume of the NMR flow cell as initially expected. It is rather possible that the 1,4-isoprene units of the 3,4-PI samples affect the total elution of these samples. It is assumed that the 3,4-isoprene units do not interact with the stationary phase while the 1,4-isoprene units show weak adsorption as is suggested by the LCCC mode for the 1,4-PI samples. As   a result, the 1,4-isoprene units in the 3,4-PI samples introduce a certain tailing of the elution profiles. As a consequence a correct calculation of M w and M n of the 3,4-PI samples cannot be achieved with LCCC-NMR. In particular M n is affected by the tailing which results in smaller values. Furthermore, the limited number of 3,4-PI samples does not provide reliable data for the smallest and highest molar masses. Thus, these data are put into parentheses in Table
+3
+.
+As an alternative the SEC-NMR experiments were used for calculating these parameters. Table
+3
+shows the molar masses in comparison to the data provided by the supplier. The data are in good agreement. In addition, a complete MMD of all 3,4-PI samples obtained with SEC-NMR is shown in Figure
+11
+.
+Scheme 1 .
+1
+Scheme 1. Structures of (a) 1,2-PI, (b) 1,4-PI, and (c) 3,4-PI
+provides several conclusions: (a) Common near-critical conditions can be found for copolymers containing roughly 94 mol % of 1,4-isoprene units. At these conditions, 1,4-PI samples with different molar masses coelute. Samples that contain predominantly 3,4isoprene units elute at lower elution times. (b) Blends of 1,4-PI and 3,4-PI samples can be well separated by LCCC-NMR. These samples are copolymers containing predominantly 1,4-and 3,4-isoprene units, respectively. The 1,4-PI sample elutes at the highest retention time which corresponds to the critical conditions of 1,4-PI. The 3,4-PI samples elute earlier indicating that for these samples a SEC mode is operating. (c) The elution peak of the 1,4-PI sample indicates simultaneous appearance of 1,4-isoprene relevant olefinic signals
+Figure 1 .
+1
+Figure 1. Critical diagram of 1,4-PI showing molar mass versus retention time at a mobile phase composition of butanone/cyclohexane: 9, 70:30; b, 92:8; 2, 97:3. Stationary phase: three RP columns of C18 (100-5, 300-5, 1000-7); detector: NMR, flow rate 0.5 mL min -1 ; SEC = size exclusion chromatography, LCCC = liquid chromatography at critical conditions, LAC = liquid adsorption chromatography.
+Figure 2 .
+2
+Figure 2. On-flow LCCC-NMR of blends of 1,4-PI (M n = 20.7 kg mol -1 ) and 3,4-PI: (a) M n = 9.1 kg mol -1 , (b) 33.0 kg mol -1 , and (c) 72.8 kg mol -1 measured at critical conditions of 1,4-PI (100 μL injection, flow rate 0.5 mL min -1 ). The blue dotted lines represent the maximum of the elution of the 1,4-PI sample (containing also a small amount 3,4-PI), and the red dotted lines show the maximum of the elution of the 3,4-PI samples (containing also 1,2-PI and 1,4-PI).
+also shows the LCCC-NMR on-flow runs of the 1,4-PI and 3,4-PI samples separately.
+Figure 3 .
+3
+Figure 3. NMR intensities of the olefinic protons as a function of the recycle delay for 0.5 mL min -1 (solid lines) and 0 mL min -1 (dashed lines): (b, 2, 9) data points for 0.5 mL min -1 ; (O, 4, 0) data points for 0.0 mL min -1 .
+Figure 4 .
+4
+Figure 4. Normalized NMR intensities and chemical composition distributions of 1,2-, 1,4-, and 3,4-isoprene units for the three blends consisting of 1,4-PI (M n = 20.7 kg mol -1 ) and 3,4-PI: (a) M n = 9.1 kg mol -1 , (b) 33.0 kg mol -1 , and (c) 72.8 kg mol -1 measured at critical conditions of 1,4-PI; blue solid line = NMR elution of 1,2-PI, red solid line = NMR elution of 1,4-PI, green solid line = NMR elution of 3,4-PI, [ = molar content of 1,2-isoprene units, 9 = molar content of 1,4isoprene units, and 2 = molar content of 3,4-isoprene units; dashed lines are calculated elution curves.
+Figures 4
+4
+Figures 4 and 5 provide a number of interesting conclusions: (i) The 1,4-PI sample (with predominantly 1,4-isoprene units) elutes at critical conditions of 1,4-PI. Both 1,4and 3,4-PI samples can be sufficiently separated. The best separation is achieved for the third blend (Figure 4c). The other two blends show partial coelution of both samples. This is due to the different molar masses of the 3,4-PI samples. (ii) The 3,4-PI samples elute at shorter retention times with increasing molar mass as indicated by the maximum intensities. (iii) The individual three isomeric structures present in the 3,4-PI samples appear completely simultaneously as indicated by the maxima which are at the same time for 1,2-, 1,4-, and 3,4-isoprene units. The 1,2-PI curve (only present in the 3,4-PI samples) is eluting without any overlapping. (iv) The chemical composition is totally constant for the individual isomers of the 3,4-PI samples. This indicates that the 3,4-PI samples are random terpolymers. From Figure 5a it is obvious that also the 1,4-PI sample has a constant distribution of the isomers which indicates a random copolymer. (v) Since the chemical composition of the three isomeric moieties in the 3,4-PI samples is constant, the entire elution curve for each single isomeric species for both
+Figure 5 .
+5
+Figure 5. NMR chromatograms (normalized to 100%) at critical conditions of 1,4-PI for (a) 1,4-PI sample (M n = 20.7 kg mol -1 ) and (b) 3,4-PI sample (M n = 33.0 kg mol -1 ); blue solid line = NMR elution of 1,2-isoprene units, red solid line = NMR elution of 1,4-isoprene units, green solid line = NMR elution of 3,4-isoprene units, [ = molar content of 1,2-PI, 9 = molar content of 1,4-PI, and 2 = molar content of 3,4-PI.
+Figure 6 .
+6
+Figure 6. On-flow LCCC-NMR of 3,4-PI samples of different molar masses at critical conditions of 1,4-PI.
+Figure 7 .
+7
+Figure 7. Molar mass calibration obtained from LCCC-NMR of 3,4-PI samples at critical conditions of 1,4-PI (9 = data points; solid line = fitted to a polynomial of third order).
+Figure 8 .
+8
+Figure 8. SEC-NMR chromatograms of sample 8 (M w = 33.9 kg mol -1 ) using THF with a flow rate of 0.8 mL min -1 , concentration 2.7 mg mL -1 , 100 μL injection, SDV columns 10 3 Å and 10 5 Å 8 Â 300 i.d., PSS GmbH, Mainz, Germany: black solid line = total NMR elution of the 3,4-PI sample, [ = molar content of 1,2-isoprene units, 9 = molar content of 1,4-isoprene units, and 2 = molar content of 3,4-isoprene units.
+Figure 9 .
+9
+Figure 9. SEC-NMR calibration of 1,4-PI (9) and 3,4-PI (b) samples; solid lines = fitted to third-order polynomials.
+Figure 10 .
+10
+Figure 10. Comparison of the molar mass distribution of sample 8 obtained by SEC-RI (black line), SEC-NMR (blue line), and LCCC-NMR (red line).
+Figure 11 .
+11
+Figure 11. Molar mass distributions of 3,4-PI samples 6-10 measured by SEC-NMR.
+Table 1 .
+1
+Microstructures of 1,4-PI Samples and 3,4-PI Samples Measured by Off-Line 1 H NMR of the Bulk Sample and LCCC-NMR (SEC = Nominal Molar Masses Given by the Supplier)
+Table 2 .
+2
+Chemical Composition and Microstructures of Blends of 1,4-PI Sample and 3,4-PI Samples Measured by LCCC-NMR and Compared to Simulated LCCC-NMR Elution
+a Determined from LCCC-NMR experiments.
+Table 3 .
+3
+Molar Masses Determined by SEC, SEC-NMR, and LCCC-NMR
+n (kg/mol) M w (kg/mol) M p (kg/mol) M n (kg/mol) M w (kg/mol) M p (kg/mol) M n (kg/mol) M w (kg/mol) M p (kg/mol)
+dx.doi.org/10.1021/ma102750s |Macromolecules 2011, 44, 1311-1318
