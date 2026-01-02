@@ -1,23 +1,19 @@
 import re
 from collections import defaultdict
-import requests
-import time
+import asyncio
+import aiohttp
 import numpy as np
 
 polymer_abbrev_dict = {
-    # Original polymers + microstructure variants
-    "PI": {"name": "polyisoprene", "contexts": ["microstructure", "rubber", "cis", "trans"]},
+     "PI": {"name": "polyisoprene", "contexts": ["microstructure", "rubber", "cis", "trans"]},
     "1,4-PI": {"name": "polyisoprene", "contexts": ["microstructure", "rubber", "cis", "trans"]},
     "3,4-PI": {"name": "polyisoprene", "contexts": ["microstructure", "rubber"]},
     "cis-PI": {"name": "polyisoprene", "contexts": ["rubber", "cis"]},
     "trans-PI": {"name": "polyisoprene", "contexts": ["rubber", "trans"]},
-
     "PMMA": {"name": "polymethyl methacrylate", "contexts": ["film", "resin"]},
     "PEMA": {"name": "polyethyl methacrylate", "contexts": []},
     "PS": {"name": "polystyrene", "contexts": []},
     "PB": {"name": "polybutadiene", "contexts": ["rubber", "copolymer"]},
-
-    # Common thermoplastics & copolymers
     "ABS": {"name": "acrylonitrile butadiene styrene", "contexts": ["copolymer", "thermoplastic"]},
     "ABS/PC": {"name": "ABS/polycarbonate blend", "contexts": ["blend"]},
     "ABS/PVC": {"name": "ABS/polyvinyl chloride blend", "contexts": ["blend"]},
@@ -39,8 +35,6 @@ polymer_abbrev_dict = {
     "PLA": {"name": "polylactic acid", "contexts": ["biodegradable", "biopolymer"]},
     "PCL": {"name": "polycaprolactone", "contexts": ["biodegradable", "biopolymer"]},
     "PHBV": {"name": "poly(3-hydroxybutyrate-co-3-hydroxyvalerate)", "contexts": ["biopolymer"]},
-
-    # Fluoropolymers & specialty plastics
     "PTFE": {"name": "polytetrafluoroethylene", "contexts": ["fluoropolymer", "Teflon"]},
     "FEP": {"name": "fluorinated ethylene propylene", "contexts": ["fluoropolymer"]},
     "PFA": {"name": "perfluoroalkoxy polymer", "contexts": ["fluoropolymer"]},
@@ -48,16 +42,12 @@ polymer_abbrev_dict = {
     "PVF": {"name": "polyvinyl fluoride", "contexts": ["fluoropolymer"]},
     "PCTFE": {"name": "polychlorotrifluoroethylene", "contexts": ["fluoropolymer"]},
     "ETFE": {"name": "ethylene tetrafluoroethylene", "contexts": ["fluoropolymer"]},
-
-    # Engineering plastics
     "PEEK": {"name": "polyether ether ketone", "contexts": ["high performance", "engineering plastic"]},
     "PEI": {"name": "polyetherimide", "contexts": ["engineering plastic"]},
     "PES": {"name": "polyethersulfone", "contexts": ["engineering plastic"]},
     "PSU": {"name": "polysulfone", "contexts": ["engineering plastic"]},
     "PPO": {"name": "polyphenylene oxide", "contexts": ["engineering plastic"]},
     "PPS": {"name": "polyphenylene sulfide", "contexts": ["engineering plastic"]},
-
-    # Elastomers & thermoplastic elastomers
     "PU": {"name": "polyurethane", "contexts": ["elastomer"]},
     "TPU": {"name": "thermoplastic polyurethane", "contexts": ["elastomer"]},
     "TPE": {"name": "thermoplastic elastomer", "contexts": ["elastomer"]},
@@ -71,16 +61,12 @@ polymer_abbrev_dict = {
     "EPDM": {"name": "ethylene propylene diene monomer rubber", "contexts": ["rubber", "elastomer"]},
     "EPM": {"name": "ethylene propylene rubber", "contexts": ["rubber"]},
     "EPR": {"name": "ethylene propylene rubber", "contexts": ["rubber"]},
-
-    # Biopolymers & derivatives
     "CA": {"name": "cellulose acetate", "contexts": ["biopolymer"]},
     "CAB": {"name": "cellulose acetate butyrate", "contexts": ["biopolymer"]},
     "CAP": {"name": "cellulose acetate propionate", "contexts": ["biopolymer"]},
     "CMC": {"name": "carboxymethyl cellulose", "contexts": ["biopolymer"]},
     "CTA": {"name": "cellulose triacetate", "contexts": ["biopolymer"]},
     "CN": {"name": "cellulose nitrate", "contexts": ["biopolymer"]},
-
-    # Copolymers
     "SAN": {"name": "styrene acrylonitrile copolymer", "contexts": ["copolymer"]},
     "SB": {"name": "styrene butadiene copolymer", "contexts": ["rubber"]},
     "AES": {"name": "acrylonitrile ethylene propylene diene styrene", "contexts": ["copolymer", "rubber"]},
@@ -92,17 +78,14 @@ polymer_abbrev_dict = {
     "E/P": {"name": "ethylene propylene copolymer", "contexts": ["elastomer"]},
 }
 
-
 POLY_PAREN_RE = re.compile(r"\bpoly\s*\(([^)]+)\)", re.IGNORECASE)
 POLY_PREFIX_RE = re.compile(r"\bpoly[a-zA-Z\-]+\b", re.IGNORECASE)
-MICROSTRUCTURE_RE = re.compile(r"(\d,\d)-PI", re.IGNORECASE)
+MICROSTRUCTURE_RE = re.compile(r"(\d,\d-[A-Z]{1,2}|cis-PI|trans-PI)", re.IGNORECASE)  
 ABBREV_RE = re.compile(r"\b([A-Z]{1,6}(?:-\d{1,2})?)\b")
 EXCLUSION_RE = re.compile(r"\b(MPa|kPa|Pa|mol|wt%|polynomial|polydispersity|polymer[s]?)\b", re.IGNORECASE)
 
 def normalize_name(name: str) -> str:
     name = name.lower().strip()
-    if name.endswith('s'):
-        name = name[:-1]
     return re.sub(r'\s+', ' ', name)
 
 def strip_poly_prefix(name: str) -> str:
@@ -122,45 +105,44 @@ def resolve_abbreviation(token: str, context_window: str) -> str | None:
     return entry["name"]
 
 VALIDATION_CACHE = {}
+KNOWN_POLYMERS = {normalize_name(p["name"]) for p in polymer_abbrev_dict.values()}
 
-def validate_polymer_pubchem(name: str) -> bool:
-    normalized_name = normalize_name(name)
-    if normalized_name in VALIDATION_CACHE:
-        return VALIDATION_CACHE[normalized_name]
+PUBCHEM_URL = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{}/cids/JSON"
+CONCURRENCY = 30
+TIMEOUT = aiohttp.ClientTimeout(total=4)
 
-    query_name = strip_poly_prefix(normalized_name)
-    valid = False
+async def check_pubchem(session, name: str) -> bool:
+    if name in VALIDATION_CACHE:
+        return VALIDATION_CACHE[name]
+
+    if name in KNOWN_POLYMERS:
+        VALIDATION_CACHE[name] = True
+        return True
 
     try:
-        url = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/substance/name/{requests.utils.quote(query_name)}/JSON"
-        resp = requests.get(url, timeout=10)
-        if resp.status_code == 200:
-            data = resp.json()
-            if "PC_Substances" in data and isinstance(data["PC_Substances"], list):
-                if len(data["PC_Substances"]) > 0:
-                    for sub in data["PC_Substances"]:
-                        synonyms = sub.get("synonyms", [])
-                        if any(query_name.lower() in syn.lower() for syn in synonyms):
-                            valid = True
-                            break
-                    else:
-                        valid = True
-            elif "Fault" in data:
-                valid = False
-    except Exception as e:
-        print(f"Error validating {name}: {e}")
-        valid = False
+        async with session.get(PUBCHEM_URL.format(name)) as r:
+            if r.status != 200:
+                VALIDATION_CACHE[name] = False
+                return False
+            data = await r.json()
+            valid = "IdentifierList" in data
+            VALIDATION_CACHE[name] = valid
+            return valid
+    except Exception:
+        VALIDATION_CACHE[name] = False
+        return False
 
-    VALIDATION_CACHE[normalized_name] = valid
-    time.sleep(0.05)
-    return valid
+async def validate_polymers_async(polymer_names):
+    connector = aiohttp.TCPConnector(limit=CONCURRENCY, ssl=False)
+    async with aiohttp.ClientSession(timeout=TIMEOUT, connector=connector) as session:
+        tasks = [check_pubchem(session, normalize_name(n.split("(")[0].strip())) for n in polymer_names]
+        return await asyncio.gather(*tasks)
 
 def extract_all_polymers(text: str) -> tuple[dict, dict]:
     counts = defaultdict(int)
     microstructures = defaultdict(list)
     text_clean = EXCLUSION_RE.sub("", text)
 
-    # poly(...) forms
     for match in POLY_PAREN_RE.findall(text_clean):
         name = normalize_name(f"poly{match}")
         counts[name] += len(re.findall(re.escape(match), text_clean, re.IGNORECASE))
@@ -171,10 +153,15 @@ def extract_all_polymers(text: str) -> tuple[dict, dict]:
         counts[normalize_name(match)] += len(re.findall(re.escape(match), text_clean, re.IGNORECASE))
 
     for micro in MICROSTRUCTURE_RE.findall(text_clean):
-        base_name = "polyisoprene"
-        micro_name = f"{base_name} ({micro}-PI)"
-        counts[micro_name] += len(re.findall(re.escape(f"{micro}-PI"), text_clean, re.IGNORECASE))
-        microstructures[base_name].append(micro)
+        matched_base = None
+        for abbrev, entry in polymer_abbrev_dict.items():
+            if abbrev.upper().endswith(micro.split("-")[-1].upper()):
+                matched_base = entry["name"]
+                break
+        if matched_base:
+            micro_name = f"{matched_base} ({micro})"
+            counts[micro_name] += 1  
+            microstructures[matched_base].append(micro)
 
     for token_match in ABBREV_RE.finditer(text_clean):
         token = token_match.group(0)
@@ -188,11 +175,9 @@ def extract_all_polymers(text: str) -> tuple[dict, dict]:
     return dict(sorted(counts.items(), key=lambda x: -x[1])), microstructures
 
 def validate_polymers(polymer_dict: dict, micro_dict: dict) -> dict:
-    validated = {}
-    for name, count in polymer_dict.items():
-        base_name = name.split("(")[0].strip()
-        if validate_polymer_pubchem(base_name):
-            validated[name] = count
+    polymer_names = list(polymer_dict.keys())
+    results = asyncio.run(validate_polymers_async(polymer_names))
+    validated = {name: count for name, valid in zip(polymer_names, results) if valid for name, count in polymer_dict.items() if name == name}
     return dict(sorted(validated.items(), key=lambda x: -x[1]))
 
 def select_main_polymers(validated_polymer_dict: dict, micro_dict: dict) -> dict:
@@ -219,9 +204,11 @@ def select_main_polymers(validated_polymer_dict: dict, micro_dict: dict) -> dict
     for base in main_bases:
         if base in micro_dict:
             for micro in micro_dict[base]:
-                micro_name = f"{base} ({micro}-PI)"
+                micro_name = f"{base} ({micro})"
                 if micro_name in validated_polymer_dict:
                     main_polymers[micro_name] = validated_polymer_dict[micro_name]
+                else:
+                    main_polymers[micro_name] = validated_polymer_dict.get(base, 0)
         else:
             if base in validated_polymer_dict:
                 main_polymers[base] = validated_polymer_dict[base]
