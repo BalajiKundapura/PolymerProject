@@ -80,7 +80,7 @@ def extract_text_and_tables_from_pdf(pdf_path, text_out, tables_dir):
 
 if __name__ == "__main__":
     extract_text_and_tables_from_pdf(
-        pdf_path=r"C:\Users\Balaji-Personal\Desktop\testingFolder\inputs\samplePaper2.pdf",
+        pdf_path=r"C:\Users\Balaji-Personal\Desktop\PolymerProject-1\inputs\samplePaper3.pdf",
         text_out="rawData/paper.txt",
         tables_dir="rawData/tables"
     )
