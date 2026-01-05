@@ -30,9 +30,6 @@ def extract_text_and_tables_from_pdf(pdf_path, text_out, tables_dir):
 
     root = etree.fromstring(response.content)
 
-    # =========================
-    # 1️⃣ Extract clean body text
-    # =========================
     text_nodes = root.xpath(
         "//tei:body//text()[not(ancestor::tei:table)]",
         namespaces=NS
@@ -41,9 +38,6 @@ def extract_text_and_tables_from_pdf(pdf_path, text_out, tables_dir):
     clean_text = "\n".join(t.strip() for t in text_nodes if t.strip())
     Path(text_out).write_text(clean_text, encoding="utf-8")
 
-    # =========================
-    # 2️⃣ Extract tables → CSV
-    # =========================
     tables = root.xpath("//tei:table", namespaces=NS)
 
     for idx, table in enumerate(tables, start=1):
@@ -65,7 +59,6 @@ def extract_text_and_tables_from_pdf(pdf_path, text_out, tables_dir):
             max_cols = max(max_cols, len(row_data))
             table_data.append(row_data)
 
-        # Normalize row lengths (CSV consistency)
         for row in table_data:
             row.extend([""] * (max_cols - len(row)))
 
