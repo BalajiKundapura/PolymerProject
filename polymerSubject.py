@@ -124,7 +124,15 @@ def extract_all_polymers(text: str) -> tuple[dict, dict]:
         if span in seen_spans:
             continue
         seen_spans.add(span)
-        name = normalize_name(f"poly{match.group(1)}")
+        raw_name = f"poly{match.group(1)}"
+        name = normalize_name(raw_name)
+
+        # Merge variants to canonical polymer
+        for abbrev, entry in polymer_abbrev_dict.items():
+            if normalize_name(entry["name"]) == name:
+                name = normalize_name(entry["name"])
+                break
+
         counts[name] += 1
 
     for match in POLY_PREFIX_RE.finditer(text_clean):
@@ -132,22 +140,24 @@ def extract_all_polymers(text: str) -> tuple[dict, dict]:
         if span in seen_spans:
             continue
         seen_spans.add(span)
-        name = normalize_name(match.group(0))
-        counts[name] += 1
+        raw_name = normalize_name(match.group(0))
+
+        # Merge variants to canonical polymer
+        for abbrev, entry in polymer_abbrev_dict.items():
+            if normalize_name(entry["name"]) == raw_name:
+                raw_name = normalize_name(entry["name"])
+                break
+
+        counts[raw_name] += 1
 
     for micro_match in MICROSTRUCTURE_RE.finditer(text_clean):
         micro = micro_match.group(1)
-        matched_base = None
         for abbrev, entry in polymer_abbrev_dict.items():
+            base_name = normalize_name(entry["name"])
             if abbrev.upper().endswith(micro.split("-")[-1].upper()):
-                matched_base = entry["name"]
+                counts[base_name] += 1  # add micro to total count
+                microstructures[base_name].append(micro)
                 break
-        if matched_base:
-            micro_name = f"{normalize_name(matched_base)} ({micro})"
-            counts[micro_name] += 1
-            microstructures[normalize_name(matched_base)].append(micro)
-            base_name = normalize_name(matched_base)
-            counts[base_name] += 1
 
     for token_match in ABBREV_RE.finditer(text_clean):
         token = token_match.group(0)
@@ -162,6 +172,7 @@ def extract_all_polymers(text: str) -> tuple[dict, dict]:
     counts = {k: v for k, v in counts.items() if not EXCLUSION_RE.match(k)}
 
     return dict(sorted(counts.items(), key=lambda x: -x[1])), microstructures
+
 
 VALIDATION_CACHE = {}
 KNOWN_POLYMERS = {normalize_name(p["name"]) for p in polymer_abbrev_dict.values()}
@@ -204,34 +215,25 @@ def validate_polymers(polymer_dict: dict, micro_dict: dict) -> dict:
     return dict(sorted(validated.items(), key=lambda x: -x[1]))
 
 def select_main_polymers(validated_polymer_dict: dict, micro_dict: dict) -> dict:
+
     if not validated_polymer_dict:
         return {}
-    base_counts = defaultdict(int)
-    for name, count in validated_polymer_dict.items():
-        base_name = name.split("(")[0].strip()
-        base_counts[base_name] += count
-    sorted_bases = sorted(base_counts.items(), key=lambda x: -x[1])
-    base_names = [b for b, c in sorted_bases]
-    counts = np.array([c for b, c in sorted_bases], dtype=float)
+
+    sorted_polymers = sorted(validated_polymer_dict.items(), key=lambda x: -x[1])
+    names = [name for name, count in sorted_polymers]
+    counts = [count for name, count in sorted_polymers]
+
     if len(counts) == 1:
-        main_bases = base_names
-    else:
-        ratios = counts[:-1] / counts[1:]
-        gap_index = np.argmax(ratios)
-        main_bases = base_names[:gap_index + 1]
-    main_polymers = {}
-    for base in main_bases:
-        if base in micro_dict:
-            for micro in micro_dict[base]:
-                micro_name = f"{base} ({micro})"
-                if micro_name in validated_polymer_dict:
-                    main_polymers[micro_name] = validated_polymer_dict[micro_name]
-                else:
-                    main_polymers[micro_name] = validated_polymer_dict.get(base, 0)
-        else:
-            if base in validated_polymer_dict:
-                main_polymers[base] = validated_polymer_dict[base]
-    return dict(sorted(main_polymers.items(), key=lambda x: -x[1]))
+        return {names[0]: counts[0]}
+
+    ratios = [counts[i] / counts[i + 1] for i in range(len(counts) - 1)]
+    gap_index = np.argmax(ratios)
+
+    main_names = names[:gap_index + 1]
+    main_polymers = {name: validated_polymer_dict[name] for name in main_names}
+
+    return main_polymers
+
 
 if __name__ == "__main__":
     file_path = r"C:\Users\Balaji-Personal\Desktop\PolymerProject-1\rawData\paper.txt"
