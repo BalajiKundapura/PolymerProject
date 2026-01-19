@@ -23,7 +23,7 @@ def extract_text_and_tables_from_pdf(pdf_path, text_out, tables_dir):
                 "consolidateCitations": "1",
                 "teiCoordinates": "false"
             },
-            timeout=60
+            timeout=6000
         )
 
     if response.status_code != 200:
@@ -74,7 +74,7 @@ def extract_text_and_tables_from_pdf(pdf_path, text_out, tables_dir):
 
 if __name__ == "__main__":
     extract_text_and_tables_from_pdf(
-        pdf_path=r"C:\Users\Balaji-Personal\Desktop\PolymerProject-1\inputs\samplePaper2.pdf",
+        pdf_path=r"C:\Users\Balaji-Personal\Desktop\PolymerProject-1\inputs\samplePaper3.pdf",
         text_out="rawData/paper.txt",
         tables_dir="rawData/tables"
     )

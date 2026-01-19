@@ -1,0 +1,4 @@
+{
+  "poly(ethylene glycol)": {"solvents": ["Acetonitrile", "Water"], "ratios": [54.0, 46.0]},
+  "poly(propylene glycol)": {"solvents": ["Acetone", "Water"], "ratios": [45.0, 55.0]}
+}
