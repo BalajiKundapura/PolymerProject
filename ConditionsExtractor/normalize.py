@@ -42,8 +42,7 @@ def preprocess_text(raw_text: str) -> List[str]:
 def preprocess_file(input_path: str) -> List[str]:
     raw_text = Path(input_path).read_text(encoding="utf-8", errors="ignore")
     sentences = preprocess_text(raw_text)
-
-    # Save back to the same file
+    
     Path(input_path).write_text("\n".join(sentences), encoding="utf-8")
     print(f"Preprocessed text saved to {input_path}")
 

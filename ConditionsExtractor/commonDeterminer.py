@@ -4,9 +4,6 @@ import re
 RATIO_REGEX = re.compile(r"\b\d+\s*[:/]\s*\d+\b")
 
 def extract_linked_ratios(context, polymers, solvents, window=50):
-    """
-    Only consider a ratio if it appears within ±window characters of a polymer or solvent.
-    """
     linked_ratios = []
 
     for match in RATIO_REGEX.finditer(context):
@@ -112,7 +109,7 @@ if __name__ == "__main__":
     most_common_solvent = select_best_solvent(records)
 
     if most_common_solvent:
-        print("✅ Most common solvent system selected:")
+        print("Most common solvent system selected:")
         print(f"Solvent: {most_common_solvent['solvent']}")
         print(f"Score: {most_common_solvent['score']}")
         print(f"Most common linked ratio: {most_common_solvent['most_common_ratio']}")

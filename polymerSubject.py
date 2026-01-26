@@ -235,7 +235,7 @@ def select_main_polymers(validated_polymer_dict: dict, micro_dict: dict) -> dict
 
 
 if __name__ == "__main__":
-    file_path = r"C:\Users\Balaji-Personal\Desktop\PolymerProject-1\rawData\paper.txt"
+    file_path = "rawData\paper.txt"
     with open(file_path, "r", encoding="utf-8") as f:
         sample_text = f.read()
 

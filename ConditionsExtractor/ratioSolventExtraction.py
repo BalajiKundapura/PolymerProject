@@ -35,6 +35,7 @@ MIXTURE_TERMS = [
     "eluent",
     "solvent"
 ]
+
 def split_sentences(text):
     text = re.sub(r"\s+", " ", text)
     return re.split(r"(?<=[.!?])\s+", text)
@@ -75,7 +76,6 @@ def extract_ratios(sentence):
     return ratios, unit
 
 def extract_conditions(sentences, window=2):
-    """Extract conditions with solvents, ratios, units, and linked polymers."""
     records = []
     seen = set()
 
@@ -128,11 +128,11 @@ def run_pipeline(input_file, output_file):
             f.write("Context:\n")
             f.write(r["context"] + "\n\n")
 
-    print(f"✅ Extracted {len(records)} solvent–ratio–polymer conditions")
-    print(f"📄 Saved to {output_file}")
+    print(f"Extracted {len(records)} solvent–ratio–polymer conditions")
+    print(f"Saved to {output_file}")
 
 if __name__ == "__main__":
     run_pipeline(
-        input_file="LCCC_context_blocks.txt",
+        input_file="LCCC_mobile_phase.txt",
         output_file="LCCC_conditions.txt"
     )
