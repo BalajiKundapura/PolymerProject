@@ -1,0 +1,6 @@
+===== EXTRACT 1 =====
+Values: ['5 μm', '5 μm']
+Polymers: ['polystyrene']
+Context:
+===== EXTRACT 1 ===== Values: ['5 μm'] Polymers: ['polystyrene sulfonate'] Context: On-flow SEC-NMR experiments were performed with the same system and same acquisition parameters as described above. Three columns (PSS SDV 5 μm precolumn, 10 3 Å, and 10 5 Å with 300 Â 8 mm i.d.) were used. The data were processed as 2D contour plots.
+

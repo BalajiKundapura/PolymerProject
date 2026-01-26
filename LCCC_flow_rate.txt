@@ -1,0 +1,36 @@
+===== EXTRACT 1 =====
+Values: ['.5mL/min']
+Polymers: ['<UNKNOWN>']
+Context:
+100 μL was injected. The flow rate was 0.5 mL/min. On-flow HPLC-NMR experiments were carried out by using protonated HPLC solvents.
+
+===== EXTRACT 2 =====
+Values: ['.8mL/min']
+Polymers: ['<UNKNOWN>']
+Context:
+100 μL was injected. HPLC grade THF was used as mobile phase with a flow rate of 0.8 mL/min. WET solvent suppression was applied to THF.
+
+===== EXTRACT 3 =====
+Values: ['.5mL/min']
+Polymers: ['polyisoprene']
+Context:
+Critical diagram of 1,4-PI showing molar mass versus retention time at a mobile phase composition of butanone/cyclohexane: 9, 70:30; b, 92:8; 2, 97:3. Stationary phase: three RP columns of C18 (100-5, 300-5, 1000-7); detector: NMR, flow rate 0.5 mL/min ; SEC = size exclusion chromatography, LCCC = liquid chromatography at critical conditions, LAC = liquid adsorption chromatography. 2 Figure 2.
+
+===== EXTRACT 4 =====
+Values: ['.5mL/min']
+Polymers: ['polyisoprene']
+Context:
+2 Figure 2. On-flow LCCC-NMR of blends of 1,4-PI (M n = 20.7 kg mol -1 ) and 3,4-PI: (a) M n = 9.1 kg mol -1 , (b) 33.0 kg mol -1 , and (c) 72.8 kg mol -1 measured at critical conditions of 1,4-PI (100 μL injection, flow rate 0.5 mL/min ). The blue dotted lines represent the maximum of the elution of the 1,4-PI sample (containing also a small amount 3,4-PI), and the red dotted lines show the maximum of the elution of the 3,4-PI samples (containing also 1,2-PI and 1,4-PI).
+
+===== EXTRACT 5 =====
+Values: ['.0mL/min', '.5mL/min', 'mL/min']
+Polymers: ['<UNKNOWN>']
+Context:
+3 Figure 3. NMR intensities of the olefinic protons as a function of the recycle delay for 0.5 mL/min (solid lines) and 0 mL/min (dashed lines): (b, 2, 9) data points for 0.5 mL/min ; (O, 4, 0) data points for 0.0 mL/min. 4 Figure 4.
+
+===== EXTRACT 6 =====
+Values: ['.8mL/min']
+Polymers: ['polyisoprene']
+Context:
+8 Figure 8. SEC-NMR chromatograms of sample 8 (M w = 33.9 kg mol -1 ) using THF with a flow rate of 0.8 mL/min , concentration 2.7 mg/mL , 100 μL injection, SDV columns 10 3 Å and 10 5 Å 8 Â 300 i.d., PSS GmbH, Mainz, Germany: black solid line = total NMR elution of the 3,4-PI sample, [ = molar content of 1,2-isoprene units, 9 = molar content of 1,4-isoprene units, and 2 = molar content of 3,4-isoprene units. 9 Figure 9.
+

@@ -1,0 +1,12 @@
+===== EXTRACT 1 =====
+Values: ['°C']
+Polymers: ['polyisoprene']
+Context:
+It can be seen that indeed near-critical conditions can be achieved by using butanone/cyclohexane mixtures as the mobile phase. If the composition of the two solvents is 92/8 vol%, these conditions are obtained for a temperature of 29 °C. In this case all 1,4-PI samples elute at the same retention volume irrespective of their molar masses.
+
+===== EXTRACT 2 =====
+Values: ['c']
+Polymers: ['polyisoprene']
+Context:
+Both 1,4and 3,4-PI samples can be sufficiently separated. The best separation is achieved for the third blend (Figure 4c). The other two blends show partial coelution of both samples.
+
