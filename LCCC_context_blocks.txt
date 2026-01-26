@@ -1,0 +1,57 @@
+===== LCCC EXTRACT 1 =====
+Applied to the characterization of poloxamers, there are different strategies, depending on their architecture, molar mass and chemical composition. SEC yields the overall molar mass distribution (MMD); with dual detection one may obtain information on the chemical composition along the MMD [22, 38, 39]. SEC is, however, not capable of discriminating mixture of diblocks, triblocks, and homopolymers! At the CAP for the EO unit, a separation according to the PO block(s) may be achieved by a SEC or a LAC mechanism, and vice versa. A schematic representation is given in Table 1 , which summarizes the (theoretically) possible situations in LCCC of EO-PO copolymers.
+
+===== LCCC EXTRACT 2 =====
+Such conditions (which correspond to situation 1 in Table 1 ) have been described by several authors [29] [30] [31] 40]. This approach is not very favorable, if the molar mass of the PO block is high, as molecules with a long PO block may be strongly retained. This problem cannot be solved by gradient elution (regardless the nature of the gradient: Mobile phase composition or temperature [34] ): In both cases the critical conditions would be lost. One may, however, also find critical conditions for the PO unit on a RP column in a different mobile phase composition (with a higher content of organic solvent): In this case EO will elute in SEC mode. The opposite may happen on normal phase columns: at the CAP for the EO unit, PO will elute in SEC mode, while EO will elute in LAC mode at the CAP for PO (if such critical points can be found).
+
+===== LCCC EXTRACT 3 =====
+This approach is not very favorable, if the molar mass of the PO block is high, as molecules with a long PO block may be strongly retained. This problem cannot be solved by gradient elution (regardless the nature of the gradient: Mobile phase composition or temperature [34] ): In both cases the critical conditions would be lost. One may, however, also find critical conditions for the PO unit on a RP column in a different mobile phase composition (with a higher content of organic solvent): In this case EO will elute in SEC mode. The opposite may happen on normal phase columns: at the CAP for the EO unit, PO will elute in SEC mode, while EO will elute in LAC mode at the CAP for PO (if such critical points can be found). For the typical molar mass range of poloxamers, situations 1 and 4 are not very favorable, as the retention of the adsorbing block may be too high (or the resolution not sufficient).
+
+===== LCCC EXTRACT 4 =====
+Data acquisition and processing was performed using the software package CHROMA, which has been developed for the DDS70. The columns and density cells were placed in a thermostatted box, in which a temperature of 25.0 8C was maintained for all measurements on both systems (A and B). In system A, the mobile phase was delivered by a JASCO 880 PU pump (Japan Spectrosopic Company, Tokyo, Japan) at a flow rate of 0.5 ml/min. Samples were injected manually using a Rheodyne 7125 injection valve (Rheodyne, Cotati, CA, USA) equipped with a 50 ml loop. A Bischoff 8110 refractive index (RI) detector (Bischoff, Leonberg, Germany) was connected to the DDS 70.
+
+===== LCCC EXTRACT 5 =====
+A Bischoff 8110 refractive index (RI) detector (Bischoff, Leonberg, Germany) was connected to the DDS 70. Columns were connected to two column selection valves (Rheodyne 7060). In system B, the mobile phase was delivered by an ISCO 2350 HPLC pump and an ISCO 2360 gradient programmer (from ISCO, Lincoln, NE, USA) at a flow rate of 0.5 ml/min. Samples were injected using an autosampler Spark SPH 125 Fix (from Spark Holland, Emmen, The Netherlands) equipped with a 20 ml loop. A SEDEX 45 ELSD (Sedere, France) was connected to the DDS 70.
+
+===== LCCC EXTRACT 6 =====
+SEC measurements were performed on a modular SEC system comprising of a Gynkotek 300C pump equipped with a VICI injector (sample loop 100 ml), two column selection valves Rheodyne 7060, a density detection system DDS 70 (Chromtech, Graz, Austria) coupled with an ERC 7512 RI detector. Data acquisition and processing was performed using the software CHROMA. All SEC measurements were performed on a Styragel HR3 column (300!7.8 mm, waters) or a set of two columns PLgel (10 mm), 10 3 C10 4 A ˚, 300!7.8 mm each (Agilent) at a flow-rate of 1.00 ml/min and a column temperature of 30.0 8C. Sample concentrations were 3.0-10.0 g/l. The solvents (chloroform, acetone and water, both HPLC grade) were purchased from Roth (Karlsruhe, Germany) and Merck (Darmstadt, Germany).
+
+===== LCCC EXTRACT 7 =====
+Data acquisition and processing was performed using the software CHROMA. All SEC measurements were performed on a Styragel HR3 column (300!7.8 mm, waters) or a set of two columns PLgel (10 mm), 10 3 C10 4 A ˚, 300!7.8 mm each (Agilent) at a flow-rate of 1.00 ml/min and a column temperature of 30.0 8C. Sample concentrations were 3.0-10.0 g/l. The solvents (chloroform, acetone and water, both HPLC grade) were purchased from Roth (Karlsruhe, Germany) and Merck (Darmstadt, Germany). Mobile phases were mixed by mass and vacuum degassed, their composition was controlled by density measurement using a DMA 60 density meter equipped with a measuring cell DMA 602 M (A.
+
+===== LCCC EXTRACT 8 =====
+All SEC measurements were performed on a Styragel HR3 column (300!7.8 mm, waters) or a set of two columns PLgel (10 mm), 10 3 C10 4 A ˚, 300!7.8 mm each (Agilent) at a flow-rate of 1.00 ml/min and a column temperature of 30.0 8C. Sample concentrations were 3.0-10.0 g/l. The solvents (chloroform, acetone and water, both HPLC grade) were purchased from Roth (Karlsruhe, Germany) and Merck (Darmstadt, Germany). Mobile phases were mixed by mass and vacuum degassed, their composition was controlled by density measurement using a DMA 60 density meter equipped with a measuring cell DMA 602 M (A. Paar, Graz, Austria).
+
+===== LCCC EXTRACT 9 =====
+Sample concentrations were 3.0-10.0 g/l. The solvents (chloroform, acetone and water, both HPLC grade) were purchased from Roth (Karlsruhe, Germany) and Merck (Darmstadt, Germany). Mobile phases were mixed by mass and vacuum degassed, their composition was controlled by density measurement using a DMA 60 density meter equipped with a measuring cell DMA 602 M (A. Paar, Graz, Austria). PEG and PPG samples were purchased from Sigma-Aldrich and FLUKA (Buchs, Switzerland), EO-PO block copolymers from Sigma-Aldrich, BASF and SERVA.
+
+===== LCCC EXTRACT 10 =====
+At a composition close to the CAP for PO, the EO unit clearly elutes in SEC mode, as is shown in Fig. 2. All PEGs elute in SEC mode, only the lower ones merge with the solvent peak, which is due to the fact, that this column has a rather large pore diameter. Surprisingly, all PPGs elute considerably behind the solvent peak! Obviously, the available pore volume is larger for PPG than for water.
+
+===== LCCC EXTRACT 11 =====
+2. All PEGs elute in SEC mode, only the lower ones merge with the solvent peak, which is due to the fact, that this column has a rather large pore diameter. Surprisingly, all PPGs elute considerably behind the solvent peak! Obviously, the available pore volume is larger for PPG than for water. This agrees with other findings, which shall be published in another paper.
+
+===== LCCC EXTRACT 12 =====
+Therefore, we looked for another column with similar properties. As can be seen in Fig. 4 , a CAP for PO was found on the Discovery HS-PEG column (a silica-based phase with attached PEG chains) in acetone-water with about 45% (w/w) acetone. Under these conditions EO elutes in SEC mode. This becomes also clear from Fig.
+
+===== LCCC EXTRACT 13 =====
+As can be seen, the PPGs elute roughly at the void volume, as the water peak almost coincides with the PPG peaks. On this column, the resolution on the low molecular range is somewhat better than on the Jordi column. On the other hand, higher PPGs are no more soluble in a mobile phase composition like that corresponding to the CAP on the HS-PEG column. Consequently, the Jordi column will perform better for samples with longer PO blocks, while the HS-PEG column is suitable for the analysis of samples with shorter PO blocks. In Fig.
+
+===== LCCC EXTRACT 14 =====
+Consequently, these conditions can be utilized in the determination of the MMD of the EO blocks, as will be shown later on. Moreover, the presence of the homopolymer PPG can be shown by this technique. With RI detection, this is not easily achieved: A peak at the void volume (where PPG will elute) may as well be a solvent peak, which results from preferential solvation of the copolymer. Hence, the RI detector was replaced by an ELSD. Even though the peaks are considerably broader with the ELSD, it becomes clear from Fig.
+
+===== LCCC EXTRACT 15 =====
+No information was, however, given about the elution behaviour of PO in these phases. The desired conditions were now found on a Diol phase in acetone-water with about 80 wt% aetone (Fig. 8 ): A CAP for EO exists at 78.54% (w/w) acetone. As can be seen in Fig. 9 , PPGs elute in SEC mode, and the peaks of all PEGs (from 400 to 12000) coincide precisely.
+
+===== LCCC EXTRACT 16 =====
+As can be seen in Fig. 9 , PPGs elute in SEC mode, and the peaks of all PEGs (from 400 to 12000) coincide precisely. Again the peak of the 'critical component' elutes considerably behind the solvent peak! These conditions allow a separation of poloxamers according to the length of the PO blocks, and show also the presence of PEG in a sample. The samples shown in Fig.
+
+===== LCCC EXTRACT 17 =====
+45 Fig. 4. Elution volumes of PEG and PPG with different molar mass on the HS-PEG column in acetone-water mobile phases of different composition (in wt%). Fig. 8 .Fig.
+
+===== LCCC EXTRACT 18 =====
+89 Fig. 8. Elution volumes of PEG and PPG with different molar mass on the Diol column in aceton-water mobile phases of different composition (in wt%). Fig. 10 .Fig.
+
+===== LCCC EXTRACT 19 =====
+16. MMD of PO-EO-PO 2700 (with 40% EO) and the individual blocks, as obtained by SEC (PL gel 10 3 C10 4 A ˚, CHCl 3 ) and LCCC (Discovery and Jordi: CAP for PO, SEC for EO; Nucleosil: CAP for EO, SEC for PO). Elution volumes of PEG and PPG with different molar mass on the Jordi column in aceton-water mobile phases of different composition (in wt%). b Diol column in 78.54% acetone. c Sum of M(EO) and M(PO).
+

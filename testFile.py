@@ -1,1 +1,0 @@
-from polymerSubject import polymer_abbrev_dict

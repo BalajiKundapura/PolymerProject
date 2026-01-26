@@ -2,6 +2,7 @@ import requests
 from lxml import etree
 from pathlib import Path
 import csv
+
 #docker run -t --rm -p 8070:8070 lfoppiano/grobid:0.7.1
 
 GROBID_URL = "http://localhost:8070/api/processFulltextDocument"
@@ -74,7 +75,7 @@ def extract_text_and_tables_from_pdf(pdf_path, text_out, tables_dir):
 
 if __name__ == "__main__":
     extract_text_and_tables_from_pdf(
-        pdf_path=r"C:\Users\Balaji-Personal\Desktop\PolymerProject-1\inputs\samplePaper3.pdf",
+        pdf_path=r"C:\Users\Balaji-Personal\Desktop\PolyCrit Chemical Project\inputs\samplePaper2.pdf",
         text_out="rawData/paper.txt",
         tables_dir="rawData/tables"
     )

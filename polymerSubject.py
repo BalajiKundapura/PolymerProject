@@ -89,6 +89,7 @@ polymer_abbrev_dict = {
     "Tween 40": {"name": "polyoxyethylene sorbitan monopalmitate", "contexts": []},
     "Polysorbate 40": {"name": "polyoxyethylene sorbitan monopalmitate", "contexts": []},
 }
+
 POLY_PAREN_RE = re.compile(r"\bpoly\s*\(([^)]+)\)", re.IGNORECASE)
 POLY_PREFIX_RE = re.compile(r"\bpoly[a-zA-Z\-]+\b", re.IGNORECASE)
 MICROSTRUCTURE_RE = re.compile(r"(\d,\d-[A-Z]{1,2}|cis-PI|trans-PI)", re.IGNORECASE)
@@ -127,7 +128,6 @@ def extract_all_polymers(text: str) -> tuple[dict, dict]:
         raw_name = f"poly{match.group(1)}"
         name = normalize_name(raw_name)
 
-        # Merge variants to canonical polymer
         for abbrev, entry in polymer_abbrev_dict.items():
             if normalize_name(entry["name"]) == name:
                 name = normalize_name(entry["name"])
@@ -142,7 +142,6 @@ def extract_all_polymers(text: str) -> tuple[dict, dict]:
         seen_spans.add(span)
         raw_name = normalize_name(match.group(0))
 
-        # Merge variants to canonical polymer
         for abbrev, entry in polymer_abbrev_dict.items():
             if normalize_name(entry["name"]) == raw_name:
                 raw_name = normalize_name(entry["name"])
@@ -155,7 +154,7 @@ def extract_all_polymers(text: str) -> tuple[dict, dict]:
         for abbrev, entry in polymer_abbrev_dict.items():
             base_name = normalize_name(entry["name"])
             if abbrev.upper().endswith(micro.split("-")[-1].upper()):
-                counts[base_name] += 1  # add micro to total count
+                counts[base_name] += 1 
                 microstructures[base_name].append(micro)
                 break
 
