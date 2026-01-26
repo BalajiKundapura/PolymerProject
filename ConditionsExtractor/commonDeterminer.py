@@ -1,75 +1,121 @@
+from collections import Counter, defaultdict
 import re
-from collections import Counter
+
+RATIO_REGEX = re.compile(r"\b\d+\s*[:/]\s*\d+\b")
+
+def extract_linked_ratios(context, polymers, solvents, window=50):
+    """
+    Only consider a ratio if it appears within ±window characters of a polymer or solvent.
+    """
+    linked_ratios = []
+
+    for match in RATIO_REGEX.finditer(context):
+        start, end = match.span()
+        ratio = match.group()
+
+        for poly in polymers:
+            poly_idx = context.lower().find(poly.lower())
+            if poly_idx != -1 and abs(poly_idx - start) <= window:
+                linked_ratios.append(ratio)
+
+
+        for sol in solvents:
+            sol_idx = context.lower().find(sol.lower())
+            if sol_idx != -1 and abs(sol_idx - start) <= window:
+                linked_ratios.append(ratio)
+
+    return linked_ratios
 
 def parse_lccc_file(file_path):
-    """Parse a text file with LCCC CONDITION blocks."""
+    records = []
     with open(file_path, "r", encoding="utf-8") as f:
         text = f.read()
-    
-    condition_blocks = re.split(r"===== LCCC CONDITION \d+ =====", text)
-    
-    records = []
+
+    condition_blocks = [b.strip() for b in text.split("===== LCCC CONDITION ") if b.strip()]
+
     for block in condition_blocks:
-        if not block.strip():
-            continue
+        lines = block.splitlines()
+        solvents = []
+        polymers = []
+        context_lines = []
 
-        solvents = re.findall(r'\b[a-zA-Z][\w-]*/[a-zA-Z][\w-]*\b', block)
+        for line in lines:
+            line = line.strip()
+            if line.startswith("Polymers:"):
+                polymer_line = line.replace("Polymers:", "").strip()
+                polymer_line = polymer_line.strip("[]")
+                polymers = [p.strip().strip("'\"") for p in polymer_line.split(",") if p.strip()]
+            elif line.startswith("Solvent expressions:"):
+                solvent_line = line.replace("Solvent expressions:", "").strip()
+                solvent_line = solvent_line.strip("[]")
+                solvents = [s.strip().strip("'\"") for s in solvent_line.split(",") if s.strip()]
+            else:
+                context_lines.append(line)
 
-        ratios = re.findall(r'\b\d{1,3}[:/]\d{1,3}\b', block)
-        
-        context = block.strip()
-        
+        context = " ".join(context_lines).strip()
+
         records.append({
-            "solvents": solvents,
-            "ratios": ratios,
+            "solvents": solvents or ["<UNKNOWN>"],
+            "polymers": polymers or ["<UNKNOWN>"],
             "context": context
         })
-    
+
     return records
 
-def find_most_common(records, min_count=1):
-    """Return solvent+ratio pairs and their occurrences."""
-    pairs = []
+def select_best_solvent(records, alpha=2):
+    solvent_count = Counter()
+    solvent_polymers = defaultdict(set)
+    solvent_linked_ratios = defaultdict(Counter)
+
     for rec in records:
-        solvents = rec.get("solvents", [])
-        ratios = rec.get("ratios", [])
-        if not solvents:
-            solvents = ["<UNKNOWN>"]
-        if not ratios:
-            ratios = ["<UNKNOWN>"]
+        solvents = rec["solvents"]
+        polymers = rec["polymers"]
+        context = rec["context"]
 
-        ratios = [r.replace(":", "/") for r in ratios]
-        
         for s in solvents:
-            if not re.search(r'[a-zA-Z]', s):
+            if s == "<UNKNOWN>":
                 continue
-            for r in ratios:
-                pairs.append((s, r))
-    
-    counts = Counter(pairs)
-    if not counts:
-        return []
-    
-    max_occurrence = max(counts.values())
-    most_common_pairs = [(pair, c) for pair, c in counts.items() if c == max_occurrence]
-    
-    return most_common_pairs
+            solvent_count[s] += 1
+            for p in polymers:
+                if p != "<UNKNOWN>":
+                    solvent_polymers[s].add(p)
 
-def save_most_common(most_common_pairs, save_path):
-    """Save the most common solvent/ratio combinations to a file."""
-    with open(save_path, "w", encoding="utf-8") as f:
-        if not most_common_pairs:
-            f.write("No solvent systems found.\n")
-        else:
-            for (solvent, ratio), count in most_common_pairs:
-                f.write(f"Solvent system: {solvent}, Ratio: {ratio}, Occurrences: {count}\n")
-    
-    print(f"Most common solvent systems saved to {save_path}")
+            linked_ratios = extract_linked_ratios(context, polymers, [s])
+            for r in linked_ratios:
+                solvent_linked_ratios[s][r] += 1
 
+    if not solvent_count:
+        return None
 
-file_path = "LCCC_conditions.txt"          
-save_path = "most_common_solvents.txt"     
+    solvent_scores = {s: solvent_count[s] + alpha * len(solvent_polymers[s])
+                      for s in solvent_count}
 
-records = parse_lccc_file(file_path)
-most_common_pairs = find_most_common(records)
-save_most_common(most_common_pairs, save_path)
+    best_solvent = max(solvent_scores, key=lambda x: solvent_scores[x])
+    best_score = solvent_scores[best_solvent]
+
+    most_common_ratio = None
+    if solvent_linked_ratios.get(best_solvent):
+        most_common_ratio = solvent_linked_ratios[best_solvent].most_common(1)[0][0]
+
+    linked_polymers = sorted(list(solvent_polymers.get(best_solvent, [])))
+
+    return {
+        "solvent": best_solvent,
+        "score": best_score,
+        "most_common_ratio": most_common_ratio,
+        "linked_polymers": linked_polymers
+    }
+
+if __name__ == "__main__":
+    file_path = "LCCC_conditions.txt"
+    records = parse_lccc_file(file_path)
+    most_common_solvent = select_best_solvent(records)
+
+    if most_common_solvent:
+        print("✅ Most common solvent system selected:")
+        print(f"Solvent: {most_common_solvent['solvent']}")
+        print(f"Score: {most_common_solvent['score']}")
+        print(f"Most common linked ratio: {most_common_solvent['most_common_ratio']}")
+        print(f"Linked polymers: {most_common_solvent['linked_polymers']}")
+    else:
+        print("⚠️ No solvent systems found.")

@@ -1,5 +1,26 @@
 import re
 import spacy
+import importlib.util
+import sys
+from pathlib import Path
+
+PROJECT_ROOT = str(Path(__file__).resolve().parents[1])
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+try:
+    from polymerSubject import extract_all_polymers, select_main_polymers, normalize_name, polymer_abbrev_dict
+except Exception:
+    spec_path = Path(PROJECT_ROOT) / "polymerSubject.py"
+    if not spec_path.exists():
+        raise
+    spec = importlib.util.spec_from_file_location("polymerSubject", str(spec_path))
+    polymerSubject = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(polymerSubject)
+    extract_all_polymers = polymerSubject.extract_all_polymers
+    select_main_polymers = polymerSubject.select_main_polymers
+    normalize_name = polymerSubject.normalize_name
+    polymer_abbrev_dict = getattr(polymerSubject, "polymer_abbrev_dict", {})
 
 nlp = spacy.load("en_core_web_sm")
 
@@ -14,7 +35,6 @@ MIXTURE_TERMS = [
     "eluent",
     "solvent"
 ]
-
 def split_sentences(text):
     text = re.sub(r"\s+", " ", text)
     return re.split(r"(?<=[.!?])\s+", text)
@@ -31,10 +51,7 @@ def extract_solvent_phrases(sentence):
     doc = nlp(sentence)
     solvents = set()
 
-    for match in re.findall(
-        r"\b[a-zA-Z][a-zA-Z\-]+/[a-zA-Z][a-zA-Z\-]+\b",
-        sentence
-    ):
+    for match in re.findall(r"\b[a-zA-Z][a-zA-Z\-]+/[a-zA-Z][a-zA-Z\-]+\b", sentence):
         solvents.add(match.lower())
 
     for chunk in doc.noun_chunks:
@@ -58,6 +75,7 @@ def extract_ratios(sentence):
     return ratios, unit
 
 def extract_conditions(sentences, window=2):
+    """Extract conditions with solvents, ratios, units, and linked polymers."""
     records = []
     seen = set()
 
@@ -75,15 +93,19 @@ def extract_conditions(sentences, window=2):
         end = min(len(sentences), i + window + 1)
         context = " ".join(sentences[start:end])
 
+        all_polymers, _ = extract_all_polymers(context)
+        main_polymers = select_main_polymers(all_polymers, {})
+
         key = (tuple(solvents), tuple(ratios), unit)
         if key in seen:
             continue
         seen.add(key)
 
         records.append({
-            "solvent_expressions": solvents,
-            "ratios": ratios,
+            "solvent_expressions": solvents or ["<UNKNOWN>"],
+            "ratios": ratios or ["<UNKNOWN>"],
             "unit": unit,
+            "polymers": sorted(main_polymers.keys()) if main_polymers else ["<UNKNOWN>"],
             "context": context
         })
 
@@ -102,12 +124,12 @@ def run_pipeline(input_file, output_file):
             f.write(f"Solvent expressions: {r['solvent_expressions']}\n")
             f.write(f"Ratios: {r['ratios']}\n")
             f.write(f"Unit: {r['unit']}\n")
+            f.write(f"Polymers: {r['polymers']}\n")
             f.write("Context:\n")
             f.write(r["context"] + "\n\n")
 
-    print(f"✅ Extracted {len(records)} solvent–ratio conditions")
+    print(f"✅ Extracted {len(records)} solvent–ratio–polymer conditions")
     print(f"📄 Saved to {output_file}")
-
 
 if __name__ == "__main__":
     run_pipeline(
