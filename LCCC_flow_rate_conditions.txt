@@ -1,6 +1,0 @@
-===== EXTRACT 1 =====
-Values: ['0.5 mL/min']
-Polymers: ['polyisoprene']
-Context:
-===== EXTRACT 3 ===== Values: ['.5mL/min'] Polymers: ['polyisoprene'] Context: Critical diagram of 1,4-PI showing molar mass versus retention time at a mobile phase composition of butanone/cyclohexane: 9, 70:30; b, 92:8; 2, 97:3. Stationary phase: three RP columns of C18 (100-5, 300-5, 1000-7); detector: NMR, flow rate 0.5 mL/min ; SEC = size exclusion chromatography, LCCC = liquid chromatography at critical conditions, LAC = liquid adsorption chromatography. 2 Figure 2.
-
