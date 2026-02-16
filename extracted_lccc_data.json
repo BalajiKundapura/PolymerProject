@@ -1,474 +1,88 @@
 {
   "metadata": {
-    "total_polymers_found": 15,
-    "validated_polymers": 6,
+    "total_polymers_found": 12,
+    "validated_polymers": 5,
     "main_polymers": 2,
-    "total_paragraphs": 39,
-    "lccc_paragraphs": 30,
-    "polymer_mentions_found": 131,
-    "extracted_experiments": 40,
-    "processing_time_seconds": 1.5304863452911377,
+    "total_paragraphs": 86,
+    "extracted_conditions": 0,
+    "processing_time_seconds": 2.499778985977173,
     "main_polymers_list": [
-      "poly(l-lactide)",
-      "poly(ethylene oxide)"
+      "poly(ethylene glycol)",
+      "poly(propylene glycol)"
     ],
-    "completion": {
-      "completion_mode": "balanced",
-      "filled_fields": 0,
-      "llm_calls": 0,
-      "llm_filled_fields": 0
+    "llm_extraction": {
+      "llm_available": true,
+      "chunks": 21,
+      "llm_calls": 22,
+      "conditions": 0,
+      "parse_failures": 0,
+      "mode": "dynamic",
+      "columns_catalog": 0,
+      "consensus_min": 1,
+      "models": [
+        "qwen2.5:7b"
+      ],
+      "used": true,
+      "model": "qwen2.5:7b"
     },
-    "output_mode": "compact"
-  },
-  "experiments": {
-    "poly(l-lactide)": {
-      "experiment_1": {
-        "polymer_mention": "PLLA",
-        "stationary_phase": [
-          {
-            "column_name": null,
-            "material": "is used for the separation of macromolecules",
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": null,
-            "column_dimensions": null,
-            "number_of_columns": null,
-            "manufacturer": null,
-            "phase": "HILIC"
-          }
-        ],
-        "solvent_details": [],
-        "technical_details": []
-      },
-      "experiment_2": {
-        "polymer_mention": "PLLA",
-        "stationary_phase": [
-          {
-            "column_name": "C of the desired temperature by circulating fluid through a",
-            "material": null,
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": null,
-            "column_dimensions": "250x4.6 mm",
-            "number_of_columns": "6",
-            "manufacturer": null,
-            "phase": "C18"
-          }
-        ],
-        "solvent_details": [],
-        "technical_details": []
-      },
-      "experiment_3": {
-        "polymer_mention": "PLLA",
-        "stationary_phase": [
-          {
-            "column_name": null,
-            "material": "s corresponding to individual elution peaks in Figure 2 were subjected to MALDI-TOF MS analysis in order to assign the number of LLA residues",
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": "337 nm",
-            "column_dimensions": null,
-            "number_of_columns": null,
-            "manufacturer": null,
-            "phase": "CN"
-          }
-        ],
-        "solvent_details": [
-          {
-            "solvent": "acetonitrile/water",
-            "ratio": "60/40",
-            "ratio_units": null
-          },
-          {
-            "solvent": "greater",
-            "ratio": "10",
-            "ratio_units": "%"
-          }
-        ],
-        "technical_details": [
-          {
-            "temperature": "6 C",
-            "flow_rate": null,
-            "injected_polymer_concentration": null,
-            "injected_polymer_solvent_solution": null,
-            "injection_volume": null
-          }
-        ]
-      },
-      "experiment_4": {
-        "polymer_mention": "PLLA",
-        "stationary_phase": [
-          {
-            "column_name": "the total mobile-phase volume in a",
-            "material": "s corresponding to elution peaks in Figure 5 were collected and analyzed by MALDI-TOF MS",
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": null,
-            "column_dimensions": null,
-            "number_of_columns": null,
-            "manufacturer": null,
-            "phase": "CN"
-          }
-        ],
-        "solvent_details": [
-          {
-            "solvent": "mobile-phase",
-            "ratio": null,
-            "ratio_units": null
-          }
-        ],
-        "technical_details": []
-      },
-      "experiment_5": {
-        "polymer_mention": "PLLA",
-        "stationary_phase": [
-          {
-            "column_name": "the total mobile-phase volume in a",
-            "material": "s corresponding to the fractionated peaks were determined by MALDI-TOF MS analysis",
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": null,
-            "column_dimensions": null,
-            "number_of_columns": null,
-            "manufacturer": null,
-            "phase": "increases"
-          }
-        ],
-        "solvent_details": [
-          {
-            "solvent": "mobile-phase",
-            "ratio": null,
-            "ratio_units": null
-          }
-        ],
-        "technical_details": []
-      },
-      "experiment_6": {
-        "polymer_mention": "PLLA",
-        "stationary_phase": [
-          {
-            "column_name": null,
-            "material": "s corresponding to the fractionated peaks were determined by MALDI-TOF MS analysis",
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": null,
-            "column_dimensions": null,
-            "number_of_columns": null,
-            "manufacturer": null,
-            "phase": "increases"
-          }
-        ],
-        "solvent_details": [],
-        "technical_details": []
-      },
-      "experiment_7": {
-        "polymer_mention": "PLLA",
-        "stationary_phase": [
-          {
-            "column_name": "C",
-            "material": null,
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": null,
-            "column_dimensions": null,
-            "number_of_columns": "37",
-            "manufacturer": null,
-            "phase": "CN"
-          }
-        ],
-        "solvent_details": [
-          {
-            "solvent": "ACN/water",
-            "ratio": "47/53",
-            "ratio_units": null
-          },
-          {
-            "solvent": "ACN/water",
-            "ratio": "54/46",
-            "ratio_units": null
-          },
-          {
-            "solvent": "ACN/water",
-            "ratio": "60/40",
-            "ratio_units": null
-          }
-        ],
-        "technical_details": []
-      },
-      "experiment_8": {
-        "polymer_mention": "PLLA",
-        "stationary_phase": [
-          {
-            "column_name": null,
-            "material": null,
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": null,
-            "column_dimensions": null,
-            "number_of_columns": null,
-            "manufacturer": null,
-            "phase": "is"
-          }
-        ],
-        "solvent_details": [],
-        "technical_details": []
-      },
-      "experiment_9": {
-        "polymer_mention": "PLLA",
-        "stationary_phase": [
-          {
-            "column_name": "C of the desired temperature by circulating fluid through a",
-            "material": null,
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": null,
-            "column_dimensions": "250x4.6 mm",
-            "number_of_columns": "6",
-            "manufacturer": null,
-            "phase": "C18"
-          }
-        ],
-        "solvent_details": [
-          {
-            "solvent": "water-soluble",
-            "ratio": null,
-            "ratio_units": null
-          }
-        ],
-        "technical_details": []
-      }
-    },
-    "poly(ethylene oxide)": {
-      "experiment_1": {
-        "polymer_mention": "PEO",
-        "stationary_phase": [
-          {
-            "column_name": null,
-            "material": "is used for the separation of macromolecules",
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": null,
-            "column_dimensions": null,
-            "number_of_columns": null,
-            "manufacturer": null,
-            "phase": "HILIC"
-          }
-        ],
-        "solvent_details": [],
-        "technical_details": []
-      },
-      "experiment_2": {
-        "polymer_mention": "PEO",
-        "stationary_phase": [
-          {
-            "column_name": "C of the desired temperature by circulating fluid through a",
-            "material": null,
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": null,
-            "column_dimensions": "250x4.6 mm",
-            "number_of_columns": "6",
-            "manufacturer": null,
-            "phase": "C18"
-          }
-        ],
-        "solvent_details": [],
-        "technical_details": []
-      },
-      "experiment_3": {
-        "polymer_mention": "PEO",
-        "stationary_phase": [
-          {
-            "column_name": "C of the desired temperature by circulating fluid through a",
-            "material": null,
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": null,
-            "column_dimensions": "250x4.6 mm",
-            "number_of_columns": "6",
-            "manufacturer": null,
-            "phase": "C18"
-          }
-        ],
-        "solvent_details": [
-          {
-            "solvent": "ACN/water",
-            "ratio": "47/53",
-            "ratio_units": null
-          },
-          {
-            "solvent": "ACN/water",
-            "ratio": "54/46",
-            "ratio_units": null
-          },
-          {
-            "solvent": "ACN/water",
-            "ratio": "60/40",
-            "ratio_units": null
-          },
-          {
-            "solvent": "UV-visible",
-            "ratio": null,
-            "ratio_units": null
-          }
-        ],
-        "technical_details": []
-      },
-      "experiment_4": {
-        "polymer_mention": "PEO",
-        "stationary_phase": [
-          {
-            "column_name": null,
-            "material": "s corresponding to individual elution peaks in Figure 2 were subjected to MALDI-TOF MS analysis in order to assign the number of LLA residues",
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": "337 nm",
-            "column_dimensions": null,
-            "number_of_columns": null,
-            "manufacturer": null,
-            "phase": "CN"
-          }
-        ],
-        "solvent_details": [
-          {
-            "solvent": "acetonitrile/water",
-            "ratio": "60/40",
-            "ratio_units": null
-          },
-          {
-            "solvent": "greater",
-            "ratio": "10",
-            "ratio_units": "%"
-          }
-        ],
-        "technical_details": [
-          {
-            "temperature": "6 C",
-            "flow_rate": null,
-            "injected_polymer_concentration": null,
-            "injected_polymer_solvent_solution": null,
-            "injection_volume": null
-          }
-        ]
-      },
-      "experiment_5": {
-        "polymer_mention": "PEO",
-        "stationary_phase": [
-          {
-            "column_name": "the total mobile-phase volume in a",
-            "material": "s corresponding to elution peaks in Figure 5 were collected and analyzed by MALDI-TOF MS",
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": null,
-            "column_dimensions": null,
-            "number_of_columns": null,
-            "manufacturer": null,
-            "phase": "CN"
-          }
-        ],
-        "solvent_details": [
-          {
-            "solvent": "mobile-phase",
-            "ratio": null,
-            "ratio_units": null
-          }
-        ],
-        "technical_details": []
-      },
-      "experiment_6": {
-        "polymer_mention": "PEO",
-        "stationary_phase": [
-          {
-            "column_name": null,
-            "material": "s corresponding to the fractionated peaks were determined by MALDI-TOF MS analysis",
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": null,
-            "column_dimensions": null,
-            "number_of_columns": null,
-            "manufacturer": null,
-            "phase": "increases"
-          }
-        ],
-        "solvent_details": [],
-        "technical_details": []
-      },
-      "experiment_7": {
-        "polymer_mention": "PEO",
-        "stationary_phase": [
-          {
-            "column_name": "C",
-            "material": null,
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": null,
-            "column_dimensions": null,
-            "number_of_columns": "37",
-            "manufacturer": null,
-            "phase": "CN"
-          }
-        ],
-        "solvent_details": [
-          {
-            "solvent": "ACN/water",
-            "ratio": "47/53",
-            "ratio_units": null
-          },
-          {
-            "solvent": "ACN/water",
-            "ratio": "54/46",
-            "ratio_units": null
-          },
-          {
-            "solvent": "ACN/water",
-            "ratio": "60/40",
-            "ratio_units": null
-          }
-        ],
-        "technical_details": []
-      },
-      "experiment_8": {
-        "polymer_mention": "PEO",
-        "stationary_phase": [
-          {
-            "column_name": null,
-            "material": null,
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": null,
-            "column_dimensions": null,
-            "number_of_columns": null,
-            "manufacturer": null,
-            "phase": "is"
-          }
-        ],
-        "solvent_details": [],
-        "technical_details": []
-      },
-      "experiment_9": {
-        "polymer_mention": "PEO",
-        "stationary_phase": [
-          {
-            "column_name": "C of the desired temperature by circulating fluid through a",
-            "material": null,
-            "modification": null,
-            "pore_size": null,
-            "particle_diameter": null,
-            "column_dimensions": "250x4.6 mm",
-            "number_of_columns": "6",
-            "manufacturer": null,
-            "phase": "C18"
-          }
-        ],
-        "solvent_details": [
-          {
-            "solvent": "water-soluble",
-            "ratio": null,
-            "ratio_units": null
-          }
-        ],
-        "technical_details": []
-      }
+    "output_mode": "compact",
+    "llm_postprocess": {
+      "used": false,
+      "reason": "empty"
     }
+  },
+  "LCCC_conditions": [],
+  "tables": {
+    "conditions": [],
+    "polymers": [
+      {
+        "polymer": "poly(ethylene glycol)",
+        "count": 24
+      },
+      {
+        "polymer": "poly(propylene glycol)",
+        "count": 20
+      },
+      {
+        "polymer": "polydisperse",
+        "count": 1
+      },
+      {
+        "polymer": "polydivinyl benzene",
+        "count": 1
+      },
+      {
+        "polymer": "polydivinylbenzene",
+        "count": 1
+      },
+      {
+        "polymer": "polyester",
+        "count": 1
+      },
+      {
+        "polymer": "polyethylene",
+        "count": 1
+      },
+      {
+        "polymer": "polyethylene oxide",
+        "count": 1
+      },
+      {
+        "polymer": "polylactide, glycolide, caprolactone",
+        "count": 1
+      },
+      {
+        "polymer": "polypropylene",
+        "count": 1
+      },
+      {
+        "polymer": "polypropylene oxide",
+        "count": 1
+      },
+      {
+        "polymer": "polytetrahydrofuran",
+        "count": 1
+      }
+    ]
   }
 }

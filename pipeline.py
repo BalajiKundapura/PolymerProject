@@ -9,7 +9,6 @@ scripts that do:
 
   from pipeline import load_text, run_pipeline, save_json
 
-For the monolithic version (pre-split), see `pipeline_monolith.py`.
 """
 
 from lccc_extractor import load_text, run_pipeline, save_json
@@ -20,7 +19,7 @@ __all__ = ["load_text", "run_pipeline", "save_json"]
 if __name__ == "__main__":
     import argparse
 
-    ap = argparse.ArgumentParser(description="Extract LCCC experiments with context-aware polymer detection")
+    ap = argparse.ArgumentParser(description="Extract LCCC experiments with LLM-based extraction")
     ap.add_argument("input", help="Path to input text file")
     ap.add_argument("-o", "--output", default="extracted_lccc_data.json", help="Output JSON path")
     ap.add_argument("--no-validation", action="store_true", help="Skip PubChem validation")
@@ -30,4 +29,3 @@ if __name__ == "__main__":
     raw = load_text(args.input)
     result, metadata = run_pipeline(raw, use_validation=not args.no_validation, threshold_ratio=args.threshold)
     save_json(result, args.output, metadata)
-

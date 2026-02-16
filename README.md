@@ -8,21 +8,22 @@ Extract LCCC (liquid chromatography at critical conditions) experiment condition
 python runner.py rawData/paper.txt --no-validation
 ```
 
-Output is written to `extracted_lccc_data.json`.
+Output is written to `extracted_lccc_data.json` and contains `LCCC_conditions`.
 
-## Accuracy + Completion Modes
-
-The pipeline supports a completion pass that tries to fill missing fields without inventing data.
-
-```powershell
-# Conservative (no cross-record filling)
-python runner.py rawData/paper.txt --completion-mode strict
-
-# Balanced (safe fills from same column/solvent across the paper)
-python runner.py rawData/paper.txt --completion-mode balanced
-
-# Aggressive (includes optional LLM fallback if available)
-python runner.py rawData/paper.txt --completion-mode aggressive
+Example output shape:
+```json
+{
+  "metadata": { "..." : "..." },
+  "LCCC_conditions": [
+    {
+      "critical_polymer_unit": "EO",
+      "SP_FIELDS": { "column_name": "..." },
+      "SOL_FIELDS": { "solvent": "...", "ratio": "...", "ratio_units": "..." },
+      "TECH_FIELDS": { "temperature": "...", "flow_rate": "..." },
+      "separation_behavior": { "critical_block_behavior": "...", "purpose": "..." }
+    }
+  ]
+}
 ```
 
 ## Output Mode
@@ -38,34 +39,39 @@ python runner.py rawData/paper.txt --output-mode compact
 python runner.py rawData/paper.txt --output-mode full
 ```
 
-### Optional Local LLM (corner cases)
-If you have a lightweight local model via Ollama, you can enable an LLM fallback for tricky cases.
-The LLM output is only accepted when values are supported by the source text.
+## LLM Extraction (Ollama)
+The pipeline uses local Ollama models as the primary extraction engine.
+All extracted values are validated against the source text.
 
 ```powershell
-# Example (model must already be pulled in Ollama)
-python runner.py rawData/paper.txt --completion-mode aggressive --llm-provider ollama --llm-model phi3:mini
+# Single model
+python runner.py rawData/paper.txt --llm-provider ollama --llm-model qwen2.5:7b
+
+# Multi-model with consensus
+python runner.py rawData/paper.txt --llm-models "qwen3:8b,kimi-k2:7b" --llm-consensus 2
 ```
 
 LLM configuration via env vars (optional):
 - `LCCC_LLM_PROVIDER` (default: `ollama`)
-- `LCCC_LLM_MODEL` (default: `phi3:mini`)
+- `LCCC_LLM_MODEL` (default: `qwen2.5:7b`)
+- `LCCC_LLM_MODELS` (comma list, e.g. `qwen3:8b,kimi-k2:7b`)
+- `LCCC_LLM_CONSENSUS` (min model agreement)
+- `LCCC_LLM_HOST` (default: `http://127.0.0.1:11434`)
 - `LCCC_LLM_TIMEOUT` (seconds)
 - `LCCC_LLM_MAX_CONTEXT` (characters)
+- `LCCC_LLM_DEBUG` (set to `1` for per-chunk logging)
 
 ## Project Layout
 
 - `runner.py`: CLI runner and human-readable summary printer.
 - `pipeline.py`: Compatibility wrapper (keeps the old `from pipeline import ...` import path working).
 - `lccc_extractor/pipeline.py`: Pipeline orchestration (`run_pipeline`, `save_json`).
-- `lccc_extractor/context.py`: Paragraph classification, global-method context extraction, experiment linking.
-- `lccc_extractor/extractors.py`: Regex-based extractors (stationary phase, solvents, technical details).
-- `lccc_extractor/polymer_mentions.py`: Polymer mention detection (uses abbreviations from `polymerSubject.py`).
-- `polymerSubject.py`: Polymer extraction + optional PubChem validation (validation gracefully skips if `aiohttp` isn't installed).
-- `pipeline_monolith.py`: The pre-split monolithic pipeline kept for reference.
+- `lccc_extractor/llm/`: LLM client + extractor.
+- `lccc_extractor/polymers/`: Polymer catalog + validation.
+- `lccc_extractor/text/`: Text normalization + paragraph splitting utilities.
+- `lccc_extractor/linking.py`: Condition linking + validation.
+- `polymerSubject.py`: Compatibility wrapper for legacy imports.
 
 ## Environment Variables
 
 - `LCCC_LOG_LEVEL`: `DEBUG`, `INFO` (default), `WARNING`, ...
-- `LCCC_USE_SEMANTIC`: set to `1` to try `sentence-transformers` (optional dependency).
-- `LCCC_SENT_MODEL`: override sentence-transformers model name (default: `all-MiniLM-L6-v2`).

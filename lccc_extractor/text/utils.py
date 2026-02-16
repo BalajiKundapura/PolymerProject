@@ -10,7 +10,7 @@ def load_text(path: str) -> str:
         return f.read()
 
 
-def clean_text(raw: str) -> List[str]:
+def split_paragraphs(raw: str) -> List[str]:
     text = re.sub(r"\[[0-9]{1,3}\]", " ", raw)
     text = text.replace("\r\n", "\n").replace("\r", "\n")
     text = re.sub(r"[ \t]+", " ", text)
@@ -20,3 +20,6 @@ def clean_text(raw: str) -> List[str]:
     paras = re.split(r"\n\s*\n|(?<=[.!?])\s*\n+(?=[A-Z])", text)
     return [p.strip() for p in paras if p and len(p.strip()) > 20]
 
+
+# Backwards compatibility alias.
+clean_text = split_paragraphs
