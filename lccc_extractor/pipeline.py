@@ -11,44 +11,55 @@ from .reporting import build_conditions_table, build_polymers_table
 from .text.utils import split_paragraphs
 
 def filter_sec_conditions(conditions: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Filter based on LCCC characteristics, not column names"""
+    """
+    Remove conditions that are clearly SEC-only, based on POSITIVE evidence of SEC.
+    We only drop a condition if we have strong evidence it is SEC, not LCCC.
+    This avoids silently dropping real LCCC conditions just because some fields are missing.
+    """
     lccc_only = []
-    
+
+    # Columns that are exclusively used for SEC and never for LCCC
+    HARD_SEC_COLUMNS = {'plgel', 'styragel', 'ultrastyragel', 'ultragel', 'shodex kf'}
+    # Phrases in the purpose field that definitively identify SEC
+    HARD_SEC_PURPOSE = {'sec measurement', 'size exclusion chromatography measurement', 'for sec', 'gpc measurement'}
+    # Phrases in purpose/behavior that confirm LCCC
+    LCCC_CONFIRMS = {'lccc', 'critical condition', 'critical adsorption', 'critical point', 'cap', 'invisible', 'chromatographically invisible'}
+
     for cond in conditions:
         sp = cond.get("SP_FIELDS") or {}
         sol = cond.get("SOL_FIELDS") or {}
         sep = cond.get("separation_behavior") or {}
-        
+
         column_name = str(sp.get("column_name") or "").lower()
         solvent = str(sol.get("solvent") or "").lower()
         purpose = str(sep.get("purpose") or "").lower()
+        behavior = str(sep.get("critical_block_behavior") or "").lower()
         ratio = sol.get("ratio")
-        
-        # EXCLUDE: Clear SEC columns
-        if any(sec in column_name for sec in ['plgel', 'styragel']):
+
+        # HARD EXCLUDE: Known SEC-only column brands
+        if any(sec_col in column_name for sec_col in HARD_SEC_COLUMNS):
+            logger.debug(f"SEC filter: dropping SEC column: {column_name}")
             continue
-        
-        # EXCLUDE: SEC purpose without LCCC mention
-        if 'sec measurement' in purpose and 'critical' not in purpose:
+
+        # HARD EXCLUDE: Purpose explicitly says SEC without any LCCC context
+        is_sec_purpose = any(p in purpose for p in HARD_SEC_PURPOSE)
+        has_lccc_context = any(t in purpose or t in behavior for t in LCCC_CONFIRMS)
+        if is_sec_purpose and not has_lccc_context:
+            logger.debug(f"SEC filter: dropping SEC purpose: {purpose[:80]}")
             continue
-        
-        # EXCLUDE: Single solvent without ratio
-        if solvent in ['thf', 'chloroform'] and not ratio:
+
+        # SOFT EXCLUDE: Single common SEC solvent + no ratio + no LCCC language anywhere
+        # (Only drop if ALL three conditions hold — very conservative)
+        is_pure_sec_solvent = solvent in ('thf', 'tetrahydrofuran', 'chloroform') and '/' not in solvent
+        if is_pure_sec_solvent and not ratio and not has_lccc_context:
+            logger.debug(f"SEC filter: dropping single-solvent no-ratio no-LCCC: {solvent}")
             continue
-        
-        # INCLUDE: Has LCCC keywords
-        has_lccc = any(term in purpose for term in [
-            'lccc', 'critical', 'cap', 'invisible'
-        ])
-        
-        # INCLUDE: Mixed solvent with ratio
-        has_mixed = '/' in solvent or 'water' in solvent
-        has_ratio = ratio is not None
-        
-        if has_lccc or (has_mixed and has_ratio):
-            lccc_only.append(cond)
-    
-    logger.info(f"Kept {len(lccc_only)} of {len(conditions)} LCCC conditions")
+
+        # Keep everything else — better a false positive than a missed LCCC condition
+        lccc_only.append(cond)
+
+    dropped = len(conditions) - len(lccc_only)
+    logger.info(f"SEC filter: kept {len(lccc_only)} of {len(conditions)} conditions (dropped {dropped})")
     return lccc_only
 
 def run_pipeline(
@@ -129,21 +140,37 @@ def run_pipeline(
                         sol["ratio_units"] = "wt%"
                     cond["SOL_FIELDS"] = sol
 
-    # Drop incomplete conditions (no column info or solvent)
-    def _is_complete(cond: Dict[str, Any]) -> bool:
+    # Tag incomplete conditions instead of silently dropping them.
+    # A condition is "complete" if it has at least some column info AND some solvent info.
+    # Incomplete conditions are kept but flagged so downstream consumers can decide.
+    def _completeness(cond: Dict[str, Any]) -> str:
         sp = cond.get("SP_FIELDS") or {}
         sol = cond.get("SOL_FIELDS") or {}
         has_column = bool(sp.get("column_name") or sp.get("phase") or sp.get("material") or sp.get("manufacturer"))
         has_solvent = bool(sol.get("solvent") or sol.get("ratio"))
-        return has_column and has_solvent
+        if has_column and has_solvent:
+            return "complete"
+        elif has_column or has_solvent:
+            return "partial"
+        else:
+            return "minimal"
 
-    linked = [c for c in linked if _is_complete(c)]
+    for c in linked:
+        c["completeness"] = _completeness(c)
+
+    # Only truly drop conditions with NO useful data at all (minimal = nothing extracted)
+    before = len(linked)
+    linked = [c for c in linked if c.get("completeness") != "minimal"]
+    dropped_minimal = before - len(linked)
+    if dropped_minimal:
+        logger.info(f"Dropped {dropped_minimal} conditions with no extractable data")
 
     # Step 8: Prune output for a clean schema
     if output_mode and output_mode.lower() == "compact":
         drop_keys = {
             "context_snippet",
             "context_snippets",
+            "completeness",  # kept in tables; stripped from top-level conditions in compact mode
         }
         pruned: List[Dict[str, Any]] = []
         for cond in linked:

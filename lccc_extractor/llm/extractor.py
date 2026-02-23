@@ -138,7 +138,7 @@ class LLMExtractor:
         self.models = self.client.models
         self.consensus_min = max(1, int(self.config.consensus_min or 1))
         self.high_accuracy = os.getenv("LCCC_LLM_HIGH_ACCURACY", "1").strip().lower() in ("1", "true", "yes")
-        self.max_global_chars = int(os.getenv("LCCC_LLM_GLOBAL_CHARS", "6000"))
+        self.max_global_chars = int(os.getenv("LCCC_LLM_GLOBAL_CHARS", "12000"))  # was 6000
         self.refine_enabled = os.getenv("LCCC_LLM_REFINE", "1").strip().lower() in ("1", "true", "yes")
         self.refine_limit = max(1, int(os.getenv("LCCC_LLM_REFINE_LIMIT", "6")))
         self.debug = os.getenv("LCCC_LLM_DEBUG", "0").strip().lower() in ("1", "true", "yes")
@@ -498,15 +498,34 @@ class LLMExtractor:
             '"injected_polymer_solvent_solution":null,"injection_volume":null},'
             '"separation_behavior":{"critical_block_behavior":null,"non_critical_block_behavior":null,"purpose":null}}]}'
         )
+        # Identify what's missing so the LLM knows what to look for
+        sp = condition.get("SP_FIELDS") or {}
+        sol = condition.get("SOL_FIELDS") or {}
+        tech = condition.get("TECH_FIELDS") or {}
+        missing_sp = [f for f in ("column_name", "manufacturer", "phase", "pore_size", "particle_diameter", "column_dimensions", "number_of_columns") if not sp.get(f)]
+        missing_sol = [f for f in ("solvent", "ratio", "ratio_units") if not sol.get(f)]
+        missing_tech = [f for f in ("temperature", "flow_rate", "injection_volume", "injected_polymer_concentration") if not tech.get(f)]
+        missing_all = missing_sp + missing_sol + missing_tech
+
+        missing_hint = ""
+        if missing_all:
+            missing_hint = f"MISSING FIELDS to find: {', '.join(missing_all)}\n"
+
         prompt = (
-            "You refine an existing LCCC condition using evidence.\n"
-            "Return ONLY valid JSON.\n"
+            "You are refining an existing LCCC condition by filling in missing fields from the evidence text.\n"
+            "Return ONLY valid JSON with the COMPLETE updated condition.\n"
             f"JSON schema:\n{schema}\n"
-            "Rules:\n"
-            "- Only use evidence text below.\n"
-            "- Keep existing values if supported; fill missing if found.\n"
-            "- Use null for unknown fields.\n"
+            "\n"
+            f"{missing_hint}"
+            "RULES:\n"
+            "- Keep all existing non-null values from the current condition.\n"
+            "- Fill in ONLY missing (null) fields if clearly stated in the evidence text.\n"
+            "- Do NOT change any existing non-null values.\n"
+            "- Do NOT invent or guess values — use null if not found.\n"
+            "- Be especially alert for: flow rate (mL/min), temperature (°C), injection volume (uL/mL), solvent ratio (wt%/vol%), column dimensions (mm).\n"
+            "\n"
             f"Current condition:\n{condition}\n"
+            "\n"
             f"Evidence text:\n{evidence_text}\n"
         )
         return prompt
@@ -563,27 +582,42 @@ class LLMExtractor:
         col_spec = "\n".join(lines) if lines else "None"
 
         prompt = (
-            "Extract LCCC (Liquid Chromatography at Critical Conditions) experimental data for this column.\n"
-            "Return ONLY valid JSON.\n"
+            "Extract LCCC (Liquid Chromatography at Critical Conditions) experimental data for this specific column.\n"
+            "Return ONLY valid JSON. No prose, no markdown.\n"
             f"JSON schema:\n{schema}\n"
             "\n"
-            "CRITICAL UNDERSTANDING:\n"
-            "- LCCC uses 'critical conditions' where one polymer block becomes 'chromatographically invisible'\n"
-            "- Typically uses mixed solvents (acetone/water, ACN/water, methanol/water) with precise ratios\n"
-            "- Different from SEC which uses single solvents (THF, chloroform)\n"
-            "- Look for terms: 'critical condition', 'CAP', 'chromatographically invisible'\n"
+            "WHAT IS LCCC:\n"
+            "- At 'critical conditions', one polymer block elutes at the same retention volume regardless of molar mass — it is 'chromatographically invisible'.\n"
+            "- Conditions are set by: stationary phase (column), mobile phase composition (solvent ratio), and temperature.\n"
+            "- Typical solvents: acetone/water, acetonitrile/water, methanol/water, butanone/cyclohexane.\n"
+            "- 'Critical polymer unit' = the polymer block at critical conditions (e.g., PEO, PMMA, PS, 1,4-PI, PLLA).\n"
+            "- Look for: 'critical condition', 'critical point', 'CAP', 'LCCC', 'chromatographically invisible', 'critical adsorption', 'elute at the same retention volume'.\n"
             "\n"
-            "Rules:\n"
-            "- Output ONE condition if LCCC/critical conditions are described\n"
-            "- Ignore SEC measurements unless combined with LCCC\n"
-            "- critical_polymer_unit: the polymer at critical condition (e.g., 'PEO', 'PLLA', 'PS')\n"
-            "- If multiple ratios given, use range format: '60-68' or '47/53'\n"
-            "- ratio_units: typically 'v/v', 'wt%', or '%'\n"
-            "- Use null for unknown fields\n"
-            "- Solvent format: 'A / B' for mixtures (e.g., 'ACN / Water')\n"
-            "\n"
-            "Column specification:\n"
+            "COLUMN SPECIFICATION (use these values if found in the text):\n"
             f"{col_spec}\n"
+            "\n"
+            "EXTRACTION RULES:\n"
+            "- Output ONE condition per distinct critical_polymer_unit described in this evidence.\n"
+            "- Only extract values explicitly stated in the text — null for anything not mentioned.\n"
+            "\n"
+            "SOLVENT RATIO (most common source of errors — read carefully):\n"
+            "- The ratio is the MIXTURE COMPOSITION of the mobile phase, always expressed as 'SolventA/SolventB'.\n"
+            "- Format: 'A/B' where A+B=100, e.g., '92/8' means 92% solvent A and 8% solvent B.\n"
+            "- NEVER use just one component's percentage as the ratio. '8 vol% cyclohexane' → ratio='92/8', NOT '8'.\n"
+            "- ratio_units: 'vol%' (most common), 'wt%', 'v/v', or 'w/w'. If unclear, use 'vol%'.\n"
+            "- CORRECT EXAMPLE: 'butanone/cyclohexane 92/8 vol%' → solvent='Butanone / Cyclohexane', ratio='92/8', ratio_units='vol%'\n"
+            "- WRONG: ratio='8' or ratio='92' (never extract just one component)\n"
+            "\n"
+            "COLUMN NAME:\n"
+            "- Use the main analytical column name, NOT guard/precolumns.\n"
+            "- Ignore 'precolumn', 'guard column' entries.\n"
+            "- Pore sizes (e.g., '10^5 A', '100 A') are NOT column names — they describe pore_size.\n"
+            "- column_name should be a brand/product name like 'Nucleosil C18', 'C18', 'HS-PEG'.\n"
+            "\n"
+            "- temperature in °C (number only, e.g., 29). flow_rate with units (e.g., '0.5 mL/min').\n"
+            "- Solvent format: 'A / B' for mixtures.\n"
+            "- If this text describes a purely theoretical discussion without experimental data, return empty array.\n"
+            '- If no LCCC conditions found, return {"LCCC_conditions":[]}.\n'
             "\n"
             "Evidence text:\n"
             f"{evidence_text}\n"
@@ -602,16 +636,43 @@ class LLMExtractor:
         )
 
         prompt = (
-            "You extract LCCC (liquid chromatography at critical conditions) conditions.\n"
-            "Return ONLY valid JSON.\n"
+            "You extract LCCC (Liquid Chromatography at Critical Conditions) experimental conditions from polymer science papers.\n"
+            "Return ONLY valid JSON matching the schema. No prose, no markdown.\n"
             f"JSON schema:\n{schema}\n"
-            "Rules:\n"
-            "- Each condition corresponds to a distinct critical polymer unit plus a column + mobile phase.\n"
-            "- Prefer conditions tied to CAP/critical conditions, not general theory.\n"
-            "- Only include values explicitly stated in the text.\n"
-            "- Use null for unknown fields.\n"
-            "- Ignore SEC/GPC conditions unless explicitly tied to LCCC critical conditions.\n"
-            '- If no conditions are described, return {"LCCC_conditions":[]}.\n'
+            "\n"
+            "LCCC DOMAIN KNOWLEDGE:\n"
+            "- At critical conditions, one polymer block becomes 'chromatographically invisible' — it elutes at the same retention volume regardless of molar mass.\n"
+            "- Critical conditions are controlled by precise solvent composition (mobile phase ratio) and temperature.\n"
+            "- Mixed solvents are typical: acetone/water, acetonitrile/water, methanol/water, butanone/cyclohexane, THF/water.\n"
+            "- 'Critical polymer unit' is the block at critical conditions (e.g., PEO, PMMA, PS, PI, 1,4-PI).\n"
+            "- Terms to look for: 'critical conditions', 'critical point', 'CAP', 'LCCC', 'chromatographically invisible', 'critical adsorption'.\n"
+            "- column_name: exact brand/model of the HPLC column (e.g., 'Nucleosil C18', 'Discovery HS-PEG', 'Jordi Gel DVB').\n"
+            "- ratio: numeric only (e.g., '92/8' or '78' for 78 wt%). ratio_units: 'vol%', 'wt%', 'v/v', 'w/w'.\n"
+            "- temperature is in °C. flow_rate in mL/min. injection_volume in uL or mL.\n"
+            "\n"
+            "EXAMPLE (do not copy values, just follow the format):\n"
+            'Input: "Three C18 columns (Macherey-Nagel) connected in series were used. Mobile phase: butanone/cyclohexane 92/8 (vol%). Temperature: 29°C. Flow rate: 0.5 mL/min. Injection: 100 uL of 2.7 mg/mL solution. All 1,4-PI samples eluted at the same retention volume."\n'
+            'Output: {"LCCC_conditions":[{"critical_polymer_unit":"1,4-PI","SP_FIELDS":{"column_name":"C18","manufacturer":"Macherey-Nagel","phase":"reversed phase","number_of_columns":3,"material":null,"modification":null,"pore_size":null,"particle_diameter":null,"column_dimensions":null},"SOL_FIELDS":{"solvent":"Butanone / Cyclohexane","ratio":"92/8","ratio_units":"vol%"},"TECH_FIELDS":{"temperature":29,"flow_rate":"0.5 mL/min","injection_volume":"100 uL","injected_polymer_concentration":"2.7 mg/mL","injected_polymer_solvent_solution":"butanone/cyclohexane"},"separation_behavior":{"critical_block_behavior":"all 1,4-PI samples elute at the same retention volume irrespective of molar mass","non_critical_block_behavior":null,"purpose":"separation of polyisoprenes by microstructure"}}]}\n'
+            "\n"
+            "RULES:\n"
+            "- Each condition = one distinct critical_polymer_unit + column + mobile phase combination.\n"
+            "- Only extract values EXPLICITLY stated in the text. Use null for anything not mentioned.\n"
+            "- Ignore pure SEC/GPC conditions (single solvent like THF alone, PLgel/Styragel columns with no LCCC context).\n"
+            "- If the text describes multiple LCCC conditions, output multiple objects in the array.\n"
+            '- If no LCCC conditions are described, return {"LCCC_conditions":[]}.\n'
+            "- Keep solvent as 'A / B' format for mixtures. Do not abbreviate manufacturer names.\n"
+            "\n"
+            "SOLVENT RATIO — CRITICAL RULE (this is the most common mistake):\n"
+            "- ratio must be the FULL mixture composition as 'A/B', e.g., '92/8' means 92% butanone + 8% cyclohexane.\n"
+            "- If text says 'X vol% of solvent B', convert: ratio = '(100-X)/X'. Example: '8 vol% cyclohexane' → ratio='92/8'.\n"
+            "- NEVER put just one component percentage as ratio. '8 vol% cyclohexane in butanone' → ratio='92/8', NOT '8'.\n"
+            "- ratio_units: 'vol%' (default for LC), 'wt%', 'v/v', 'w/w'.\n"
+            "\n"
+            "COLUMN NAME — CRITICAL RULE:\n"
+            "- Use the MAIN ANALYTICAL column name only. Ignore 'precolumn', 'guard column'.\n"
+            "- Pore sizes like '10^5 A', '10^4 A', '100 A' are NOT column names — use them for pore_size field.\n"
+            "- column_name should be a brand/product: 'Nucleosil C18', 'C18', 'Jordi Gel DVB', 'HS-PEG'.\n"
+            "\n"
             f"Text:\n{chunk.llm_text}\n"
         )
         return prompt
@@ -627,15 +688,31 @@ class LLMExtractor:
             '"separation_behavior":{"critical_block_behavior":null,"non_critical_block_behavior":null,"purpose":null}}]}'
         )
         prompt = (
-            "You extract LCCC conditions from the paper.\n"
-            "Return ONLY valid JSON.\n"
+            "Extract ALL LCCC (Liquid Chromatography at Critical Conditions) experimental conditions from the text below.\n"
+            "Return ONLY valid JSON. No prose, no markdown.\n"
             f"JSON schema:\n{schema}\n"
-            "Rules:\n"
-            "- Conditions may involve any critical unit (e.g., EO, PO, 1,4-PI).\n"
-            "- Include only conditions explicitly stated in the text.\n"
-            "- Use null for unknown fields.\n"
-            "- Capture solvent mixtures and ratios (wt%, vol%, v/v).\n"
-            "- Ignore purely theoretical discussion unless tied to experimental conditions.\n"
+            "\n"
+            "WHAT IS LCCC:\n"
+            "- A polymer chromatography technique where one block is at its 'critical point' — it elutes at the same retention volume regardless of molar mass.\n"
+            "- The 'critical polymer unit' is this block (e.g., PEO, EO, PMMA, PS, PI, 1,4-PI, PLLA, PO).\n"
+            "- Critical conditions require: a specific column + a precise mobile phase ratio + controlled temperature.\n"
+            "- Signal phrases: 'critical condition', 'critical point', 'CAP', 'LCCC', 'chromatographically invisible', 'elute at the same volume', 'critical adsorption point'.\n"
+            "- Mixed solvents are the norm: acetone/water, acetonitrile/water, methanol/water, butanone/cyclohexane.\n"
+            "- Ratio format: '60/40' (vol%) or '78' (wt%). Units: 'vol%', 'wt%', 'v/v', 'w/w'.\n"
+            "\n"
+            "RULES:\n"
+            "- Output one JSON object per distinct [critical_polymer_unit + column + mobile phase] combination.\n"
+            "- Only extract values explicitly stated in the text. Null = not mentioned.\n"
+            "- Ignore pure SEC/GPC (single solvent, no critical conditions language).\n"
+            "- Do NOT invent or infer values not present in the text.\n"
+            "- For separation_behavior, capture how the critical block behaves and what the experiment's purpose is.\n"
+            '- Return {"LCCC_conditions":[]} if no LCCC conditions are found.\n'
+            "\n"
+            "SOLVENT RATIO RULE: ratio must be the full mixture as 'A/B' (e.g., '92/8'). "
+            "If text says 'X% of component B', ratio = '(100-X)/X'. Never use a single component % as ratio.\n"
+            "COLUMN NAME RULE: Use main analytical column only. Ignore precolumns/guard columns. "
+            "Pore sizes ('10^5 A') are NOT column names — put them in pore_size.\n"
+            "\n"
             f"Text:\n{evidence_text}\n"
         )
         return prompt
@@ -688,13 +765,27 @@ class LLMExtractor:
             '"particle_diameter":null,"column_dimensions":null,"number_of_columns":null,"manufacturer":null,"phase":null}]}'
         )
         prompt = (
-            "Extract ALL column specifications from the text.\n"
-            "Return ONLY valid JSON.\n"
+            "Extract ALL HPLC/LC column specifications mentioned in the text below.\n"
+            "Return ONLY valid JSON. No prose, no markdown.\n"
             f"JSON schema:\n{schema}\n"
-            "Rules:\n"
-            "- Extract EVERY column mentioned\n"
-            "- Only include values explicitly stated\n"
-            "- Use null for unknown fields\n"
+            "\n"
+            "WHAT TO LOOK FOR:\n"
+            "- column_name: brand/model (e.g., 'Nucleosil C18', 'Discovery HS-PEG', 'Jordi Gel DVB', 'C18', 'Diol')\n"
+            "- manufacturer: company name (e.g., 'Macherey-Nagel', 'Supelco', 'Waters', 'Jordi', 'Phenomenex')\n"
+            "- phase: 'reversed phase', 'normal phase', 'mixed mode'\n"
+            "- column_dimensions: e.g., '250 x 4.6 mm'\n"
+            "- particle_diameter: e.g., '5 um'\n"
+            "- pore_size: e.g., '100 A'\n"
+            "- number_of_columns: integer, if multiple columns are connected in series\n"
+            "- material: e.g., 'silica', 'DVB' (divinylbenzene)\n"
+            "- modification: e.g., 'C18', 'diol', 'PEG', 'amino'\n"
+            "\n"
+            "RULES:\n"
+            "- Extract EVERY column mentioned, even if only partially described.\n"
+            "- One JSON object per distinct column.\n"
+            "- Only include values explicitly stated — use null for anything not mentioned.\n"
+            "- Ignore non-column equipment (detectors, pumps, autosamplers).\n"
+            "\n"
             f"Text:\n{self._sanitize_for_llm(text)}\n"
         )
         

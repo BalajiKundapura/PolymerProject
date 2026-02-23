@@ -9,6 +9,7 @@ from .text.normalization import normalize_for_parsing
 CONDITION_TABLE_COLUMNS = [
     "polymer_group",
     "critical_polymer_unit",
+    "completeness",
     "column_name",
     "manufacturer",
     "phase",
@@ -55,6 +56,7 @@ def build_conditions_table(conditions: List[Dict[str, Any]], main_polymers: Iter
         row = {
             "polymer_group": polymer_group,
             "critical_polymer_unit": _stringify(cond.get("critical_polymer_unit")),
+            "completeness": _stringify(cond.get("completeness", "complete")),
             "column_name": _stringify(sp.get("column_name")),
             "manufacturer": _stringify(sp.get("manufacturer")),
             "phase": _stringify(sp.get("phase")),

@@ -260,10 +260,10 @@ def _normalize_column_name(sp: Dict[str, Any]) -> None:
     low = n.lower()
     if "nucleosol" in low:
         n = re.sub(r"nucleosol", "Nucleosil", n, flags=re.I)
-    if "hs peg" in low:
-        n = re.sub(r"hs\\s*peg", "HS-PEG", n, flags=re.I)
-    if low.startswith("of c18") or low.startswith("of c 18"):
-        n = re.sub(r"^of\\s+", "", n, flags=re.I)
+    if "hs peg" in low or "hs-peg" in low:
+        n = re.sub(r"hs\s*peg", "HS-PEG", n, flags=re.I)
+    if low.startswith("of c18") or low.startswith("of c 18") or low.startswith("of c-18"):
+        n = re.sub(r"^of\s+", "", n, flags=re.I)
     if "c18" in low and "nucleosil" in low:
         n = "Nucleosil C18"
     sp["column_name"] = n
@@ -326,6 +326,178 @@ def _clean_tech(tech: Dict[str, Any]) -> None:
     inj_text = str(inj).lower()
     if ("wt%" in inj_text or "%" in inj_text) and "ul" not in inj_text and "ml" not in inj_text:
         tech["injection_volume"] = None
+
+
+def _fix_single_component_ratio(sol: Dict[str, Any]) -> None:
+    """
+    Fix the most common LLM ratio mistake: extracting a single component percentage
+    instead of the full A/B ratio.
+
+    Examples corrected:
+      ratio="8", solvent="Butanone / Cyclohexane"  →  ratio="92/8"
+      ratio="92", solvent="Butanone / Cyclohexane" →  ratio="92/8"
+      ratio="70", solvent="Acetone / Water"         →  ratio="70/30"
+    """
+    ratio = sol.get("ratio")
+    solvent = str(sol.get("solvent") or "").lower()
+    if not ratio or not solvent or "/" not in solvent:
+        return
+
+    ratio_str = str(ratio).strip()
+    # If ratio already looks like A/B, nothing to fix
+    if re.match(r"^\d+(?:\.\d+)?[/:\-]\d+(?:\.\d+)?$", ratio_str):
+        return
+
+    # Strip any unit suffix that snuck in
+    ratio_str = re.sub(r"\s*(vol%|wt%|v/v|w/w|%)\s*$", "", ratio_str, flags=re.I).strip()
+    try:
+        val = float(ratio_str)
+    except ValueError:
+        return
+
+    # Only act if it's a plausible single-component percentage (1–99)
+    if not (1.0 <= val <= 99.0):
+        return
+
+    complement = round(100.0 - val, 4)
+    # The major component should be listed first in the solvent name.
+    # If val < 50, assume it's the minor component (second solvent) → A=complement, B=val
+    # If val >= 50, assume it's the major component (first solvent) → A=val, B=complement
+    if val < 50:
+        sol["ratio"] = f"{complement:g}/{val:g}"
+    else:
+        sol["ratio"] = f"{val:g}/{complement:g}"
+    # Ensure units are set
+    if not sol.get("ratio_units"):
+        sol["ratio_units"] = "vol%"
+
+
+# Patterns that are clearly NOT valid analytical column names
+_PHANTOM_COLUMN_PATTERNS = [
+    re.compile(r"^\d+\s*[x\^]\s*\d+", re.I),          # "10^5", "10x4"
+    re.compile(r"^[\d\s]+[aA]$"),                        # "10 5 A", "100 A" (pore sizes)
+    re.compile(r"\bprecolumn\b", re.I),                  # guard/pre columns
+    re.compile(r"\bguard\s*col", re.I),
+    re.compile(r"^\d+[\s\-]\d+[\s\-]\d+$"),             # "100-5 300-5" (column series specs)
+    re.compile(r"sdv\s*\d+\s*um\s*precolumn", re.I),    # "SDV 5 um precolumn"
+]
+
+def _is_phantom_column(name: str) -> bool:
+    """Return True if this looks like a misidentified column name (pore size, precolumn, etc.)"""
+    if not name:
+        return False
+    n = name.strip()
+    return any(pat.search(n) for pat in _PHANTOM_COLUMN_PATTERNS)
+
+
+def _fix_phantom_column(sp: Dict[str, Any]) -> None:
+    """
+    If column_name looks like a phantom (pore size, precolumn, etc.), try to:
+    1. Move the value to pore_size if it looks like a pore size spec
+    2. Clear column_name so it can be inferred later
+    """
+    name = sp.get("column_name") or ""
+    if not _is_phantom_column(name):
+        return
+
+    # If it looks like a pore size (e.g., "10^5 A", "100 A"), move it
+    pore_match = re.match(r"^(10[\s\^]\s*[345]|[\d]+)\s*[aA]$", name.strip())
+    if pore_match and not sp.get("pore_size"):
+        sp["pore_size"] = name.strip().replace(" ", "").replace("^", "e") + " A"
+
+    sp["column_name"] = None
+
+
+def _fuzzy_dedup(conditions: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """
+    Second-pass deduplication that catches conditions the keyed merge missed.
+    Two conditions are duplicates if they share the same:
+      - critical_polymer_unit (or both null)
+      - manufacturer
+      - phase/material (at least one matching)
+      - solvent
+      - ratio (within tolerance)
+    When merging, prefer the condition with more filled-in fields.
+    """
+    def _score(cond: Dict[str, Any]) -> int:
+        total = 0
+        for group in ("SP_FIELDS", "SOL_FIELDS", "TECH_FIELDS", "separation_behavior"):
+            d = cond.get(group) or {}
+            total += sum(1 for v in d.values() if v not in (None, "", {}))
+        if cond.get("critical_polymer_unit"):
+            total += 1
+        return total
+
+    def _are_duplicates(a: Dict[str, Any], b: Dict[str, Any]) -> bool:
+        # Same critical unit (null==null counts)
+        unit_a = _norm(a.get("critical_polymer_unit"))
+        unit_b = _norm(b.get("critical_polymer_unit"))
+        if unit_a != unit_b:
+            return False
+
+        sp_a = a.get("SP_FIELDS") or {}
+        sp_b = b.get("SP_FIELDS") or {}
+        sol_a = a.get("SOL_FIELDS") or {}
+        sol_b = b.get("SOL_FIELDS") or {}
+
+        # Same manufacturer
+        manuf_a = _norm(sp_a.get("manufacturer"))
+        manuf_b = _norm(sp_b.get("manufacturer"))
+        if manuf_a and manuf_b and manuf_a != manuf_b:
+            return False
+
+        # Same solvent
+        solv_a = _norm(sol_a.get("solvent"))
+        solv_b = _norm(sol_b.get("solvent"))
+        if solv_a and solv_b and solv_a != solv_b:
+            return False
+
+        # Similar ratio (within 5 percentage points on the major component)
+        ratio_a = _parse_ratio_range(sol_a.get("ratio"))
+        ratio_b = _parse_ratio_range(sol_b.get("ratio"))
+        if ratio_a and ratio_b:
+            # Check if major component (lo) matches within tolerance
+            if abs(ratio_a[1] - ratio_b[1]) > 5:
+                return False
+
+        # At least one phase/material match or both column names normalize to same thing
+        phase_match = (
+            (_norm(sp_a.get("phase")) and _norm(sp_a.get("phase")) == _norm(sp_b.get("phase")))
+            or (_norm(sp_a.get("material")) and _norm(sp_a.get("material")) == _norm(sp_b.get("material")))
+            or (_norm(sp_a.get("column_name")) and _norm(sp_a.get("column_name")) == _norm(sp_b.get("column_name")))
+        )
+        return phase_match
+
+    def _merge_two(winner: Dict[str, Any], loser: Dict[str, Any]) -> Dict[str, Any]:
+        """Merge loser into winner, filling missing fields."""
+        for group in ("SP_FIELDS", "SOL_FIELDS", "TECH_FIELDS", "separation_behavior"):
+            w = winner.get(group) or {}
+            l = loser.get(group) or {}
+            for k, v in l.items():
+                if w.get(k) in (None, "", {}) and v not in (None, "", {}):
+                    w[k] = v
+            winner[group] = w
+        if not winner.get("critical_polymer_unit") and loser.get("critical_polymer_unit"):
+            winner["critical_polymer_unit"] = loser["critical_polymer_unit"]
+        return winner
+
+    kept: List[Dict[str, Any]] = []
+    for cond in conditions:
+        matched = False
+        for existing in kept:
+            if _are_duplicates(existing, cond):
+                # Keep the richer one, merge the other into it
+                if _score(cond) > _score(existing):
+                    _merge_two(cond, existing)
+                    kept[kept.index(existing)] = cond
+                else:
+                    _merge_two(existing, cond)
+                matched = True
+                break
+        if not matched:
+            kept.append(cond)
+
+    return kept
 
 
 def link_conditions(conditions: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
@@ -459,9 +631,19 @@ def link_conditions(conditions: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         _normalize_ratio(sol)
         _clean_tech(tech)
 
+        # Fix phantom column names (pore sizes, precolumns misidentified as column names)
+        _fix_phantom_column(sp)
+
+        # Fix single-component ratio extraction (e.g., "8" → "92/8" for butanone/cyclohexane)
+        _fix_single_component_ratio(sol)
+
         cond["SP_FIELDS"] = sp
         cond["SOL_FIELDS"] = sol
         cond["TECH_FIELDS"] = tech
+
+    # Second-pass fuzzy deduplication to catch near-duplicate conditions
+    results = _fuzzy_dedup(results)
+
     return results
 
 

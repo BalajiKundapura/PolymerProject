@@ -18,7 +18,7 @@ class LLMConfig:
     model: str = "qwen2.5:7b"
     models: List[str] = field(default_factory=list)
     timeout_s: int = 60
-    max_context_chars: int = 1600
+    max_context_chars: int = 6000  # increased from 1600 for multi-paragraph LCCC context
     consensus_min: int = 0
     host: str = ""
     start_server: bool = True
@@ -34,7 +34,7 @@ class LLMClient:
                 model=os.getenv("LCCC_LLM_MODEL", "qwen2.5:7b"),
                 models=[m.strip() for m in os.getenv("LCCC_LLM_MODELS", "").split(",") if m.strip()],
                 timeout_s=int(os.getenv("LCCC_LLM_TIMEOUT", "60")),
-                max_context_chars=int(os.getenv("LCCC_LLM_MAX_CONTEXT", "1600")),
+                max_context_chars=int(os.getenv("LCCC_LLM_MAX_CONTEXT", "6000")),
                 consensus_min=int(os.getenv("LCCC_LLM_CONSENSUS", "0")),
                 host=os.getenv("LCCC_LLM_HOST", os.getenv("OLLAMA_HOST", "")),
                 start_server=os.getenv("LCCC_LLM_START_SERVER", "1").strip().lower() in ("1", "true", "yes"),
