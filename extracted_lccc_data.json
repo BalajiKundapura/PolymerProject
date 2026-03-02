@@ -1,22 +1,23 @@
 {
   "metadata": {
-    "total_polymers_found": 6,
-    "validated_polymers": 6,
-    "main_polymers": 1,
-    "total_paragraphs": 36,
-    "extracted_conditions": 2,
-    "processing_time_seconds": 108.38770341873169,
+    "total_polymers_found": 12,
+    "validated_polymers": 5,
+    "main_polymers": 2,
+    "total_paragraphs": 86,
+    "extracted_conditions": 10,
+    "processing_time_seconds": 148.3324739933014,
     "main_polymers_list": [
-      "polyisoprene"
+      "poly(ethylene glycol)",
+      "poly(propylene glycol)"
     ],
     "llm_extraction": {
       "llm_available": true,
-      "chunks": 7,
-      "llm_calls": 13,
-      "conditions": 7,
+      "chunks": 10,
+      "llm_calls": 15,
+      "conditions": 13,
       "parse_failures": 0,
       "mode": "per_column+dynamic",
-      "columns_catalog": 2,
+      "columns_catalog": 5,
       "consensus_min": 1,
       "models": [
         "qwen2.5:7b"
@@ -28,171 +29,719 @@
     "llm_postprocess": {
       "used": true,
       "model": "qwen2.5:7b",
-      "row_count": 1
+      "row_count": 5
     }
   },
   "LCCC_conditions": [
     {
-      "critical_polymer_unit": "1,4-PI",
+      "critical_polymer_unit": "PEG",
       "SP_FIELDS": {
-        "column_name": "Nucleosil C18",
-        "material": null,
-        "modification": "C18",
-        "pore_size": null,
+        "column_name": "Jordi Gel DVB 500 RP",
+        "material": "divinylbenzene",
+        "modification": null,
+        "pore_size": "500 A",
         "particle_diameter": "5 um",
-        "column_dimensions": "250x4.6 mm i.d.",
-        "number_of_columns": 3,
-        "manufacturer": "Macherey-Nagel",
-        "phase": "reversed phase"
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": 1,
+        "manufacturer": "Jordi",
+        "phase": "Reversed phase (polymeric)"
       },
       "SOL_FIELDS": {
-        "solvent": "Butanone / Cyclohexane",
+        "solvent": "Acetone / Water",
         "ratio": "92/8",
         "ratio_units": "vol%"
       },
       "TECH_FIELDS": {
-        "temperature": 29,
-        "flow_rate": "0.5-0.8 mL/min",
-        "injected_polymer_concentration": "2.7 mg/mL",
-        "injected_polymer_solvent_solution": "butanone/cyclohexane",
-        "injection_volume": "100 uL"
+        "temperature": 25,
+        "flow_rate": null,
+        "injected_polymer_concentration": null,
+        "injected_polymer_solvent_solution": null,
+        "injection_volume": null
       },
       "separation_behavior": {
-        "critical_block_behavior": "all 1,4-PI samples elute at the same retention volume irrespective of their molar masses",
-        "non_critical_block_behavior": "If the mobile phase contains more cyclohexane (>8 vol%), the molar mass dependence corresponds to size exclusion chromatography behavior. If the mobile phase contains less cyclohexane (<8 vol%), the 1,4-PI samples are eluted in the liquid adsorption chromatography mode",
-        "purpose": "separation of polyisoprene according to the microstructure by LCCC"
+        "critical_block_behavior": "EO unit clearly elutes in SEC mode",
+        "non_critical_block_behavior": "All PEGs elute in SEC mode, only the lower ones merge with the solvent peak",
+        "purpose": null
       }
     },
     {
-      "critical_polymer_unit": "3,4-PI",
+      "critical_polymer_unit": "PO",
       "SP_FIELDS": {
-        "column_name": "Nucleosil C18",
-        "material": null,
-        "modification": "C18",
-        "pore_size": null,
+        "column_name": "Discovery HS-PEG",
+        "material": "silica",
+        "modification": "PEG",
+        "pore_size": "120 A",
         "particle_diameter": "5 um",
-        "column_dimensions": "250x4.6 mm i.d.",
-        "number_of_columns": 3,
-        "manufacturer": "Macherey-Nagel",
-        "phase": "reversed phase"
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": 1,
+        "manufacturer": "Supelco",
+        "phase": "normal phase"
       },
       "SOL_FIELDS": {
-        "solvent": "Butanone / Cyclohexane",
-        "ratio": "97/3",
+        "solvent": "Acetone / Water",
+        "ratio": "45-90",
+        "ratio_units": "wt% acetone"
+      },
+      "TECH_FIELDS": {
+        "temperature": 25,
+        "flow_rate": null,
+        "injected_polymer_concentration": null,
+        "injected_polymer_solvent_solution": null,
+        "injection_volume": null
+      },
+      "separation_behavior": {
+        "critical_block_behavior": "LAC mode for PO, SEC mode for EO",
+        "non_critical_block_behavior": "EO blocks elute at the same positions as corresponding PEGs",
+        "purpose": "Separation of poloxamers and identification of PEG presence"
+      }
+    },
+    {
+      "critical_polymer_unit": null,
+      "SP_FIELDS": {
+        "column_name": "Nucleosil 100-5 OH",
+        "material": "silica",
+        "modification": "Diol",
+        "pore_size": "100 A",
+        "particle_diameter": "5 um",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": null,
+        "manufacturer": "Macherey-Nagel",
+        "phase": "normal phase"
+      },
+      "SOL_FIELDS": {
+        "solvent": "Acetone / Water",
+        "ratio": "80/20",
+        "ratio_units": "wt% acetone"
+      },
+      "TECH_FIELDS": {
+        "temperature": 25,
+        "flow_rate": null,
+        "injected_polymer_concentration": null,
+        "injected_polymer_solvent_solution": null,
+        "injection_volume": "50 uL"
+      },
+      "separation_behavior": {
+        "critical_block_behavior": "elutes in SEC mode",
+        "non_critical_block_behavior": "elutes in LAC mode",
+        "purpose": "determine the total MMD by SEC, length of EO block(s) at CAP for PO, and length of PO block at CAP for EO"
+      }
+    },
+    {
+      "critical_polymer_unit": "EO",
+      "SP_FIELDS": {
+        "column_name": "Discovery HS-PEG",
+        "material": "silica",
+        "modification": "PEG",
+        "pore_size": "120 A",
+        "particle_diameter": "5 um",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": null,
+        "manufacturer": "Supelco",
+        "phase": "normal phase"
+      },
+      "SOL_FIELDS": {
+        "solvent": "Acetone / Water",
+        "ratio": "92/8",
         "ratio_units": "vol%"
       },
       "TECH_FIELDS": {
-        "temperature": 29,
+        "temperature": 30,
+        "flow_rate": null,
+        "injected_polymer_concentration": null,
+        "injected_polymer_solvent_solution": null,
+        "injection_volume": null
+      },
+      "separation_behavior": {
+        "critical_block_behavior": "SEC mode",
+        "non_critical_block_behavior": "LAC mode",
+        "purpose": "determine the length of EO block(s) at the CAP for PO"
+      }
+    },
+    {
+      "critical_polymer_unit": "PO",
+      "SP_FIELDS": {
+        "column_name": "Jordi Gel DVB 500 RP",
+        "material": "divinylbenzene",
+        "modification": null,
+        "pore_size": "500 A",
+        "particle_diameter": "5 um",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": 10,
+        "manufacturer": "Jordi",
+        "phase": "LAC mode"
+      },
+      "SOL_FIELDS": {
+        "solvent": "Acetone / Water",
+        "ratio": "90/10",
+        "ratio_units": "vol%"
+      },
+      "TECH_FIELDS": {
+        "temperature": 25,
+        "flow_rate": 1,
+        "injected_polymer_concentration": 3,
+        "injected_polymer_solvent_solution": null,
+        "injection_volume": null
+      },
+      "separation_behavior": {
+        "critical_block_behavior": "SEC mode",
+        "non_critical_block_behavior": "LAC mode",
+        "purpose": "determine the length of PO block(s) at the CAP for EO"
+      }
+    },
+    {
+      "critical_polymer_unit": "EO-PO copolymers",
+      "SP_FIELDS": {
+        "column_name": "Jordi Gel DVB 500 RP",
+        "material": "divinylbenzene",
+        "modification": null,
+        "pore_size": "500 A",
+        "particle_diameter": "5 um",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": 1,
+        "manufacturer": "Jordi",
+        "phase": "reversed phase"
+      },
+      "SOL_FIELDS": {
+        "solvent": "Acetone / Water",
+        "ratio": "92/8",
+        "ratio_units": "vol%"
+      },
+      "TECH_FIELDS": {
+        "temperature": 30,
+        "flow_rate": 1,
+        "injected_polymer_concentration": null,
+        "injected_polymer_solvent_solution": null,
+        "injection_volume": null
+      },
+      "separation_behavior": {
+        "critical_block_behavior": "at the CAP for the EO unit, PO block elutes in LAC mode; at the CAP for the PO unit, EO block elutes in SEC mode",
+        "non_critical_block_behavior": null,
+        "purpose": "separation of EO-PO copolymers by critical conditions"
+      }
+    },
+    {
+      "critical_polymer_unit": "EO",
+      "SP_FIELDS": {
+        "column_name": "Jordi Gel DVB 500 RP",
+        "material": "divinylbenzene",
+        "modification": null,
+        "pore_size": "500 A",
+        "particle_diameter": "5 um",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": null,
+        "manufacturer": "Jordi",
+        "phase": "reversed phase"
+      },
+      "SOL_FIELDS": {
+        "solvent": null,
+        "ratio": "90/10",
+        "ratio_units": "vol%"
+      },
+      "TECH_FIELDS": {
+        "temperature": 25,
         "flow_rate": "0.5 mL/min",
         "injected_polymer_concentration": null,
-        "injected_polymer_solvent_solution": "butanone/cyclohexane",
-        "injection_volume": "100 uL"
+        "injected_polymer_solvent_solution": null,
+        "injection_volume": null
+      },
+      "separation_behavior": {
+        "critical_block_behavior": "PO elutes in LAC mode at the CAP for EO on this column under these conditions",
+        "non_critical_block_behavior": null,
+        "purpose": "determination of critical adsorption point (CAP) for EO"
+      }
+    },
+    {
+      "critical_polymer_unit": "EO",
+      "SP_FIELDS": {
+        "column_name": "Nucleosil 100-5 OH",
+        "material": "silica",
+        "modification": "PEG",
+        "pore_size": "100 A",
+        "particle_diameter": "5 um",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": null,
+        "manufacturer": "Macherey-Nagel",
+        "phase": "normal phase"
+      },
+      "SOL_FIELDS": {
+        "solvent": "Acetone / Water",
+        "ratio": "80/20",
+        "ratio_units": "vol%"
+      },
+      "TECH_FIELDS": {
+        "temperature": null,
+        "flow_rate": null,
+        "injected_polymer_concentration": null,
+        "injected_polymer_solvent_solution": null,
+        "injection_volume": null
+      },
+      "separation_behavior": {
+        "critical_block_behavior": "PPGs elute in SEC mode, and the peaks of all PEGs (from 400 to 12000) coincide precisely.",
+        "non_critical_block_behavior": "EO blocks elute at the same positions as the corresponding PEGs with similar molar mass",
+        "purpose": "Separation of poloxamers according to the length of PO blocks and identification of PEG presence"
+      }
+    },
+    {
+      "critical_polymer_unit": null,
+      "SP_FIELDS": {
+        "column_name": "Discovery HS-PEG",
+        "material": "silica",
+        "modification": "PEG",
+        "pore_size": "120 A",
+        "particle_diameter": "5 um",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": null,
+        "manufacturer": "Supelco",
+        "phase": "normal phase"
+      },
+      "SOL_FIELDS": {
+        "solvent": null,
+        "ratio": "92/8",
+        "ratio_units": "vol%"
+      },
+      "TECH_FIELDS": {
+        "temperature": null,
+        "flow_rate": null,
+        "injected_polymer_concentration": null,
+        "injected_polymer_solvent_solution": null,
+        "injection_volume": null
       },
       "separation_behavior": {
         "critical_block_behavior": null,
-        "non_critical_block_behavior": "3,4-PI samples elute earlier indicating that for these samples a SEC mode is operating",
-        "purpose": "separation and determination of molar mass distributions"
+        "non_critical_block_behavior": "PO block elutes in exclusion mode",
+        "purpose": "determination of molar mass distribution of the individual blocks"
+      }
+    },
+    {
+      "critical_polymer_unit": null,
+      "SP_FIELDS": {
+        "column_name": "Jordi Gel DVB 500 RP",
+        "material": "divinylbenzene",
+        "modification": null,
+        "pore_size": "500 A",
+        "particle_diameter": "5 um",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": null,
+        "manufacturer": "Jordi",
+        "phase": "reversed phase"
+      },
+      "SOL_FIELDS": {
+        "solvent": null,
+        "ratio": "92/8",
+        "ratio_units": "vol%"
+      },
+      "TECH_FIELDS": {
+        "temperature": null,
+        "flow_rate": null,
+        "injected_polymer_concentration": null,
+        "injected_polymer_solvent_solution": null,
+        "injection_volume": null
+      },
+      "separation_behavior": {
+        "critical_block_behavior": "PO block elutes in exclusion mode",
+        "non_critical_block_behavior": "EO block elutes by microstructure",
+        "purpose": "determination of molar mass distribution of the individual blocks"
       }
     }
   ],
   "tables": {
     "conditions": [
       {
-        "polymer_group": "1,4-PI",
-        "critical_polymer_unit": "1,4-PI",
+        "polymer_group": "PEG",
+        "critical_polymer_unit": "PEG",
         "completeness": "complete",
-        "column_name": "Nucleosil C18",
-        "manufacturer": "Macherey-Nagel",
-        "phase": "reversed phase",
-        "material": "",
-        "modification": "C18",
-        "column_dimensions": "250x4.6 mm i.d.",
-        "number_of_columns": "3",
-        "pore_size": "",
+        "column_name": "Jordi Gel DVB 500 RP",
+        "manufacturer": "Jordi",
+        "phase": "Reversed phase (polymeric)",
+        "material": "divinylbenzene",
+        "modification": "",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": "1",
+        "pore_size": "500 A",
         "particle_diameter": "5 um",
-        "solvent": "Butanone / Cyclohexane",
+        "solvent": "Acetone / Water",
         "ratio": "92/8",
         "ratio_units": "vol%",
         "temperature": "29 °C",
         "flow_rate": "0.5 mL/min",
         "injection_volume": "100 µL",
-        "injected_polymer_concentration": "2.7 mg/mL",
-        "injected_polymer_solvent_solution": "butanone/cyclohexane",
-        "purpose": "separation of polyisoprene according to the microstructure by LCCC; separation and determination of molar mass distributions"
+        "injected_polymer_concentration": "",
+        "injected_polymer_solvent_solution": "",
+        "purpose": "determine the length of PO block(s) at the CAP for EO; separation of EO-PO copolymers by critical conditions"
+      },
+      {
+        "polymer_group": "PO",
+        "critical_polymer_unit": "PO",
+        "completeness": "complete",
+        "column_name": "Discovery HS-PEG",
+        "manufacturer": "Supelco",
+        "phase": "normal phase",
+        "material": "silica",
+        "modification": "PEG",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": "",
+        "pore_size": "120 A",
+        "particle_diameter": "5 um",
+        "solvent": "Acetone / Water",
+        "ratio": "92/8",
+        "ratio_units": "vol%",
+        "temperature": "29 °C",
+        "flow_rate": "0.5 mL/min",
+        "injection_volume": "",
+        "injected_polymer_concentration": "",
+        "injected_polymer_solvent_solution": "",
+        "purpose": "Separation of poloxamers and identification of PEG presence; determination of molar mass distribution of the individual blocks"
+      },
+      {
+        "polymer_group": "poly(ethylene glycol), poly(propylene glycol)",
+        "critical_polymer_unit": "",
+        "completeness": "complete",
+        "column_name": "Nucleosil 100-5 OH",
+        "manufacturer": "Macherey-Nagel",
+        "phase": "normal phase",
+        "material": "silica",
+        "modification": "Diol",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": "",
+        "pore_size": "100 A",
+        "particle_diameter": "5 um",
+        "solvent": "Acetone / Water",
+        "ratio": "80/20",
+        "ratio_units": "vol%",
+        "temperature": "29 °C",
+        "flow_rate": "0.5 mL/min",
+        "injection_volume": "100 µL",
+        "injected_polymer_concentration": "",
+        "injected_polymer_solvent_solution": "",
+        "purpose": "determine the total MMD by SEC, length of EO block(s) at CAP for PO, and length of PO block at CAP for EO; Separation of poloxamers according to the length of PO blocks and identification of PEG presence"
+      },
+      {
+        "polymer_group": "EO-PO copolymers",
+        "critical_polymer_unit": "EO-PO copolymers",
+        "completeness": "complete",
+        "column_name": "",
+        "manufacturer": "",
+        "phase": "reversed phase",
+        "material": "",
+        "modification": "",
+        "column_dimensions": "",
+        "number_of_columns": "",
+        "pore_size": "",
+        "particle_diameter": "",
+        "solvent": "Acetone / Water",
+        "ratio": "92/8",
+        "ratio_units": "vol%",
+        "temperature": "29 °C",
+        "flow_rate": "0.5 mL/min",
+        "injection_volume": "",
+        "injected_polymer_concentration": "",
+        "injected_polymer_solvent_solution": "",
+        "purpose": "separation of EO-PO copolymers by critical conditions"
+      },
+      {
+        "polymer_group": "EO",
+        "critical_polymer_unit": "EO",
+        "completeness": "complete",
+        "column_name": "Jordi Gel DVB 500 RP",
+        "manufacturer": "Jordi",
+        "phase": "reversed phase",
+        "material": "divinylbenzene",
+        "modification": "",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": "1",
+        "pore_size": "500 A",
+        "particle_diameter": "5 um",
+        "solvent": "Acetone / Water",
+        "ratio": "90/10",
+        "ratio_units": "vol%",
+        "temperature": "29 °C",
+        "flow_rate": "0.5 mL/min",
+        "injection_volume": "",
+        "injected_polymer_concentration": "",
+        "injected_polymer_solvent_solution": "",
+        "purpose": "determination of critical adsorption point (CAP) for EO"
       }
     ],
     "polymers": [
       {
-        "polymer": "polyisoprene",
-        "count": 115
+        "polymer": "poly(ethylene glycol)",
+        "count": 24
       },
       {
-        "polymer": "polystyrene",
-        "count": 2
+        "polymer": "poly(propylene glycol)",
+        "count": 20
       },
       {
-        "polymer": "polystyrene sulfonate",
-        "count": 2
-      },
-      {
-        "polymer": "polybutadiene",
+        "polymer": "polydisperse",
         "count": 1
       },
       {
-        "polymer": "polyethyl methacrylate",
+        "polymer": "polydivinyl benzene",
         "count": 1
       },
       {
-        "polymer": "polymethyl methacrylate",
+        "polymer": "polydivinylbenzene",
+        "count": 1
+      },
+      {
+        "polymer": "polyester",
+        "count": 1
+      },
+      {
+        "polymer": "polyethylene",
+        "count": 1
+      },
+      {
+        "polymer": "polyethylene oxide",
+        "count": 1
+      },
+      {
+        "polymer": "polylactide, glycolide, caprolactone",
+        "count": 1
+      },
+      {
+        "polymer": "polypropylene",
+        "count": 1
+      },
+      {
+        "polymer": "polypropylene oxide",
+        "count": 1
+      },
+      {
+        "polymer": "polytetrahydrofuran",
         "count": 1
       }
     ],
     "conditions_raw": [
       {
-        "polymer_group": "1,4-PI",
-        "critical_polymer_unit": "1,4-PI",
+        "polymer_group": "PEG",
+        "critical_polymer_unit": "PEG",
         "completeness": "complete",
-        "column_name": "Nucleosil C18",
-        "manufacturer": "Macherey-Nagel",
-        "phase": "reversed phase",
-        "material": "",
-        "modification": "C18",
-        "column_dimensions": "250x4.6 mm i.d.",
-        "number_of_columns": "3",
-        "pore_size": "",
+        "column_name": "Jordi Gel DVB 500 RP",
+        "manufacturer": "Jordi",
+        "phase": "Reversed phase (polymeric)",
+        "material": "divinylbenzene",
+        "modification": "",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": "1",
+        "pore_size": "500 A",
         "particle_diameter": "5 um",
-        "solvent": "Butanone / Cyclohexane",
+        "solvent": "Acetone / Water",
         "ratio": "92/8",
         "ratio_units": "vol%",
-        "temperature": "29",
-        "flow_rate": "0.5-0.8 mL/min",
-        "injection_volume": "100 uL",
-        "injected_polymer_concentration": "2.7 mg/mL",
-        "injected_polymer_solvent_solution": "butanone/cyclohexane",
-        "purpose": "separation of polyisoprene according to the microstructure by LCCC"
+        "temperature": "25",
+        "flow_rate": "",
+        "injection_volume": "",
+        "injected_polymer_concentration": "",
+        "injected_polymer_solvent_solution": "",
+        "purpose": ""
       },
       {
-        "polymer_group": "3,4-PI",
-        "critical_polymer_unit": "3,4-PI",
+        "polymer_group": "PO",
+        "critical_polymer_unit": "PO",
         "completeness": "complete",
-        "column_name": "Nucleosil C18",
-        "manufacturer": "Macherey-Nagel",
-        "phase": "reversed phase",
-        "material": "",
-        "modification": "C18",
-        "column_dimensions": "250x4.6 mm i.d.",
-        "number_of_columns": "3",
-        "pore_size": "",  
+        "column_name": "Discovery HS-PEG",
+        "manufacturer": "Supelco",
+        "phase": "normal phase",
+        "material": "silica",
+        "modification": "PEG",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": "1",
+        "pore_size": "120 A",
         "particle_diameter": "5 um",
-        "solvent": "Butanone / Cyclohexane",
-        "ratio": "97/3",
-        "ratio_units": "vol%",
-        "temperature": "29",
-        "flow_rate": "0.5 mL/min",
-        "injection_volume": "100 uL",
+        "solvent": "Acetone / Water",
+        "ratio": "45-90",
+        "ratio_units": "wt% acetone",
+        "temperature": "25",
+        "flow_rate": "",
+        "injection_volume": "",
         "injected_polymer_concentration": "",
-        "injected_polymer_solvent_solution": "butanone/cyclohexane",
-        "purpose": "separation and determination of molar mass distributions"
+        "injected_polymer_solvent_solution": "",
+        "purpose": "Separation of poloxamers and identification of PEG presence"
+      },
+      {
+        "polymer_group": "poly(ethylene glycol), poly(propylene glycol)",
+        "critical_polymer_unit": "",
+        "completeness": "complete",
+        "column_name": "Nucleosil 100-5 OH",
+        "manufacturer": "Macherey-Nagel",
+        "phase": "normal phase",
+        "material": "silica",
+        "modification": "Diol",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": "",
+        "pore_size": "100 A",
+        "particle_diameter": "5 um",
+        "solvent": "Acetone / Water",
+        "ratio": "80/20",
+        "ratio_units": "wt% acetone",
+        "temperature": "25",
+        "flow_rate": "",
+        "injection_volume": "50 uL",
+        "injected_polymer_concentration": "",
+        "injected_polymer_solvent_solution": "",
+        "purpose": "determine the total MMD by SEC, length of EO block(s) at CAP for PO, and length of PO block at CAP for EO"
+      },
+      {
+        "polymer_group": "EO",
+        "critical_polymer_unit": "EO",
+        "completeness": "complete",
+        "column_name": "Discovery HS-PEG",
+        "manufacturer": "Supelco",
+        "phase": "normal phase",
+        "material": "silica",
+        "modification": "PEG",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": "",
+        "pore_size": "120 A",
+        "particle_diameter": "5 um",
+        "solvent": "Acetone / Water",
+        "ratio": "92/8",
+        "ratio_units": "vol%",
+        "temperature": "30",
+        "flow_rate": "",
+        "injection_volume": "",
+        "injected_polymer_concentration": "",
+        "injected_polymer_solvent_solution": "",
+        "purpose": "determine the length of EO block(s) at the CAP for PO"
+      },
+      {
+        "polymer_group": "PO",
+        "critical_polymer_unit": "PO",
+        "completeness": "complete",
+        "column_name": "Jordi Gel DVB 500 RP",
+        "manufacturer": "Jordi",
+        "phase": "LAC mode",
+        "material": "divinylbenzene",
+        "modification": "",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": "10",
+        "pore_size": "500 A",
+        "particle_diameter": "5 um",
+        "solvent": "Acetone / Water",
+        "ratio": "90/10",
+        "ratio_units": "vol%",
+        "temperature": "25",
+        "flow_rate": "1",
+        "injection_volume": "",
+        "injected_polymer_concentration": "3",
+        "injected_polymer_solvent_solution": "",
+        "purpose": "determine the length of PO block(s) at the CAP for EO"
+      },
+      {
+        "polymer_group": "EO-PO copolymers",
+        "critical_polymer_unit": "EO-PO copolymers",
+        "completeness": "complete",
+        "column_name": "Jordi Gel DVB 500 RP",
+        "manufacturer": "Jordi",
+        "phase": "reversed phase",
+        "material": "divinylbenzene",
+        "modification": "",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": "1",
+        "pore_size": "500 A",
+        "particle_diameter": "5 um",
+        "solvent": "Acetone / Water",
+        "ratio": "92/8",
+        "ratio_units": "vol%",
+        "temperature": "30",
+        "flow_rate": "1",
+        "injection_volume": "",
+        "injected_polymer_concentration": "",
+        "injected_polymer_solvent_solution": "",
+        "purpose": "separation of EO-PO copolymers by critical conditions"
+      },
+      {
+        "polymer_group": "EO",
+        "critical_polymer_unit": "EO",
+        "completeness": "complete",
+        "column_name": "Jordi Gel DVB 500 RP",
+        "manufacturer": "Jordi",
+        "phase": "reversed phase",
+        "material": "divinylbenzene",
+        "modification": "",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": "",
+        "pore_size": "500 A",
+        "particle_diameter": "5 um",
+        "solvent": "",
+        "ratio": "90/10",
+        "ratio_units": "vol%",
+        "temperature": "25",
+        "flow_rate": "0.5 mL/min",
+        "injection_volume": "",
+        "injected_polymer_concentration": "",
+        "injected_polymer_solvent_solution": "",
+        "purpose": "determination of critical adsorption point (CAP) for EO"
+      },
+      {
+        "polymer_group": "EO",
+        "critical_polymer_unit": "EO",
+        "completeness": "complete",
+        "column_name": "Nucleosil 100-5 OH",
+        "manufacturer": "Macherey-Nagel",
+        "phase": "normal phase",
+        "material": "silica",
+        "modification": "PEG",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": "",
+        "pore_size": "100 A",
+        "particle_diameter": "5 um",
+        "solvent": "Acetone / Water",
+        "ratio": "80/20",
+        "ratio_units": "vol%",
+        "temperature": "",
+        "flow_rate": "",
+        "injection_volume": "",
+        "injected_polymer_concentration": "",
+        "injected_polymer_solvent_solution": "",
+        "purpose": "Separation of poloxamers according to the length of PO blocks and identification of PEG presence"
+      },
+      {
+        "polymer_group": "poly(ethylene glycol), poly(propylene glycol)",
+        "critical_polymer_unit": "",
+        "completeness": "complete",
+        "column_name": "Discovery HS-PEG",
+        "manufacturer": "Supelco",
+        "phase": "normal phase",
+        "material": "silica",
+        "modification": "PEG",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": "",
+        "pore_size": "120 A",
+        "particle_diameter": "5 um",
+        "solvent": "",
+        "ratio": "92/8",
+        "ratio_units": "vol%",
+        "temperature": "",
+        "flow_rate": "",
+        "injection_volume": "",
+        "injected_polymer_concentration": "",
+        "injected_polymer_solvent_solution": "",
+        "purpose": "determination of molar mass distribution of the individual blocks"
+      },
+      {
+        "polymer_group": "poly(ethylene glycol), poly(propylene glycol)",
+        "critical_polymer_unit": "",
+        "completeness": "complete",
+        "column_name": "Jordi Gel DVB 500 RP",
+        "manufacturer": "Jordi",
+        "phase": "reversed phase",
+        "material": "divinylbenzene",
+        "modification": "",
+        "column_dimensions": "250x4.6 mm",
+        "number_of_columns": "",
+        "pore_size": "500 A",
+        "particle_diameter": "5 um",
+        "solvent": "",
+        "ratio": "92/8",
+        "ratio_units": "vol%",
+        "temperature": "",
+        "flow_rate": "",
+        "injection_volume": "",
+        "injected_polymer_concentration": "",
+        "injected_polymer_solvent_solution": "",
+        "purpose": "determination of molar mass distribution of the individual blocks"
       }
     ]
   }

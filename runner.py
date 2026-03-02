@@ -7,7 +7,7 @@ from typing import Dict, Any, List
 
 from pipeline import load_text, run_pipeline, save_json
 from lccc_extractor.llm import LLMConfig
-from lccc_extractor.reporting import write_conditions_csv
+from lccc_extractor.reporting import write_conditions_csv, write_conditions_xlsx
 from lccc_extractor.postprocess import llm_normalize_conditions_table
 
 def print_summary(data: List[Dict[str, Any]], metadata: Dict[str, Any]) -> None:
@@ -117,6 +117,7 @@ Examples:
   python runner.py rawData/paper.txt
   python runner.py rawData/paper.txt -o output/results.json
   python runner.py rawData/paper.txt --no-validation --threshold 0.3
+  python runner.py rawData/paper.txt --table-xlsx results.xlsx
         """
     )
     parser.add_argument("input", nargs="?", default="rawData/paper.txt", help="Path to input .txt file")
@@ -142,6 +143,7 @@ Examples:
     parser.add_argument("--no-llm-postprocess", action="store_true", help="Disable LLM postprocess table cleanup")
     parser.add_argument("--llm-postprocess-max-rows", type=int, default=60, help="Max table rows for LLM postprocess")
     parser.add_argument("--table-csv", default=None, help="Optional path to save tabular CSV output")
+    parser.add_argument("--table-xlsx", default=None, help="Optional path to save tabular Excel output")
     args = parser.parse_args()
 
     # Validate input
@@ -212,8 +214,14 @@ Examples:
 
         # Save to JSON
         save_json(data, args.output, metadata, tables)
+        
+        # Save to CSV if requested
         if args.table_csv:
             write_conditions_csv(tables.get("conditions", []), args.table_csv)
+        
+        # Save to Excel if requested
+        if args.table_xlsx:
+            write_conditions_xlsx(tables.get("conditions", []), args.table_xlsx)
 
         # Summary
         if not args.no_summary:
@@ -221,6 +229,8 @@ Examples:
 
         if args.table_csv:
             print(f"Tabular CSV saved to: {args.table_csv}")
+        if args.table_xlsx:
+            print(f"Tabular Excel saved to: {args.table_xlsx}")
         print(f"Complete! Results saved to: {args.output}")
 
     except FileNotFoundError as e:

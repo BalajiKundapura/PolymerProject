@@ -614,7 +614,7 @@ class LLMExtractor:
             "- Pore sizes (e.g., '10^5 A', '100 A') are NOT column names — they describe pore_size.\n"
             "- column_name should be a brand/product name like 'Nucleosil C18', 'C18', 'HS-PEG'.\n"
             "\n"
-            "- temperature in °C (number only, e.g., 29). flow_rate with units (e.g., '0.5 mL/min').\n"
+            "- temperature in °C (number only). flow_rate with units (e.g., '0.5 mL/min').\n"
             "- Solvent format: 'A / B' for mixtures.\n"
             "- If this text describes a purely theoretical discussion without experimental data, return empty array.\n"
             '- If no LCCC conditions found, return {"LCCC_conditions":[]}.\n'

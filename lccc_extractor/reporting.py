@@ -5,6 +5,11 @@ from typing import Any, Dict, Iterable, List
 
 from .text.normalization import normalize_for_parsing
 
+try:
+    import pandas as pd
+except ImportError:
+    pd = None
+
 
 CONDITION_TABLE_COLUMNS = [
     "polymer_group",
@@ -126,3 +131,35 @@ def write_conditions_csv(rows: List[Dict[str, Any]], path: str) -> None:
         writer.writeheader()
         for row in rows:
             writer.writerow(row)
+
+
+def write_conditions_xlsx(rows: List[Dict[str, Any]], path: str) -> None:
+    """Write conditions to Excel with formatting"""
+    if pd is None:
+        raise ImportError(
+            "pandas is required for Excel export. Install it with: pip install pandas openpyxl"
+        )
+    
+    if not rows:
+        rows = [{col: "" for col in CONDITION_TABLE_COLUMNS}]
+    
+    # Create DataFrame
+    df = pd.DataFrame(rows)
+    
+    # Reorder columns to match expected order
+    df = df[[col for col in CONDITION_TABLE_COLUMNS if col in df.columns]]
+    
+    # Write to Excel with auto-adjusted column widths
+    with pd.ExcelWriter(path, engine='openpyxl') as writer:
+        df.to_excel(writer, index=False, sheet_name='LCCC_Conditions')
+        
+        # Auto-adjust column widths
+        worksheet = writer.sheets['LCCC_Conditions']
+        for idx, col in enumerate(df.columns):
+            max_len = max(
+                df[col].astype(str).apply(len).max(),
+                len(str(col))
+            ) + 2
+            # Excel column letters: A, B, C, ...
+            col_letter = chr(65 + idx) if idx < 26 else chr(65 + idx // 26 - 1) + chr(65 + idx % 26)
+            worksheet.column_dimensions[col_letter].width = min(max_len, 50)
