@@ -1,7 +1,0 @@
-Situation,Column,Mobile,EO,PO
-,,phase,,
-,,polarity,,
-1,RP,High,LCCC,LAC
-2,RP,Low,SEC,LCCC
-3,NP,High,LCCC,SEC
-4,NP,Low,LAC,LCCC

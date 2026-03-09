@@ -1,254 +1,224 @@
-Introduction
-Amphiphilic polymers contain chemically different blocks with different solubility or affinity towards other solids or liquids. Consequently, they exhibit surface activity and will be enriched at the interface between immiscible phases (which may be solid, liquid, or gaseous). Typically, the hydrophilic blocks consist of poly(ethylene oxide), while the hydrophobic blocks may be poly(propylene oxide), poly(tetrahydrofuran), a polyester such as poly(lactide, glycolide, caprolactone), etc.
-Block copolymers of ethylene oxide and propylene oxide are in widespread use as synthetic lubricants, as emulsifiers, as defoaming agents, and in various other applications, which utilize their amphiphilic nature: The EO block is hydrophilic, and the PO block hydrophobic.
-Especially important are EO-PO-EO triblocks, which are often called poloxamers (the corresponding brand names are Pluronics or Synperonics). These products are produced by ethoxylation of polypropylene glycol (PPG), while PO-EO-PO triblocks are prepared by propoxylation of polyethylene glycol (PEG).
-The desired triblocks can only be formed, if the alkoxylation proceeds on both ends of the starting material. PEG contains two primary OH groups, which may react with the same probability and rate. PPG can also contain secondary OH groups, which react more slowly, and allyl end groups, which do not react at all. These allyl end groups can be present already in the starting material, but may also be formed during the alkoxylation by hydrogen abstraction from the methyl group of the growing PO chain end, which is thus terminated
-[1]
-. Consequently, chain transfer may result in different side products: Homopolymers and diblocks.
-In general, EO-PO-diblocks have quite different properties than EO-PO-EO or PO-EO-PO triblocks. They show different micellization behavior
+Block copolymers consisting of hydrophilic components (e.g., poly(ethylene oxide) (PEO)) and hydrophobic components (e.g., poly(L-lactide) (PLLA), poly(propylene oxide) (PPO), poly(butylene oxide) (PBO)) can form micelles and hydrogels in water.
 [1]
 [2]
 [3]
 [4]
+Such amphiphilc block copolymers are of growing interest in the pharmaceutical and biomedical fields due to their biodegradability and biocompatability.
 [5]
 [6]
-and a different influence on protein adsorption
 [7]
-. Similar differences exist also in other amphiphilic block copolymers, as has been shown experimentally
-[8,
-9]
-and by Monte Carlo simulations
+[8]
+The physical properties of such block copolymers depend on the composition and chain architecture. 2,6-15 For example, Jeong et al. investigated the temperature-dependent reversible sol-gel transitions for aqueous solutions of the block copolymers, poly(ethylene oxide)-block-poly(L-lactide) (PEO-b-PLLA) and poly(L-lactide)-block-poly(ethylene oxide)-block-poly(Llactide) (PEO-b-PLLA-b-PEO).
+6
+They found that the association behavior of the block copolymers is strongly dependent on the PLLA block length. As the PLLA block length gets longer, the critical aggregation concentration becomes lower and the solgel transition temperature higher.
+Not only the block length but also the architecture of block copolymers has a large impact on properties.
+1,
+[6]
+[7]
+[8]
+[9]
 [10]
-.
-The specification given by the producers are generally very limited: the overall molar mass and the overall composition (the average EO content), which are typically calculated from the monomer conversion in the synthesis.
-Other products are specified by the average number of EO and PO units, or by the average molar mass of the center block and the percentage of the monomer constituting the arms. All of these parameters are typically obtained just as above.
-This information is, however, by far not sufficient: The properties of these products are strongly influenced by the distributions of molar mass, functionality, chemical composition, architecture, and content of homopolymers and diblocks.
-Hence, a discrimination of polymers with different architecture (e.g. di-and triblock structures) would be highly important.
-The producer, who knows the molar mass distribution of the starting material (PEG or PPG), will mainly be interested in the content of impurities (homopolymer and diblocks), and in the length of the arms he has added to the center block. The customer, however, must just rely on the information given by the producer, as it is difficult to obtain the desired information by the usual analytical techniques.
-Consequently, there is a strong need for reliable analytical methods, which allow a full characterization of such products, i.e. an independent determination of the distributions mentioned above. Typically, a two-dimensional separation will be required, in which each dimension separates according to different criteria.
-The nature of these separations can be chromatography (liquid or supercritical fluid chromatography) or mass spectrometry (especially MALDI-TOF-MS), and combinations of these techniques. Obviously, the first dimension will always be a chromatographic separation.
-The goal of this paper was the development of a method, which should allow a determination of homopolymers in EO-PO block copolymers, and yield information on the molar mass distribution of the individual blocks.
-Strategies in the separation of block copolymers
-Functional polymers and oligomers can be characterized using different chromatographic techniques, which separate according to different criteria. The type of chromatographic separation is determined by the so-called interaction parameter c, which describes the interaction of a structural unit with the stationary phase
 [11]
-. This parameter is negative in size exclusion chromatography (SEC) and positive in liquid adsorption chromatography (LAC). At the critical adsorption point (CAP) the interaction parameter equals zero, and the corresponding block becomes 'chromatographically invisible'
-[12]
-[13]
-[14]
-[15]
-. This effect is utilized in liquid chromatography under critical conditions (LCCC), which allows a separation of polymer homologous series according to their functionality
-[16]
+For example, in a study by Yang et al., the association behavior of triblock copolymers (EO 21 BO 8 EO 21 and BO 4 EO 40 BO 4 ) was compared with that of a diblock copolymer EO 41 BO 8 .
+9
+The critical micelle * Corresponding author: (tel) +82-54-279-2109; (fax) +82-54-279-3399; (e-mail) tc@postech.ac.kr.
+(1) Schick, M. J.; Fowkes, F. M. In Nonionic Surfactants: The strong sensitivity of the association and the phase transition behavior of amphiphilic block copolymers to block length and chain architecture demonstrates the importance of accurate structural analysis of block copolymers. Rigorous characterization of synthetic block copolymers is very complicated mainly because they exhibit distributions in molecular weight as well as in chemical composition. In addition, ABA-type triblock copolymers can have another distribution in the chain architecture, i.e., difference in length or isomerism of the two end blocks. In previous work, we carried out a precise characterization of both blocks of a PEO-b-PLLA diblock copolymer by liquid chromatography at the critical condition (LCCC) combined with matrixassisted laser desorption/ionization mass spectrometry (MALDI-TOF MS).
+16
+The critical condition of liquid chromatography is the transition point of the separation mode between size exclusion and adsorption (or partition) when a porous column packing material is used for the separation of macromolecules. At the critical point of a particular polymer species, retention of that polymer becomes independent of the molecular weight.
 [17]
 [18]
 [19]
-.
-In the case of amphiphilic polymers the interaction parameters c A and c B of the individual structural units (A and B) may assume different values. Hence, the following options exist:
-If both c A and c B are negative, the molar mass distribution (MMD) can be determined by size exclusion chromatography (SEC), with retention decreasing with increasing molar mass, and only a minor influence of chemical composition. With dual detection, the chemical composition along the peak can be obtained
 [20]
 [21]
 [22]
-.
-If both c A and c B are positive, a separation by LAC (with retention increasing exponentially with the number of repeat units) can be achieved, if one of the blocks is monodisperse. If, however, both blocks are polydisperse and c A sc B , several superimposed series of peaks will be observed, which can hardly be resolved.
-If one of the parameters is positive and the other one negative, each polymer homologous series will elute in SEC order, but far behind the void volume of the column. This mechanism, which is called liquid exclusion-adsorption chromatography (LEAC)
-[23,
-24]
-, can be utilized in the separation of monofunctional oligomers with a monodisperse adsorbing block or end group.
-If one of the interaction parameters (c A or c B ) equals zero, the corresponding block becomes 'chromatographically invisible', and a separation according to the other block can be achieved (liquid chromatography under critical conditions: LCCC). Depending of the corresponding interaction parameter, this separation may follow a SEC
+[23]
+[24]
 [25]
 [26]
 [27]
 [28]
-or LAC
+LCCC has been often employed for the analysis of block copolymers under the premise that a specific block can be made "chromatographically invisible" at the critical condition and that the chromatographic retention is determined by the rest of the polymer molecule.
+[18]
+[19]
+[20]
+[21]
+[22]
+[23]
+28
+Also the recent advent of the MALDI-TOF MS method has dramatically enhanced the capability for analysis of copolymers.
+22,
 [29]
 [30]
 [31]
-mechanism.
-The situation becomes more complicated in the case of triblock copolymers: At the CAP for A, the triblock A-B-A behaves just like the diblock A-B; the B-A-B triblock, however, shows a completely different pattern. Even under critical conditions for the center block (A), a separation according to its size will be observed, as long as A is rather short. For higher polymers, the difference between A-B-A and B-A-B structures may be rather small, but should not be neglected
 [32]
 [33]
 [34]
 [35]
 [36]
 [37]
-. In some cases, these differences may be sufficient to allow a discrimination of polymers with different architecture.
-Applied to the characterization of poloxamers, there are different strategies, depending on their architecture, molar mass and chemical composition.
-SEC yields the overall molar mass distribution (MMD); with dual detection one may obtain information on the chemical composition along the MMD
-[22,
-38,
-39]
-. SEC is, however, not capable of discriminating mixture of diblocks, triblocks, and homopolymers! At the CAP for the EO unit, a separation according to the PO block(s) may be achieved by a SEC or a LAC mechanism, and vice versa.
-A schematic representation is given in Table
+MALDI-TOF MS analysis combined with LCCC separation has been used to successfully characterize each block of block copolymers to the molecular level.
+16,
+22
+In the previous study on PEO-b-PLLA, we carried out a high-resolution separation by LCCC in terms of the PLLA block length under the critical condition of PEO and a precise characterization of the PEO block by MALDI-TOF MS analysis of the LCCC fractionated samples.
+16
+In this study, we employed the same strategy for the characterization of the PLLA-b-PEO-b-PLLA triblock copolymer system. We found that not only the molecular weight and composition distribution but also the distribution of two end blocks affects the chromatographic retention. The isomeric structure of the triblock copolymers can be resolved by this method.
+EXPERIMENTAL SECTION
+Synthesis. PEO-b-PLLA and PLLA-b-PEO-b-PLLA block copolymers were prepared by ring-opening polymerization of Llactide (LLA) initiated by hydroxyl end group(s) of methoxy endcapped poly(ethylene oxide) (MPEO) and poly(ethylene glycol) (PEG), respectively. The schematic diagrams of the synthesis and the chemical structures of the block copolymers are shown in Figure
 1
-, which summarizes the (theoretically) possible situations in LCCC of EO-PO copolymers.
-On many reversed phase columns, critical conditions for the (more polar) EO block have been found in aqueous methanol, acetone, or acetonitrile. In such a system, the less polar PO block elutes in LAC mode. Such conditions (which correspond to situation 1 in Table
+, and the detailed synthesis procedure was published elsewhere.
+38
+Copolymers were synthesized by adding recrystallized L-lactide (Boehringer Ingellheim) and tin(II) bis(2-ethylhexanoate) (Sn(Oct) 2 , Sigma) to a toluene solution of MPEO or PEG and refluxing under dry nitrogen atmosphere for 12 (for diblock) or 24 h (for triblock). After the reaction was completed, the polymer was precipitated in diethyl ether and dried under vacuum at ambient temperature for 24 h. If necessary, the block copolymer was reprecipitated in methylene chloride. The weight-average molecular weight (M w ) and polydispersity (M w /M n ) of the block copolymers were determined by size exclusion chromatography (SEC) using two mixed-bed columns (Polymer Lab., mixed C) and tetrahydrofuran (Fisher, HPLC grade) as eluent. A calibration curve was made with eight polystyrene (PS) standards covering the molecular weight range from 580 to 384 000. The characteristics of the polymers used in this study are summarized in Table
 1
-) have been described by several authors
-[29]
-[30]
-[31]
-40]
 .
-This approach is not very favorable, if the molar mass of the PO block is high, as molecules with a long PO block may be strongly retained. This problem cannot be solved by gradient elution (regardless the nature of the gradient: Mobile phase composition or temperature
-[34]
-): In both cases the critical conditions would be lost.
-One may, however, also find critical conditions for the PO unit on a RP column in a different mobile phase composition (with a higher content of organic solvent): In this case EO will elute in SEC mode.
-The opposite may happen on normal phase columns: at the CAP for the EO unit, PO will elute in SEC mode, while EO will elute in LAC mode at the CAP for PO (if such critical points can be found).
-For the typical molar mass range of poloxamers, situations 1 and 4 are not very favorable, as the retention of the adsorbing block may be too high (or the resolution not sufficient).
-A separation of the non-critical blocks by SEC would allow not only the determination of their MMD, but also show the presence of homopolymers, as they should be separated from the block copolymers. This could be achieved, if conditions corresponding to situations 2 and 3 could be realized.
-Experimental
-These investigations were performed using the density detection system DDS70 (CHROMTECH, Graz, Austria). Data acquisition and processing was performed using the software package CHROMA, which has been developed for the DDS70.
-The columns and density cells were placed in a thermostatted box, in which a temperature of 25.0 8C was maintained for all measurements on both systems (A and B).
-In system A, the mobile phase was delivered by a JASCO 880 PU pump (Japan Spectrosopic Company, Tokyo, Japan) at a flow rate of 0.5 ml/min. Samples were injected manually using a Rheodyne 7125 injection valve (Rheodyne, Cotati, CA, USA) equipped with a 50 ml loop.
-A Bischoff 8110 refractive index (RI) detector (Bischoff, Leonberg, Germany) was connected to the DDS 70. Columns were connected to two column selection valves (Rheodyne 7060).
-In system B, the mobile phase was delivered by an ISCO 2350 HPLC pump and an ISCO 2360 gradient programmer (from ISCO, Lincoln, NE, USA) at a flow rate of 0.5 ml/min. Samples were injected using an autosampler Spark SPH 125 Fix (from Spark Holland, Emmen, The Netherlands) equipped with a 20 ml loop.
-A SEDEX 45 ELSD (Sedere, France) was connected to the DDS 70. Nitrogen was used as carrier gas, and the pressure at the nebulizer was set to 1.0 bar. Evaporator temperature: 30 8C.
-The following columns were used in both systems: † Jordi Gel DVB 500 RP: 100% poly(divinylbenzene); 250!4.6 mm; particle diameterZ5 mm; nominal pore sizeZ500 A ˚, (Jordi, Bellingham, MA, USA). † Discovery HS-PEG, silica-based PEG phase; 250! 4.6 mm; particle diameterZ5 mm; nominal pore sizeZ 120 A ˚(Supelco, Bellefonte, PA, USA). † Nucleosil 100-5 OH 5 mm, silica-based Diol phase; 250!4.6 mm; particle diameter: 5 mm; nominal pore sizeZ100 A ˚(Macherey-Nagel, Dueren, Germany).
-SEC measurements were performed on a modular SEC system comprising of a Gynkotek 300C pump equipped with a VICI injector (sample loop 100 ml), two column selection valves Rheodyne 7060, a density detection system DDS 70 (Chromtech, Graz, Austria) coupled with an ERC 7512 RI detector. Data acquisition and processing was performed using the software CHROMA. All SEC measurements were performed on a Styragel HR3 column (300!7.8 mm, waters) or a set of two columns PLgel (10 mm), 10 3 C10 4 A ˚, 300!7.8 mm each (Agilent) at a flow-rate of 1.00 ml/min and a column temperature of 30.0 8C. Sample concentrations were 3.0-10.0 g/l.
-The solvents (chloroform, acetone and water, both HPLC grade) were purchased from Roth (Karlsruhe, Germany) and Merck (Darmstadt, Germany).
-Mobile phases were mixed by mass and vacuum degassed, their composition was controlled by density measurement using a DMA 60 density meter equipped with a measuring cell DMA 602 M (A. Paar, Graz, Austria).
-PEG and PPG samples were purchased from Sigma-Aldrich and FLUKA (Buchs, Switzerland), EO-PO block copolymers from Sigma-Aldrich, BASF and SERVA. Several polymer samples were also provided by Dr W. Kolb AG (Hedingen, Switzerland) and by 'Blachownia' Institute of Heavy Organic Synthesis, (Ke ˛dzierzyn-Koz ´le, Poland).
-An overview of the copolymer samples used in this study is given in Tables
-2 and 3
-. The parameters specified by the producers (from which the others were calculated) are printed in bold. All samples used in this study are specified as triblock copolymers.
-Results and discussion
-The first step in these investigations was the search for critical conditions for the individual monomer units. In the literature, there are numerous papers on critical conditions for the EO unit: most of them use C18 columns, on which a critical adsorption point (CAP) for EO is observed (typically at 25 8C) in methanol-water (80-90%)
-[31,
-41]
-, acetonitrile-water (35-45%)
-[29,
-30,
-42,
-43]
-, and acetone-water (25-30%)
-[33,
-35]
-. On CN columns, critical conditions for EO have been reported in methanol-water (85%)
-[31]
-or 44% at 50 8C
-[31]
-), acetonitrile-water (28%)
-[43]
-, and dimethoxyethane-water (21.5%)
-[43]
-.
-In all of these systems, PO will elute in LAC mode. As we have shown previously
-[33,
-35]
-, a second CAP for EO exists on all silica-based C18 (and C6) columns at high acetone content (90-95%). This can be explained by beginning interaction of the polar EO unit with residual silanol groups in the stationary phase (It must be mentioned, that PEG can be separated by LAC on plain silica at high acetone content). The same conditions (C18, about 90% acetone) are also quite close to a CAP for PO.
-On polymer-based RP columns, which do not contain silanol groups, EO still elutes in SEC mode under these conditions
-[35]
-. This could be shown for the Jordi column, which consists of 100% poly(divinyl benzene). On this  column, a CAP for PO is found at about 90% acetone, as can be seen in Fig.
-1
-. At a composition close to the CAP for PO, the EO unit clearly elutes in SEC mode, as is shown in Fig.
+HPLC. The characterization by HPLC at the critical condition of PEO block was carried out on a HPLC system comprising an isocratic pump (LDC, CM 3200), a reversed-phase column (LUNA C18, 100-Å pore size, 250 × 4.6 mm), a refractive index detector (Shodex RI 71), and a UV-visible absorption detector (LDC, SM 3200). A mixture of acetonitrile (ACN, Aldrich HPLC grade) and water (deionized and filtered with a 0.45-µm filter) was used as the eluent, and the temperature of the column was controlled to within (0.1 °C of the desired temperature by circulating fluid through a column jacket from a bath/circulator (Neslab, RTE-111). The critical condition of PEO block was determined by monitoring the retention volumes of three different molecular weight PEG standards (M n : 1500, 3400, and 8000). At a given composition of the eluent, the critical condition can be found by adjusting the column temperature until the molecular weight dependence of the retention time disappears. The critical condition for the analysis of diblock copolymer was a 68 °C column temperature and an ACN/water mixture at the ratio of 60/40 (v/ v).
+16
+In the analysis for triblock copolymer, two different critical conditions were used (37 °C, ACN:H 2 O ) 47:53 (v/v); 54 °C, ACN: H 2 O ) 54:46 (v/v)), which will be detailed later.
+For the fractionation of individual peaks for the MALDI-TOF MS experiment, polymer solutions were prepared at 50-70 mg/ mL and a 100 µL of the solution was injected. The injected amount was a few tens of times larger than the analytical separation condition, which deteriorated the resolution, but still a reasonable peak separation was possible. The fractionations were collected in small vials and dried before the preparation of the solutions for the MALDI-TOF MS analysis.
+MALDI-TOF MS.
+All HPLC fractionated samples were analyzed using a Voyager Elite MALDI-TOF MS (Perkin-Elmer PerSeptive Biosystems, Framingham, MA) equipped with 337nm N 2 laser. All the spectra were obtained using an accelerating voltage of 20-25 kV and a laser intensity of ∼10% greater than threshold. The grid voltage, guide wire voltage, delay time, and mode (linear or reflector) were chosen for each spectrum to achieve a good signal-to-noise ratio. Mass calibration was performed using protein standards (Sequazyme Peptide Mass Standard Kit) purchased from PerSeptive Biosystems. While polymer samples were run with equal success in either indoleacrylic acid (IAA, Aldrich) or 2,5-dihydroxybenzoic acid (DHB, Aldrich) doping with potassium trifluoroacetate (KTFA) salt, all spectra shown in this paper were run in IAA. A 15 mg/mL solution of IAA and 5 mg/mL solution of KTFA were prepared in THF. These solutions were further diluted (1:100) to prepare a 0.15 mg/mL IAA and a 0.05 mg/mL KTFA solution. A volume of 20 µL of the IAA solution and 1 µL of the KTFA was added to each of the polymer fractions. The sample solutions were then spotted on a MALDI sample plate and air-dried before analysis.
+RESULTS AND DISCUSSION
+LCCC Retention and Peak Identification. We previously reported the characterization of the PLLA block in PEO-b-PLLA diblock copolymer at the critical condition of the PEO block.
+16
+The chromatogram for PEO-b-PLLA under the critical condition of PEO block is shown in Figure
 2
-. All PEGs elute in SEC mode, only the lower ones merge with the solvent peak, which is due to the fact, that this column has a rather large pore diameter.
-Surprisingly, all PPGs elute considerably behind the solvent peak! Obviously, the available pore volume is larger for PPG than for water. This agrees with other findings, which shall be published in another paper. This behaviour is rather favorable: It can be utilized to separate poloxamers with sufficiently large EO blocks from PPG, as is shown in Fig.
+. The critical condition was achieved with a mixture of acetonitrile and water (60/40, v/v) at a column temperature of 68 °C. At this condition, the PEO block becomes "chromatographically invisible" in principle and the PEOb-PLLA block copolymer is expected to behave like a PLLA homopolymer having molecular weight equivalent to the PLLA block as far as the chromatographic retention is concerned. The materials corresponding to individual elution peaks in Figure
+2
+were subjected to MALDI-TOF MS analysis in order to assign the number of LLA residues, as labeled in Figure
+2
+. The same method can be employed for the analysis of triblock copolymer.   different from the condition for the diblock copolymer shown in Figure
+2
+. Under the experimental conditions as in Figure
+2
+, the triblock copolymers elute too fast for the peaks to be well resolved. The critical condition can be established by adjusting two variables, either the solvent composition or temperature.
+16,
+17
+By manipulating the two variables, the retention of the triblock copolymer can be changed while maintaining the critical condition of PEO block. We increased the retention of the triblock copolymers by decreasing the concentration of ACN and simultaneously lowering the temperature.
+Materials corresponding to individual peaks in Figure
 3
-.
-Due to the large pore diameter, this column has only a poor selectivity for EO in lower molar mass range. Therefore, we looked for another column with similar properties.
-As can be seen in Fig.
+Each major peak in the mass spectrum corresponds to a polymer species that has x EO units (MW ) 44.05) and y LLA units (MW ) 72.06) in addition to the end groups (one hydrogen and one hydroxyl, MW ) 18.02) and a K + ion (MW ) 39.10). The small subsidiary peaks can be assigned to either polymers that had lost one (or two) LLA unit(s) by degradation or Na + ions captured instead of K + ion.
+16
+The conspicuous series of subsidiary peaks of lower molecular weight distribution in (a) seems to be caused by contamination of peak 6 since the resolution in the fractionation condition is not as good as the chromatogram shown in Figure
+3
+and the contamination should be more serious due to the low intensity of the peak 7.
+From the molecular weight of the major peaks, the number of EO units and LLA units (x and y) can be uniquely determined. For example, the major peaks of the three spectra in Figure
 4
-, a CAP for PO was found on the Discovery HS-PEG column (a silica-based phase with attached PEG chains) in acetone-water with about 45% (w/w) acetone. Under these conditions EO elutes in SEC mode. This becomes also clear from Fig.
+are best represented as follows.
+Through the analysis scheme of the MALDI-TOF MS spectra, the number of LLA units in the triblock copolymers in each elution peak was determined and the elution peaks in Figure
+3
+are labeled with the corresponding number of LLA units. In the chromatogram for diblock copolymer (Figure
+2
+) and triblock copolymer (Figure
+3
+), the block copolymer species with an even number of LLA units are much more abundant than ones with odd numbers of LLA units. This is due to the fact that one L-lactide monomer generates two repeat units of LLA as shown in Figure
+1
+.
+16
+If the reaction proceeded ideally so that two units of the lactide moiety were added in each growing step, and if side reactions were absent, only the species with an even number of lactide units would be found. Therefore, from now on we will focus our discussion on polymer species with even numbers of lactide units.
+An interesting observation in the chromatogram displayed in Figure
+3
+is that multiple peaks corresponding to the same number of LLA units appear for triblock copolymer species with eight or more LLA units. Polymers with four or six LLA units exhibit only one peak. As shown in Figure
+2
+, this phenomenon was not found in the diblock copolymers. The MALDI-TOF MS spectra for the two elution peaks containing eight LLA units, displayed in Figure
+4b and c
+, show a similar distribution that corresponds to the distribution of the middle PEO blocks. Since the PEO block is at its critical condition and does not affect the retention, the peak splitting must originate from a difference in the PLLA blocks. Also it is only found in triblock copolymers, not in diblock copolymers. Recalling the structure of the triblock copolymers, which have two PLLA blocks at both ends of the PEO block, the only way to explain the peak splitting is a different distribution of LLA units at the two ends of the middle PEO block while keeping the total number of LLA units the same.
+To substantiate this speculation, another PLLA-b-PEO-b-PLLA triblock copolymer with a longer PLLA block length was made and analyzed by the same method. For the analysis of the longer PLLA blocks, the critical condition was changed again by increasing the content of ACN (ACN:H 2 O ) 54:46, v/v) and raising the temperature (54 °C) as compared to Figure
+3
+. As displayed in Figure
 5
-, which shows an overlay of several chromatograms of PEGs and PPGs with different molar mass and water. As can be seen, the PPGs elute roughly at the void volume, as the water peak almost coincides with the PPG peaks.
-On this column, the resolution on the low molecular range is somewhat better than on the Jordi column. On the other hand, higher PPGs are no more soluble in a mobile phase composition like that corresponding to the CAP on the HS-PEG column.
-Consequently, the Jordi column will perform better for samples with longer PO blocks, while the HS-PEG column is suitable for the analysis of samples with shorter PO blocks.
-In Fig.
-6
-several chromatograms of EO-PO block copolymers are shown, which elute at the same positions as the PEGs with corresponding molar mass (The shoulder in the Imbentin and Synperonic sample may be due to the diblock copolymer or a bimodal MMD of the PPG used as starting material). Consequently, these conditions can be utilized in the determination of the MMD of the EO blocks, as will be shown later on.
-Moreover, the presence of the homopolymer PPG can be shown by this technique. With RI detection, this is not easily achieved: A peak at the void volume (where PPG will elute) may as well be a solvent peak, which results from preferential solvation of the copolymer. Hence, the RI detector was replaced by an ELSD. Even though the peaks are considerably broader with the ELSD, it becomes clear from Fig.
-7
-, that the poloxamers do not contain PPG. Only the PO-EO-PO copolymer reaches into the region, where PPG would elute. As will be shown later on, this sample really contains traces of PPG (Fig.
-15
-).
-There remained still the question, whether it would be possible to find a system corresponding to situation 3 in Table
-1
-: CAP for EO and SEC for PO. Obviously, this would require a normal phase column.
-In the literature, critical conditions for EO have been reported on amino-modified silica in methanol-water (86%) Fig.
-6
-. Chromatograms of several poloxamers and PPG 1000, as obtained on the Discovery HS-PEG column in 44.52 wt% acetone. Detection: RI. Fig.
-7
-. Chromatograms of several poloxamers and PPG 1000, as obtained on the Discovery HS-PEG column in 44.52 wt% acetone. Detection: ELSD.
-[31], acetonitrile-water (31.8%)
-[43]
-, and dimethoxyethanewater (18.5%)
-[43]
-. No information was, however, given about the elution behaviour of PO in these phases.
-The desired conditions were now found on a Diol phase in acetone-water with about 80 wt% aetone (Fig.
-8
-): A CAP for EO exists at 78.54% (w/w) acetone.
-As can be seen in Fig.
-9
-, PPGs elute in SEC mode, and the peaks of all PEGs (from 400 to 12000) coincide precisely. Again the peak of the 'critical component' elutes considerably behind the solvent peak! These conditions allow a separation of poloxamers according to the length of the PO blocks, and show also the presence of PEG in a sample. The samples shown in Fig.
-10
-(which should have a center block of PO with a similar length) show quite similar chromatograms, but contain obviously traces of PEG.
-This can be proven by SEC with dual detection, which yields not only the overall MMD, but also the chemical composition along the peak
-[20]
-[21]
-[22]
-. As can be seen in Fig.
-11
-, there is indeed a lower molecular shoulder in these samples, which contains PEG. The EO content of this fraction is somewhat lower than 100%, as the MMD of the homopolymer PEG overlaps with that of the block copolymer.
-Combining the techniques described above, one may determine the total MMD by SEC (on a Styragel HR3 column in chloroform), the length of the EO block(s) at the CAP for PO (on the Jordi or the Discovery HS-PEG column), and the length of the PO block at the CAP for EO (on the Nucleosil 100-5 OH column).
-The result thus obtained for Synperonic F 68 is shown in Fig.
-12
-.
-On the columns used in this study, homopolymers can be identified, and the MMD of the individual blocks can be determined with good accuracy, if the blocks are long enough. As can be seen in Figs.
-13 and 14
-, a EO-PO-EO sample containing 50% EO can be characterized quite well. This sample does not contain the homopolymers, as can be concluded from Fig.
-13
-. The MMD of the individual blocks and the overall MMD are in good agreement with the specification and appear quite reasonable. The MMD of the EO blocks obtained on the Jordi and the Discovery column also agree very well.
-The same procedure can also be applied to PO-EO-PO block copolymers: the PO-EO-PO sample 2700 with 40% EO already shown in Figs.
-6 and 7
-indeed contains traces of PPG, as can be seen in Fig.
-15
-. The MMD of the individual blocks corresponds quite well to the specification, and there is again a good agreement of the distributions of the EO block, which were obtained on the Jordi and the Discovery column (Fig.
-16
-).
-In Table
-4
-, the results thus obtained are compared to the specifications of the producers. The weight averages of molar mass were taken from SEC on a set ol PLgel 10 3 C10 4 in chloroform, on the Discovery HS-PEG column in 44.52% acetone, and on the Diol column in 78.54% acetone. It must  be mentioned, that the averages do not reflect the actual molar masses as well as the maximum of the distribution functions: the averages are strongly influenced by the low molecular end of the distribution, which is sometimes hard to identify, and the poor separation power of these columns in the range below a molar mass of 1000. Anyway, a reasonable agreement is found in the samples, which do not contain the homopolymers. If a sample contains homopolymers or diblocks besides the triblocks, the sum of the EO and PO blocks is different from the overall molar mass, as can be expected.
-The really important information is, however, only reflected by the full MMD: In some cases, the PPG used as a starting material has a bimodal distribution, which will lead to a shoulder in the MMD of the PO block as well as a shoulder in the overall MMD (as determined by SEC), which should have a different EO content. This will be the subject of further investigations.
-Conclusions
-Under the conditions described above, block copolymers of ethylene oxide (EO) and propylene oxide (PO) can be characterized with respect to the length of the individual blocks. Under these conditions, the other (non-critical) block elutes in exclusion mode, which allows an independent determination of the molar mass distribution of the individual blocks. Homopolymers present in a sample (as residual starting material or as a side product from chain transfer) can be identified. Comparison of the results thus obtained with those from SEC with coupled density and RI detection (which allows the determination of the entire MMD and the chemical composition along the MMD) show good agreement between the different systems.
-Fig. 2 .Fig. 3 .
-23
-Fig. 2. Chromatograms of PEGs, PPGs, and water, as obtained on the Jordi column in 92.42 wt% acetone (CAP for PO). Detection: RI.
-Fig. 4 .Fig. 5 .
-45
-Fig. 4. Elution volumes of PEG and PPG with different molar mass on the HS-PEG column in acetone-water mobile phases of different composition (in wt%).
-Fig. 8 .Fig. 9 .
-89
-Fig. 8. Elution volumes of PEG and PPG with different molar mass on the Diol column in aceton-water mobile phases of different composition (in wt%).
-Fig. 10 .Fig. 11 .
-1011
-Fig. 10. Chromatograms of several poloxamers and PEGs, as obtained on the Diol column in 78.54 wt% acetone.
-Fig. 12 .
-12
-Fig. 12. MMD of synperonic F68 and the individual blocks, as obtained by SEC (Styragel HR3, CHCl 3 ) and LCCC (Discovery and Jordi: CAP for PO, SEC for EO; Nucleosil: CAP for EO, SEC for PO).
-Fig. 13 .
-13
-Fig. 13. MMD and chemical composition of EO-PO-EO 1900 (with 50% EO), as obtained by SEC with coupled density and RI detection (PL gel 10 3 C10 4 A ˚, CHCl 3 ).
-Fig. 14 .
-14
-Fig. 14. MMD of EO-PO-PO 1900 (with 50% EO) and the individual blocks, as obtained by SEC (PL gel 10 3 C10 4 A ˚, CHCl 3 ) and LCCC (Discovery and Jordi: CAP for PO, SEC for EO; Nucleosil: CAP for EO, SEC for PO).
-Fig. 15 .
-15
-Fig. 15. MMD and chemical composition of PO-EO-PO 2700 (with 40% EO), as obtained by SEC with coupled density and RI detection (PL gel 10 3 C10 4 A ˚, CHCl 3 ).
-Fig. 16 .
-16
-Fig. 16. MMD of PO-EO-PO 2700 (with 40% EO) and the individual blocks, as obtained by SEC (PL gel 10 3 C10 4 A ˚, CHCl 3 ) and LCCC (Discovery and Jordi: CAP for PO, SEC for EO; Nucleosil: CAP for EO, SEC for PO).
-Table 1
-1
-Possible situation in liquid chromatography of EO-PO block copolymers
-Table 3
+, at this new critical condition, the peaks elute faster than in Figure
 3
-Specifications of PO-EO-PO triblock copolymers given by the producers (specified parameters: bold)
-Fig. 1. Elution volumes of PEG and PPG with different molar mass on the Jordi column in aceton-water mobile phases of different composition (in wt%).
-Table 2
+. All the materials corresponding to elution peaks in Figure
+5
+were collected and analyzed by MALDI-TOF MS. As labeled in Figure
+5
+, we could identify the groups consisting of two to three peaks having identical numbers of LLA units up to 20 LLA units.
+Separation Mechanism of Block Copolymer. Retention in interaction chromatography is generally expressed by the capacity factor (k′), which is defined as 39 where K is the distribution coefficient of an analyte between the stationary and mobile phases, V o is the retention volume of the injection sample solvent (the total mobile-phase volume in a column), V R is the retention volume of the analyte, and V s and V m are the volumes of the stationary and mobile phases, respectively. K is related to the standard Gibbs free energy (∆G°) associated with the distribution process of the analyte.
+k′ ≡ K(V s /V m ) ) (V R -V o )/V o (
+1
+)
+According to well-known empirical observations, the so-called Martin's rule, ∆G°is proportional to the degree of polymerization (DP).  the assumption that the peak splitting is due to the structural isomerism of two PLLA end blocks. To match the number of structural isomers to the number of elution peaks, we need to make two further assumptions. First, we have not considered the possibility of odd-numbered PLLA blocks since they are side products and their amounts are very small. Therefore, the presence of triblock copolymers with odd-numbered LLA blocks or diblock copolymers such as LLA 3 -PEO-LLA 5 or LLA 0 -PEO-LLA 8 was not considered. In addition, we assumed that both hydroxyl end groups of the PEO block react much faster than the hydroxyl end group of L-lactide due to the higher reactivity of the primary alcohol as compared to the secondary alcohol (see molecular structures in Figure
+1
+). This assumption seems somewhat crude but good enough to compare the relative peak intensity qualitatively as detailed later. Based upon these assumptions, the possibility of the triblock copolymer structure with eight LLA units is reduced to two structures in the distribution of LLA units, LLA 2 -PEO-LLA 6 , and LLA 4 -PEO-LLA 4 , which is consistent with the number of elution peaks found in Figure
+3
+. Thus, we are able to construct a schematic diagram for the possible structures of the triblock copolymers with even-numbered LLA units as shown in Figure
+8
+. Up to 10 LLA units, under the assumptions we made, there exist only two structural possibilities, which is consistent with the number of elution peaks in the chromatograms shown in Figures
+3 and 5
+.
+Next we need to interpret the correspondence between the elution peaks and structure. Table
 2
-Specifications of EO-PO-EO triblock copolymers given by the producers (specified parameters: bold)
-Table 4
+includes the probabilities calculated from the combinatorial numbers for the possible    structures in Figure
+8
+, assuming equal reactivity of the end hydroxyl group of the PLLA block. Comparing these probability values with the peak areas, the peaks 8 and 8′ show comparable areas, which are consistent with the probabilities in Table
+2
+. Fractions 10 and 10′ are expected to be in 3:1 ratio, which is again consistent with the ratio of the peak areas shown in Figure
+3
+. Now we can explain the two distinct features of Figure
+7
+as compared with Figure
+6
+mentioned earlier. The deviation found for DP ) 2 can be attributed to the effect of the different end group on the interaction free energy since the DP ) 2 oligomer is the only species that contains a primary hydroxyl end group for PEG.
+42,
+43
+The deviation of the open symbols from DP ) 6 is also understandable since these are species containing four LLA blocks at one end and varying sizes of the other block. The filled symbols represent species containing two LLA units at one end and varying lengths of the other block.
+Although the proposed peak identification is consistent with the experimental results, self-consistency sometimes is not enough to constitute a proof. However, we cannot find any other analytical means to identify the detailed chain structure. Instead we tested the proposed scheme of the peak identification once more by a plot of k′ vs total DP of the two LLA blocks of the triblock copolymer with longer PLLA blocks, whose chromatogram is shown in Figure
+5
+. In Figure
+9
+, the squares represent peaks identified as having two LLA units at one end and variable numbers of LLA units at the other ends based upon the relative abundance in Table
+2
+. The circles and triangles represent elution peaks of triblock copolymers having four and six LLA units at one end, respectively. Three different symbols represent three linear lines, obeying Martin's rule nicely with slightly different slopes, for the three different groups of the triblock copolymers.
+Provided that Martin's rule holds for the triblock copolymers as found in diblock copolymers, the split three straight lines are in strong support of our proposition that the peak splitting found in the triblock copolymers is due to the isomerism of the PLLA blocks at both ends of the PEO block. The capacity factor, i.e., the interaction strength of the triblock copolymer, increases as one of the PLLA block length increases (more asymmetric) at the same total number of LLA units. In other words, a longer interactive chain is more efficient than two short chains in interacting with the stationary phase. This is consistent with the finding that diblock copolymers form micelles much more easily than triblock copolymers with the same total number of hydrophobic units.
+In summary, PLLA-b-PEO-b-PLLA triblock copolymers were separated according to the PLLA block length by reversed-phase HPLC at the critical condition of PEO block, and the total numbers of LLA units for the materials corresponding to the fractionated peaks were determined by MALDI-TOF MS analysis. We found that not only the total number of LLA units but also the relative block lengths at two ends affect the retention of the triblock copolymers. The interaction with the stationary phase increases as the end PLLA blocks become more asymmetric, which indicates that longer chains interact more strongly with the stationary phase. This analysis technique may be employed for rigorous characterization of block copolymers, as well as degradation for studying or synthesis mechanisms of PEO-PLLA block copolymers.
+ACKNOWLEDGMENT
+T.C. acknowledges the support from the Center for Integrated Molecular Systems (KOSEF) and the BK21 program (KRF). D.L. acknowledges the support from the Center for Advanced Functional Polymers.
+Received for review
+Figure 1 .
+1
+Figure 1. Synthesis scheme for (a) PEO-b-PLLA diblock copolymer and (b) PLLA-b-PEO-b-PLLA triblock copolymer.
+Figure 3
+3
+displays the chromatogram of a PLLA-b-PEO-b-PLLA triblock copolymer under the critical condition of PEO block. The critical condition in Figure 3 was obtained with an ACN/water mixture (47/53, v/v) at 37 °C column temperature, which is (38) Choi, S. W.; Choi, S. Y.; Jeong, B.; Kim, S. W.; Lee, D. S. J. Polym. Sci., Polym. Chem. 1999, 37, 2207-2218.
+a
+Determined by size exclusion chromatography relative to polystyrene standards. b Used in the synthesis of PEO-b-PLLA diblock copolymer. c Used in the synthesis of PLLA-b-PEO-b-PLLA triblock copolymer. d Corresponds to the chromatogram shown in Figure 2. e Corresponds to the chromatogram shown in Figure 3. f Corresponds to the chromatogram shown in Figure 5.
+Figure 2 .
+2
+Figure 2. LCCC chromatogram of a PEO-b-PLLA diblock copolymer at the critical condition of PEO block. The number on top of each peak is the total number of LLA units in the diblock copolymer determined by MALDI-TOF MS analysis.
+were also collected and subjected to MALDI-TOF MS analysis. Typical examples of MALDI-TOF MS spectra of fractionated samples are shown in Figure 4: (a) peak 7, (b) peak 8, and (c) peak 8′ in Figure 3. In all the spectra in Figure 4, the mass difference between the major peaks is 44, indicating that the peak envelope represents the molecular weight distribution of the PEO block.
+39
+( 39 )
+39
+Snyder, L. R.; Kirkland, J. J. Introduction to modern liquid chromatography, 2nd ed.; John Wiley & Sons: New York, 1979.
+Figure 3 .
+3
+Figure 3. LCCC chromatogram of a PLLA-b-PEO-b-PLLA triblock copolymer at the critical condition of PEO block. The number labeled on top of each peak is the total number of LLA units in the triblock copolymer determined by MALDI-TOF MS analysis.
+(
+a) x(44.05) + 7(72.06) + 18.02 + 39.10: 5010 (x ) 101), 5099 (x ) 103), 5187 (x ) 105), etc. (b), (c) x(44.05) + 8(72.06) + 18.02 + 39.10: 5215 (x ) 104), 5303 (x ) 106), 5391 (x ) 108), etc.
+40,41 Therefore k′ (also K) changes exponentially with DP of the polymer molecules. In the chromatograms shown in Figures2, 3, and 5, a log scale abscissa was used for the retention volume to place the peaks in a regular interval according to Martin's rule. To examine how well Martin's rule works in this system, ln k′ obtained from the chromatogram of the PEO-b-PLLA in Figure2was plotted in Figure6against DP of the PLLA block. This plot exhibits an excellent linear relationship, which indicates that the interaction strength of the diblock copolymer with the stationary phase is precisely proportional to the number of LLA units according to Martin's rule. Although Martin's rule has long been known to be a good empirical relationship, it is striking that the diblock copolymers obey the rule so perfectly despite the presence(40) Martin, A. J. P. Biochim. Soc. Symp. 1949, 3, 4. (41) Karger, B. L.; Snyder, L. R.; Horvath, C. An Introduction to Separation Science; Willey-Interscience: New York, 1973.
+Figure 4 .
 4
-Specifications and results from complementary chromatographic separations
-a HS-PEG in 44% acetone. b Diol column in 78.54% acetone. c Sum of M(EO) and M(PO). d Plgel 10 3 C10 4 in chloroform.
+Figure 4. MALDI-TOF MS spectra for the PLLA-b-PEO-b-PLLA triblock copolymer fractionated at the critical condition of PEO block: (a) fraction 7, (b) fraction 8, and (c) fraction 8′ shown in Figure 3.
+Figure 5 .
+5
+Figure 5. LCCC chromatogram of a PLLA-b-PEO-b-PLLA triblock copolymer with longer PLLA blocks than the one used in Figure 3 at the critical condition of PEO block. The number of LLA units was determined by MALDI-TOF MS and labeled on individual peaks.
+Figure 6 .
+6
+Figure 6. Dependence of k′ on the PLLA block length in PEO-b-PLLA diblock copolymer at the critical condition of PEO block from the chromatogram shown in Figure 2. It shows an excellent linear relationship in accordance with the Martin rule.
+Figure 7 .
+7
+Figure 7. Dependence of k′ on PLLA total block length in PLLAb-PEO-b-PLLA triblock copolymer at the critical condition of PEO block from the chromatogram shown in Figure 3. The filled and open circles represent peaks showing a longer (marked with solid arrows) and a shorter retention (dashed arrows) among the same number of LLA units in Figure 3, respectively.
+Figure 8 .
+8
+Figure 8. Schematic diagram of possible structures of PLLA-b-PEOb-PLLA triblock copolymers having even numbers of LLA units. The ellipsoids represent PEO block and the rectangles represent 2 LLA units.
+Figure 9 .
+9
+Figure 9. Dependence of k′ on PLLA total block length in PLLAb-PEO-b-PLLA triblock copolymer at the critical condition of PEO block from the chromatogram shown in Figure 5. Squares, circles, and triangles are assigned to each series of triblock copolymers with two, four, and six PLLA units at one end and a varying block length at the other end of the PEO block, respectively.
+Langmuir 1995, 11, 414.(5) Gref, R.; Minamitake, Y.; Peracchia, M. T.; Trubetskoy, V.; Torchilin, V.; Langer, R.Science 1994, 263, 1600. (6) Jeong, B.; Bae, Y. H.; Lee, D. S.; Kim, S. W. Nature 1997, 388, 860-862. (7) Tanodekaew, S.; Pannu, R.; Heatley, F.; Attwood, D.; Booth, C. Macromol. Chem. Phys. 1997, 198, 927-944. (8) Li, S. M.; Rashkov, I.; Espartero, J. L.; Manolova, N.; Vert, M. Macromolecules 1996, 29, 57-62. (9) Yang, Z.; Pickard, S.; Deng, N.-J.; Barlow, R. J.; Attwood, D.; Booth, C. Macromolecules 1994, 27, 2371-2379. (10) Guttman, C. M.; Dimarzio, E. A.; Douglas, J. F. Macromolecules 1996, 29, 5723-5733. Anal. Chem. 2001, 73, 1726-1732 concentration (cmc) of BO 4 EO 40 BO 4 (30 g/dm 3 ) was much higher than that of EO 41 BO 8 (0.3 g/dm 3 ). The mass-average association number, N w , at 35 °C was 78 for EO 41 BO 8 but only 5 for EO 21 -BO 8 EO 21 . 9 The unfavorable micellization of the triblock copolymer BO 4 EO 40 BO 4 was ascribed to the entropy loss associated with the looping of the water-soluble PEO block in order that the hydrophobic PBO blocks associate at the core of a micelle. They also reported that a thermally reversible sol-gel-sol transition was observed on heating or cooling for concentrated solutions of diblock copolymer EO 41 BO 8 , but concentrated solutions of triblock copolymers did not show a gel phase. Yu et al. pointed out the significant effect of the block length distribution on the association properties. 11 They found that a copolymer with a wide EO block length distribution has a low cmc and a high N w relative to a copolymer with a narrow EO block length distribution.
+Polyoxyalkylene Block Copolymers; Nace, V. M., Ed.; Marcel Dekker: New York, 1996; Vol. 60. (2) Alexandridis, P.; Hatton, T. A. Colloids Surfaces A: Physicochem. Eng. Aspects 1995, 96, 1-46. (3) Hamley, I. W. In The Physics of Block Copolymers; Oxford University Press: New York, 1998. (4) Chu, B. (11) Yu, G.-E.; Yang, Y.-W.; Attwood, D.; Booth, C. Langmuir 1996, 12, 3404-3412. (12) Almgren, M.; Brown, W.; Hvidt, S. Colloid Polym. Sci. 1995, 273, 2-15. (13) Wanka, G.; Hoffmann, H.; Ulbricht, W. Macromolecules 1994, 27, 4145-4159. (14) Malmsten, M.; Lindman, B. Macromolecules 1992, 25, 5440-5445. (15) Hvidt, S.; Jørgensen, E. B.; Brown, W.; Schille ´n, K. J. Phys. Chem. 1994, 98, 12320-12328.
+October 16, 2000. Accepted February 5, 2001. AC001219Z (42) Jandera, P.; Rozkos ˇna ´, J. J. Chromatogr. 1986, 362, 325-343. (43) Philipsen, H. J. A.; Claessens, H. A.; Lind, H.; Klumperman, B.; German, A.
+L. J. Chromatogr., A 1997, 790, 101-116.
+Table 2 .
+2
+Probability for Different Isomeric Structures of PLLA-b-PEO-b-PLLA total no. of LLA units
+a Calculated by assuming equal reactivity of the LLA end hydroxyl groups.
+.1021/ac001219z CCC: $20.00 © 2001 American Chemical Society Published on Web 03/17/2001 Downloaded via UNIV OF MEMPHIS on June 19, 2024 at 17:26:46 (UTC).See https://pubs.acs.org/sharingguidelines for options on how to legitimately share published articles.
